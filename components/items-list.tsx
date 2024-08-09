@@ -28,7 +28,7 @@ const ItemsList: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className='hidden md:block '>
+      <div className='hidden lg:block '>
         <PostsRightSidebar />
       </div>
     </div>

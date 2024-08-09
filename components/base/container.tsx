@@ -24,10 +24,10 @@ export function Container({ children }: IBaseWrapperProps) {
         <>
             <header className="border-b fixed top-0 left-0 right-0 z-50 w-full  bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="flex h-16 items-center px-4 justify-between">
-                    <div className=" lg:hidden">
+                    <div className="xl:hidden mr-3">
                         <Sheet>
-                            <SheetTrigger><MenuIcon /></SheetTrigger>
-                            <SheetContent className=" p-0" side={"left"}>
+                            <SheetTrigger><MenuIcon className="mt-2" /></SheetTrigger>
+                            <SheetContent className="p-0" side={"left"}>
                                 <Sidebar playlists={playlists} />
                             </SheetContent>
                         </Sheet>
@@ -53,7 +53,7 @@ export function Container({ children }: IBaseWrapperProps) {
                 </div>
             </header>
             <main className="pt-16 flex">
-                <aside className="bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden lg:block">
+                <aside className="bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden xl:block">
                     <Sidebar playlists={playlists} className="" />
                 </aside>
                 <div className="ml-64 w-full ">
