@@ -67,13 +67,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-
-.\[\&\>\.threadline\>\*\]\:border-tone-4 > .threadline > * {
-  border-color: var(--color-tone-4);
-}
-
-details > summary {
-  /* list-style: none; */
-  /* padding-bottom: 2px; */
-}
