@@ -14,7 +14,10 @@ import { Star, StarIcon } from "lucide-react"
 export default function Component({className}) {
   const [isFavourite, setIsFavourite] = useState(false)
   const [showToast, setShowToast] = useState(false)
-  const handleFavouriteClick = () => {
+  const handleFavouriteClick = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+  
     setIsFavourite(!isFavourite)
     setShowToast(true)
     setTimeout(() => setShowToast(false), 3000)

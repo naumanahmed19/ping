@@ -1,3 +1,4 @@
+'use client';
 import * as React from "react"
 import { useState } from "react"
 
@@ -13,6 +14,7 @@ import { communities } from "@/data/communities"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import CommunityHoverCard from "./CommunityHoverCard"
 
 export function PostsRightSidebar() {
     const [visibleCount, setVisibleCount] = useState(5)
@@ -22,15 +24,16 @@ export function PostsRightSidebar() {
     }
 
     return (
-       <div className="w-[300px]">  
-        <Card className="fixed">
+       <div className="w-[300px] ">  
+        <Card >
             <CardHeader>
                 <CardTitle className="text-sm font-semibold tracking-tight">Popular Communities</CardTitle>
             </CardHeader>
 
             <CardContent  className="w-[300px]">
-                {communities.slice(0, visibleCount).map((button, index) => (
-                    <Link href="/" key={index}
+                {communities.slice(0, visibleCount).map((community, index) => (
+                   <CommunityHoverCard community={community}>
+                 <Link href="/" key={index}
 
                         className={cn(
                             "flex select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -39,20 +42,21 @@ export function PostsRightSidebar() {
 
                     >
                         <Avatar className="h-8 w-8 mr-2">
-                            <AvatarImage src={button.src} alt={button.alt} />
-                            <AvatarFallback>{button.fallback}</AvatarFallback>
+                        <AvatarImage src={community.icon_img} alt={community.name} />
+                        <AvatarFallback>{community.title.slice(0,2)}</AvatarFallback>
                         </Avatar>
 
                         <div className="grid gap-1">
                             <p className="text-xs font-medium leading-none">
-                                {button.text}
+                            {community.name}
                             </p>
                             <p className="text-xs text-muted-foreground">
-                                {button.members} members
+                                {community.subscribers} members
                             </p>
                         </div>
                         {/* <div className="ml-auto text-xs">Join</div> */}
                     </Link>
+                    </CommunityHoverCard>
                 ))}
             </CardContent>
             <CardFooter className="">

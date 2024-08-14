@@ -32,8 +32,9 @@ const Comment = ({ key, index, author, time, content, replies, isOpen }) => {
 
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
-  const handleShowReplyForm = () => {
-    console.log(showReplyForm);
+  const handleShowReplyForm = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     setShowReplyForm(!showReplyForm);
   };
 
@@ -67,7 +68,7 @@ const Comment = ({ key, index, author, time, content, replies, isOpen }) => {
         aria-label={`Metadata for ${author.name}'s comment`}
         className="grid "
       >
-        <CommentHeader isExpanded={isExpanded} author={author} time={time} />
+        <CommentHeader isExpanded={isExpanded} user={author} time={time} />
       </summary>
 
       <div className="grid grid-cols-[24px_1fr] xs:grid-cols-[32px_1fr] relative">

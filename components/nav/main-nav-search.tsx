@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Search } from './search'; // Adjust the import path as necessary
+import { Search } from './search';
 const MainNavSearch: React.FC = () => {
   const [selectedPlaceId, setSelectedPlaceId] = useState<string>('');
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);

@@ -26,13 +26,15 @@ const PostPage: React.FC = () => {
   const post = postsData.find((post) => post.id === Number(id));
 
   return (
-    <div className="md:w-[700px] lg:w-[1000px] mx-auto my-4 ">
-      <Container />
+    
+  
+      <Container isFullWidth={false}>
       <div className="flex items-start gap-4">
         <div>
 
             <PostHeader key={post.id} post={post} isDetailsPage/>
-            <h2 className="text-md font-bold">{post.title}</h2>
+           
+            <h1 className="text-xl font-bold my-2">{post.title}</h1>
 
             <Badge className="rounded-md">
                {post.flair}
@@ -66,7 +68,7 @@ const PostPage: React.FC = () => {
           <PostSidebar post={post} />
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -11,8 +11,13 @@ interface CommentActionsProps {
 const CommentActions: React.FC<CommentActionsProps> = ({ handleShowReplyForm }) => {
 
 
- 
 
+
+  const handleClick = (e) => {
+   e.stopPropagation(); 
+   e.preventDefault(); 
+ 
+  };
 
   return (
     <div className="flex items-center gap-3 my-2">
@@ -28,6 +33,7 @@ const CommentActions: React.FC<CommentActionsProps> = ({ handleShowReplyForm }) 
       <Button
         variant="ghost"
        className="text-xs h-[28px] items-center gap-1.5 p-[4px] "
+       onClick={handleClick}
       >
         <Award width={14} height={14} />
         Award
@@ -35,9 +41,10 @@ const CommentActions: React.FC<CommentActionsProps> = ({ handleShowReplyForm }) 
       <Button
         variant="ghost"
         className="text-xs h-[28px] items-center gap-1.5 p-[4px] "
+        onClick={handleClick}
       >
         <Share2 width={14} height={14} />
-        Share
+          Share
       </Button>
       <DropdownMenu>
               <DropdownMenuTrigger asChild>

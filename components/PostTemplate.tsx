@@ -3,20 +3,12 @@ import Image from "next/image"
 import PostHeader from "./PostHeader"
 import PostActions  from "./PostActions"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
-import { Separator } from "./ui/separator"
 import { Badge } from "./ui/badge"
+import { Post } from "@/data/posts"
 
 interface PostTemplateProps {
-    post: {
-      
-        id: string
-        title: string
-        image?: string
-        content: string
-        flair: string
-    },
-        children: React.ReactNode;
+    post: Post,
+    children?: React.ReactNode;
 }
 
 const PostTemplate: React.FC<PostTemplateProps> = ({ children, post }) => {
@@ -47,7 +39,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ children, post }) => {
             )}
             <p className="text-sm  my-3">{post.content}</p>
             <PostActions />
-            <Separator className="my-4" />
+           
             {children}
         </div>
     )

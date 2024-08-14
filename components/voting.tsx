@@ -20,10 +20,14 @@ const Voting: React.FC<VotingProps> = ({ className }) => {
 
  
 
-  const handleUpvote = () => {
+  const handleUpvote = (e) => {
+    e.stopPropagation(); 
+    e.preventDefault(); 
     setVoteCount(voteCount + 1)
   }
-  const handleDownvote = () => {
+  const handleDownvote = (e) => {
+    e.stopPropagation();
+    e.preventDefault(); 
     setVoteCount(voteCount - 1)
   }
   return (

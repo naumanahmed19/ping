@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import '../styles/globals.css'
-import { ThemeProvider } from "@/components/theme-provider";
+import "../styles/globals.css";
+import "/public/themes.css"
 import { cn } from "@/lib/utils";
+import { ThemeWrapper } from "@/components/theme-wrapper";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { JotaiProvider } from "@/providers/jotai-provider";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+import NextTopLoader from 'nextjs-toploader';
+import { ReactQueryProvider } from "@/providers/react-query-provider";
+import { MountProvider } from "@/providers/mount-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,18 +22,44 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+
+
   return (
-    <html lang="en">
-       <body className={cn(inter.className, '')}>
-      <ThemeProvider
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(inter.className, "")}>
+   
+        <JotaiProvider>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <ThemeWrapper>
+            <NextTopLoader
+              color="#2299DD"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={true}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+              />
+        <ReactQueryProvider>
+          
+                {children}
+                </ReactQueryProvider>
+        
+              <ThemeSwitcher />
+
+            </ThemeWrapper>
           </ThemeProvider>
-          </body>
+        </JotaiProvider>
+    
+      </body>
     </html>
   );
 }

@@ -9,15 +9,18 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Button } from '@/components/ui/button';
-import { Separator } from './ui/separator';
+import { Separator } from "@/components/ui/separator"
 interface PostsFilterProps {
-  toggleView: () => void;
-  isGridView: boolean;
+
 }
+import { useConfig } from "@/hooks/use-config"
 
-const PostsFilter: React.FC<PostsFilterProps> = ({ toggleView, isGridView }) => {
 
-  
+
+const PostsFilter: React.FC<PostsFilterProps> = ( {}) => {
+
+  const [config , setConfig] = useConfig()
+
   return (
     <>
       <div className='flex items-center justify-between'>
@@ -62,13 +65,16 @@ const PostsFilter: React.FC<PostsFilterProps> = ({ toggleView, isGridView }) => 
 
   
     </div>
+  
     <Button
         size="icon"
         variant="ghost"
         className='w-[32px] h-[32px]'
-        onClick={toggleView}
+        onClick={()=> setConfig({
+          ...config,
+          postLayout: config.postLayout =='card' ? 'compact' : 'card'})}
       >
-        {isGridView ? <List size="16" /> : <Expand size="16" />}
+        {config.postLayout =='card' ? <List size="16" /> : <Expand size="16" />}
       </Button>
    
     </div>

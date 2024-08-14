@@ -3,7 +3,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Delete, Loader2, MessageCircleIcon, Pencil, Plus, Search as SearchIcon } from "lucide-react";
 import { BellIcon, ChatBubbleIcon, PlusCircledIcon } from "@radix-ui/react-icons";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle"
 
 export function MainNav({
