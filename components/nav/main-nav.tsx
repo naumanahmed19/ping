@@ -17,7 +17,7 @@ export function MainNav({
     >
       <Button asChild>
       <Link
-        href="/create"
+        href="/posts/create"
     
       >
         <PlusCircledIcon  className="mr-2 h-4 w-4" />

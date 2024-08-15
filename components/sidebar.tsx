@@ -88,11 +88,13 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             <CollapsibleContent>
               <div className="space-y-1">
                 <Button
+                asChild
                   variant="ghost"
                   className="w-full justify-start"
-                  onClick={() => handleAddCommunity()}
+                 
                 >
-                  <Avatar className="h-8 w-8">
+                <Link href="/communities/create">
+                <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-transparent">
                       <Plus />
                     </AvatarFallback>
@@ -100,6 +102,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                   <span className="ml-2 mr-2 text-xs text-ellipsis overflow-hidden">
                     Add Community
                   </span>
+                </Link>
                 </Button>
                 {communities.slice(0, 5).map((community, index) => (
                   <CommunityHoverCard community={community}>
