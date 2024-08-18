@@ -5,7 +5,7 @@ import { playlists } from "@/data/playlists";
 import { UserNav } from "@/components/user-nav";
 import { MainNav } from "@/components/nav/main-nav";
 import MainNavSearch from "@/components/nav/main-nav-search";
-import { MenuIcon, TrendingUp } from "lucide-react";
+import { Aperture, MenuIcon, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
@@ -34,8 +34,8 @@ export const Header = () => {
             href="/"
             className="text-sm font-medium transition-colors hover:text-primary flex items-center space-x-2"
           >
-            <TrendingUp width={20} height={20} />
-            <span>bizbiz</span>
+            <Aperture width={30} height={30} />
+            <span>ping</span>
           </Link>
         </div>
         <div className="flex-1 flex justify-center">

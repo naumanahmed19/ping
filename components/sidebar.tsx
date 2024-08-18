@@ -17,12 +17,16 @@ import {
   CollapsibleTrigger,
 } from "./ui/collapsible";
 import {
+  BadgeHelpIcon,
   ChevronsUpDown,
   GalleryVerticalEnd,
   Home,
+  Newspaper,
   Plus,
   Rocket,
+  Rss,
   Telescope,
+  Users,
 } from "lucide-react";
 import { communities } from "@/data/communities";
 import CommunityHoverCard from "./CommunityHoverCard";
@@ -47,7 +51,13 @@ export function Sidebar({ className, playlists }: SidebarProps) {
     router.push(route);
   };
 
-  const buttons = [
+  const bottomNav = [
+    { href: "", icon: BadgeHelpIcon, label: "Help" },
+    { href: "", icon: Rss, label: "Blog" },
+    { href: "", icon: Users, label: "Careers" },
+    { href: "", icon: Newspaper, label: "Press" },
+  ];
+  const topNav = [
     { href: "/", icon: Home, label: "Home" },
     { href: "/popular", icon: Rocket, label: "Popular" },
     { href: "/explore", icon: Telescope, label: "Explore" },
@@ -57,30 +67,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-3">
-        <div className="px-3 py-2">
-          <div className="space-y-1">
-            {buttons.map(({ href, icon: Icon, label }) => (
-              <Button
-                variant={pathname === href ? "secondary" : "ghost"}
-                className={cn("w-full justify-start")}
-                asChild
-                key={href}
-              >
-                <Link href={href}>
-                  <Icon
-                    className={cn(
-                      "h-4 w-4 mr-2 text-primary/40",
-                      pathname === href && "text-primary",
-                    )}
-                  />
-
-                  {label}
-                </Link>
-              </Button>
-            ))}
-          </div>
-        </div>
-
+        <TopNavItems items={topNav} pathname={pathname} />
         <Separator />
         <div className="px-3 py-2">
           <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -141,39 +128,58 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             </CollapsibleContent>
           </Collapsible>
         </div>
-        <div className="py-2">
-          <h2 className="relative px-7 text-lg font-semibold tracking-tight">
-            Playlists
-          </h2>
-          <ScrollArea className="h-[300px] px-1">
-            <div className="space-y-1 p-2">
-              {playlists?.map((playlist, i) => (
-                <Button
-                  key={`${playlist}-${i}`}
-                  variant="ghost"
-                  className="w-full justify-start font-normal"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="mr-2 h-4 w-4"
-                  >
-                    <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                    <path d="M12 12H3" />
-                    <path d="M16 6H3" />
-                    <path d="M12 18H3" />
-                  </svg>
-                  {playlist}
-                </Button>
-              ))}
-            </div>
-          </ScrollArea>
+
+        <Separator />
+        <CollapsibleSection title="Resources">
+          <TopNavItems items={bottomNav} pathname={pathname} />
+        </CollapsibleSection>
+      </div>
+    </div>
+  );
+}
+
+function CollapsibleSection({ children, title }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <CollapsibleTrigger asChild>
+        <div className="px-3 py-2">
+          <Button variant="ghost" className="w-full justify-start ">
+            {title}
+            <ChevronsUpDown className="h-4 w-4 ml-auto" />
+          </Button>
         </div>
+      </CollapsibleTrigger>
+
+      <CollapsibleContent>{children}</CollapsibleContent>
+    </Collapsible>
+  );
+}
+
+function TopNavItems({ pathname, items = [] }: { pathname: string }) {
+  return (
+    <div className="px-3 py-2">
+      <div className="space-y-1">
+        {items?.map(({ href, icon: Icon, label }) => (
+          <Button
+            variant={pathname === href ? "secondary" : "ghost"}
+            className={cn("w-full justify-start")}
+            asChild
+            key={href}
+          >
+            <Link href={href}>
+              <Icon
+                className={cn(
+                  "h-4 w-4 mr-2 text-muted-foreground",
+                  pathname === href && "text-primary",
+                )}
+              />
+
+              {label}
+            </Link>
+          </Button>
+        ))}
       </div>
     </div>
   );

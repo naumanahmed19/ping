@@ -17,7 +17,9 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ children, post }) => {
       <PostHeader key={post.id} post={post} />
       <h2 className="text-md font-bold">{post.title}</h2>
 
-      <Badge className="rounded-md ">{post.flair}</Badge>
+      <Badge className="rounded-sm bg-primary/10 font-normal border-primary text-primary hover:bg-primary/10 hover:bg-primary/10">
+        {post.flair}
+      </Badge>
 
       {post.image && (
         <div className="overflow-hidden rounded-md my-3">

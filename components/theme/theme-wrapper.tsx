@@ -21,7 +21,7 @@ export function ThemeWrapper({
     <div
       style={
         {
-          "--radius": `${themeConfig?.radius ?? (0 || config.radius || 0.5)}rem`,
+          "--radius": `${parseFloat(themeConfig?.radius ?? "0") || config.radius || 0.5}rem`,
         } as React.CSSProperties
       }
     >

@@ -34,7 +34,7 @@ export function Container({
     <div>
       <Header />
       <main className="flex">
-        <aside className="bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden xl:block">
+        <aside className="overflow-y-auto bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden xl:block">
           <Sidebar playlists={playlists} className="" />
         </aside>
 
