@@ -117,3 +117,5 @@ export const posts: Post[] = [
     created_at: "2023-03-05T12:00:00Z",
   },
 ];
+
+export const popularPosts = posts.filter((post) => post.image !== null);

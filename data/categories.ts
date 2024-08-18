@@ -1,0 +1,117 @@
+// Categories with related tags
+export const categories = [
+  {
+    id: 1,
+    title: "Anime & Cosplay",
+    created_at: new Date("2022-01-01"),
+    parentId: null,
+  },
+  {
+    id: 2,
+    title: "Anime & Manga",
+    created_at: new Date("2022-01-02"),
+    parentId: 1,
+  },
+  {
+    id: 3,
+    title: "Cosplay",
+    created_at: new Date("2022-01-03"),
+    parentId: 1,
+  },
+  {
+    id: 4,
+    title: "Art",
+    created_at: new Date("2022-01-04"),
+    parentId: null,
+  },
+  {
+    id: 5,
+    title: "Performing Arts",
+    created_at: new Date("2022-01-05"),
+    parentId: 4,
+  },
+  {
+    id: 6,
+    title: "Architecture",
+    created_at: new Date("2022-01-06"),
+    parentId: 4,
+  },
+  {
+    id: 7,
+    title: "Design",
+    created_at: new Date("2022-01-07"),
+    parentId: 4,
+  },
+  {
+    id: 8,
+    title: "Filmmaking",
+    created_at: new Date("2022-01-08"),
+    parentId: 4,
+  },
+  {
+    id: 9,
+    title: "Digital Art",
+    created_at: new Date("2022-01-09"),
+    parentId: 4,
+  },
+  {
+    id: 10,
+    title: "Photography",
+    created_at: new Date("2022-01-10"),
+    parentId: 4,
+  },
+  {
+    id: 11,
+    title: "Business & Finance",
+    created_at: new Date("2022-01-11"),
+    parentId: null,
+  },
+  {
+    id: 12,
+    title: "Personal Finance",
+    created_at: new Date("2022-01-12"),
+    parentId: 11,
+  },
+  {
+    id: 13,
+    title: "Crypto",
+    created_at: new Date("2022-01-13"),
+    parentId: 11,
+  },
+  {
+    id: 14,
+    title: "Economics",
+    created_at: new Date("2022-01-14"),
+    parentId: 11,
+  },
+  {
+    id: 15,
+    title: "Business News & Discussion",
+    created_at: new Date("2022-01-15"),
+    parentId: 11,
+  },
+  {
+    id: 16,
+    title: "Deals & Marketplace",
+    created_at: new Date("2022-01-16"),
+    parentId: 11,
+  },
+  {
+    id: 17,
+    title: "Startups & Entrepreneurship",
+    created_at: new Date("2022-01-17"),
+    parentId: 11,
+  },
+  {
+    id: 18,
+    title: "Real Estate",
+    created_at: new Date("2022-01-18"),
+    parentId: 11,
+  },
+  {
+    id: 19,
+    title: "Stocks & Investing",
+    created_at: new Date("2022-01-19"),
+    parentId: 11,
+  },
+];

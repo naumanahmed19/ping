@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import "/public/themes.css";
-import { cn } from "@/lib/utils";
-import { ThemeWrapper } from "@/components/theme-wrapper";
+import { cn, themeClassName } from "@/lib/utils";
+import { ThemeWrapper } from "@/components/theme/theme-wrapper";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { JotaiProvider } from "@/providers/jotai-provider";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import NextTopLoader from "nextjs-toploader";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { MountProvider } from "@/providers/mount-provider";
 import { getTheme } from "@/actions/theme-config";
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,20 +24,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const theme = await getTheme();
-  
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "")}>
-        <JotaiProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ThemeWrapper themeConfig={theme}>
+      <body className={cn(inter.className, themeClassName(theme.theme))}>
+        <ThemeWrapper themeConfig={theme}>
+          <JotaiProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
               <NextTopLoader
                 color="#2299DD"
                 initialPosition={0.08}
@@ -49,11 +49,10 @@ export default async function RootLayout({
                 shadow="0 0 10px #2299DD,0 0 5px #2299DD"
               />
               <ReactQueryProvider>{children}</ReactQueryProvider>
-
-      
-            </ThemeWrapper>
-          </ThemeProvider>
-        </JotaiProvider>
+              <Toaster />
+            </ThemeProvider>
+          </JotaiProvider>
+        </ThemeWrapper>
       </body>
     </html>
   );

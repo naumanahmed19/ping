@@ -26,3 +26,7 @@ export function dt(dataTime: string | number) {
 export function af(name: string) {
   return name?.slice(0, 2);
 }
+
+export function themeClassName(theme: string) {
+  return `theme-${theme}` || "zinc";
+}

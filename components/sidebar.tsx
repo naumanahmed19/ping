@@ -51,7 +51,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
     { href: "/", icon: Home, label: "Home" },
     { href: "/popular", icon: Rocket, label: "Popular" },
     { href: "/explore", icon: Telescope, label: "Explore" },
-    { href: "/all", icon: GalleryVerticalEnd, label: "All" },
+    { href: "/posts/all", icon: GalleryVerticalEnd, label: "All" },
   ];
 
   return (
@@ -67,7 +67,13 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 key={href}
               >
                 <Link href={href}>
-                  <Icon className="mr-2 h-4 w-4" />
+                  <Icon
+                    className={cn(
+                      "h-4 w-4 mr-2 text-primary/40",
+                      pathname === href && "text-primary",
+                    )}
+                  />
+
                   {label}
                 </Link>
               </Button>
@@ -88,21 +94,20 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             <CollapsibleContent>
               <div className="space-y-1">
                 <Button
-                asChild
+                  asChild
                   variant="ghost"
                   className="w-full justify-start"
-                 
                 >
-                <Link href="/communities/create">
-                <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-transparent">
-                      <Plus />
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="ml-2 mr-2 text-xs text-ellipsis overflow-hidden">
-                    Add Community
-                  </span>
-                </Link>
+                  <Link href="/communities/create">
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="bg-transparent">
+                        <Plus />
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="ml-2 mr-2 text-xs text-ellipsis overflow-hidden">
+                      Add Community
+                    </span>
+                  </Link>
                 </Button>
                 {communities.slice(0, 5).map((community, index) => (
                   <CommunityHoverCard community={community}>
@@ -110,7 +115,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                       key={index}
                       variant="ghost"
                       className="w-full justify-start"
-                      onClick={(e) => handleNavigation(e, `/communities/${community.id}`)}
+                      onClick={(e) =>
+                        handleNavigation(e, `/communities/${community.id}`)
+                      }
                     >
                       <Avatar className="h-8 w-8">
                         <AvatarImage

@@ -26,22 +26,22 @@ const Explore: React.FC = () => {
 
   return (
     <Container>
-      <div className="flex items-center  justify-between">
+      <div className="md:flex items-center justify-between">
         <h1 className="text-2xl font-bold my-10">Explore Communities</h1>
 
         <Button asChild variant="outline">
-          <Link  href="/create-community">
-            <Plus className="mr-2 h-4 w-4"  /> Add Community
+          <Link href="/communities/create">
+            <Plus className="mr-2 h-4 w-4" /> Add Community
           </Link>
         </Button>
       </div>
-      <div className="grid grid-cols-3 gap-4 my-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5">
         {communities.map((community, index) => (
-          <Card className="w-full max-w-sm rounded-lg overflow-hidden dtransition-all duration-300 hover:shadow-2xl">
+          <Card className="w-full max-w-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl">
             <CardContent className="p-4 bg-background">
-              <Link href={`/c/${community.name}`}>
-                <div className="flex justify-between space-x-4 space-x-4">
-                  <div className="flex items-center  space-x-4">
+              <Link href={`/communities/${community.id}`}>
+                <div className="flex justify-between space-x-4">
+                  <div className="flex items-center space-x-4">
                     <Avatar>
                       <AvatarImage
                         src={community?.icon_img}

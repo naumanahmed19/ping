@@ -1,68 +1,42 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import {
-  CheckIcon,
-  CopyIcon,
-  InfoCircledIcon,
-  MoonIcon,
-  ResetIcon,
-  SunIcon,
-} from "@radix-ui/react-icons"
-import { Paintbrush, Palette } from "lucide-react"
-import { useTheme } from "next-themes"
+import * as React from "react";
+import { CheckIcon, MoonIcon, ResetIcon, SunIcon } from "@radix-ui/react-icons";
+import { Palette } from "lucide-react";
+import { useTheme } from "next-themes";
 
-import { cn } from "@/lib/utils"
-import { useConfig } from "@/hooks/use-config"
+import { cn } from "@/lib/utils";
+import { useConfig } from "@/hooks/use-config";
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
-import { ThemeWrapper } from "@/components/theme-wrapper"
-import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Skeleton } from "@/components/ui/skeleton"
-import { Theme, themes } from "@/styles/themes"
+} from "@/components/ui/popover";
+import { Skeleton } from "@/components/ui/skeleton";
+import { themes } from "@/styles/themes";
 
-import "@/styles/mdx.css"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { setCookie } from "@/actions/theme-config"
+import "@/styles/mdx.css";
+import { setCookie } from "@/actions/theme-config";
 
 export function ThemeCustomizer() {
-  const [config, setConfig] = useConfig()
-  const { resolvedTheme: mode } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+  const [config, setConfig] = useConfig();
+  const { resolvedTheme: mode } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <div className="flex items-center gap-2">
       <Drawer>
         <DrawerTrigger asChild>
-          <Button  className="md:hidden" variant="ghost" size="icon">
+          <Button className="md:hidden" variant="ghost" size="icon">
             <Palette width={20} height={20} />
-    
           </Button>
         </DrawerTrigger>
         <DrawerContent className="p-6 pt-0">
@@ -70,9 +44,11 @@ export function ThemeCustomizer() {
         </DrawerContent>
       </Drawer>
       <div className="hidden items-center md:flex">
-        <Popover>
+        <Popover modal={true}>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="icon"> <Palette width={20} height={20} /></Button>
+            <Button variant="ghost" size="icon">
+              <Palette width={20} height={20} />
+            </Button>
           </PopoverTrigger>
           <PopoverContent
             align="start"
@@ -81,36 +57,31 @@ export function ThemeCustomizer() {
             <Customizer />
           </PopoverContent>
         </Popover>
-    
       </div>
-  
     </div>
-  )
+  );
 }
 
 function Customizer() {
-  const [mounted, setMounted] = React.useState(false)
-  const { setTheme: setMode, resolvedTheme: mode } = useTheme()
-  const [config, setConfig] = useConfig()
+  const [mounted, setMounted] = React.useState(false);
+  const { setTheme: setMode, resolvedTheme: mode } = useTheme();
+  const [config, setConfig] = useConfig();
 
   React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
+    setMounted(true);
+  }, []);
 
   const handleThemeChangeClick = async (theme: any) => {
-    
     setConfig({
       ...config,
-    theme: theme.name,
-    })
-    await setCookie('theme', theme.name)
-  }
-
+      theme: theme.name,
+    });
+    await setCookie("theme", theme.name);
+  };
 
   return (
     <div>
-       <div className="flex items-start pt-4 md:pt-0">
+      <div className="flex items-start pt-4 md:pt-0">
         <div className="space-y-1 pr-2">
           <div className="font-semibold leading-none tracking-tight">
             Customize
@@ -128,9 +99,9 @@ function Customizer() {
               ...config,
               theme: "zinc",
               radius: 0.5,
-            })
-            await setCookie('theme', "zinc")
-            await setCookie('radius', "0.5")
+            });
+            await setCookie("theme", "zinc");
+            await setCookie("radius", "0.5");
           }}
         >
           <ResetIcon />
@@ -139,7 +110,6 @@ function Customizer() {
       </div>
       <div className="flex flex-1 flex-col space-y-4 md:space-y-6">
         <div className="space-y-1.5">
-   
           {/* <div className="grid grid-cols-3 gap-2">
             <Button
               variant={"outline"}
@@ -167,7 +137,7 @@ function Customizer() {
           <Label className="text-xs">Color</Label>
           <div className="grid grid-cols-3 gap-2">
             {themes.map((theme) => {
-              const isActive = config.theme === theme.name
+              const isActive = config.theme === theme.name;
 
               return mounted ? (
                 <Button
@@ -177,7 +147,7 @@ function Customizer() {
                   onClick={() => handleThemeChangeClick(theme)}
                   className={cn(
                     "justify-start",
-                    isActive && "border-2 border-primary"
+                    isActive && "border-2 border-primary",
                   )}
                   style={
                     {
@@ -189,7 +159,7 @@ function Customizer() {
                 >
                   <span
                     className={cn(
-                      "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-[--theme-primary]"
+                      "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-[--theme-primary]",
                     )}
                   >
                     {isActive && <CheckIcon className="h-4 w-4 text-white" />}
@@ -198,7 +168,7 @@ function Customizer() {
                 </Button>
               ) : (
                 <Skeleton className="h-8 w-full" key={theme.name} />
-              )
+              );
             })}
           </div>
         </div>
@@ -215,17 +185,17 @@ function Customizer() {
                     setConfig({
                       ...config,
                       radius: parseFloat(value),
-                    })
-                    await setCookie('radius', value)
+                    });
+                    await setCookie("radius", value);
                   }}
                   className={cn(
                     config.radius === parseFloat(value) &&
-                      "border-2 border-primary"
+                      "border-2 border-primary",
                   )}
                 >
                   {value}
                 </Button>
-              )
+              );
             })}
           </div>
         </div>
@@ -241,7 +211,7 @@ function Customizer() {
                   className={cn(mode === "light" && "border-2 border-primary")}
                 >
                   <SunIcon className="mr-1 -translate-x-1" />
-                  Light 
+                  Light
                 </Button>
                 <Button
                   variant={"outline"}
@@ -250,7 +220,7 @@ function Customizer() {
                   className={cn(mode === "dark" && "border-2 border-primary")}
                 >
                   <MoonIcon className="mr-1 -translate-x-1" />
-                  Dark  
+                  Dark
                 </Button>
               </>
             ) : (
@@ -262,9 +232,6 @@ function Customizer() {
           </div>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
-
-
