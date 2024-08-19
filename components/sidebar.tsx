@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Playlist } from "../data/playlists";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import Favourites from "./favourites";
+import Favourites from "./community/favourites";
 import {
   Collapsible,
   CollapsibleContent,
@@ -18,6 +18,7 @@ import {
 } from "./ui/collapsible";
 import {
   BadgeHelpIcon,
+  BellDotIcon,
   ChevronsUpDown,
   GalleryVerticalEnd,
   Home,
@@ -28,32 +29,33 @@ import {
   Telescope,
   Users,
 } from "lucide-react";
-import { communities } from "@/data/communities";
-import CommunityHoverCard from "./CommunityHoverCard";
+// import { communities } from "@/data/communities";
 import { usePathname, useRouter } from "next/navigation";
+import CommunitiesWidget from "./community/communities-widget";
+import { useCommunities } from "@/api/communities";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import { ChatBubbleIcon } from "@radix-ui/react-icons";
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  playlists: Playlist[];
-}
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function Sidebar({ className, playlists }: SidebarProps) {
+export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
+  const { data: communities, isLoading, isError } = useCommunities();
 
-  function handleAddCommunity(): void {
-    throw new Error("Function not implemented.");
-  }
-
-  const handleNavigation = (e, route: string) => {
+  const handleNavigation = (
+    e: MouseEvent<HTMLButtonElement, MouseEvent>,
+    route: string,
+  ) => {
     e.preventDefault();
     e.stopPropagation();
     router.push(route);
   };
 
   const bottomNav = [
-    { href: "", icon: BadgeHelpIcon, label: "Help" },
-    { href: "", icon: Rss, label: "Blog" },
+    { href: "/chats", icon: ChatBubbleIcon, label: "Chats" },
+    { href: "/notifications", icon: BellDotIcon, label: "Notifications" },
     { href: "", icon: Users, label: "Careers" },
     { href: "", icon: Newspaper, label: "Press" },
   ];
@@ -65,80 +67,56 @@ export function Sidebar({ className, playlists }: SidebarProps) {
   ];
 
   return (
-    <div className={cn("pb-12", className)}>
-      <div className="space-y-4 py-3">
-        <TopNavItems items={topNav} pathname={pathname} />
-        <Separator />
-        <div className="px-3 py-2">
-          <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-            <CollapsibleTrigger asChild>
-              <Button variant="ghost" className="w-full justify-start mb-3">
-                Communities
-                <ChevronsUpDown className="h-4 w-4 ml-auto" />
+    <aside className="overflow-y-auto bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden xl:block">
+      <div className={cn("pb-12", className)}>
+        <div className="space-y-4 py-3">
+          <TopNavItems items={topNav} pathname={pathname} />
+          <Separator />
+
+          <CollapsibleSection title="Communities">
+            <div className="space-y-1 px-3 py-2">
+              <Button asChild variant="ghost" className="w-full justify-start">
+                <Link href="/communities/create">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-transparent">
+                      <Plus />
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="ml-2 mr-2 text-xs text-ellipsis overflow-hidden">
+                    Add Community
+                  </span>
+                </Link>
               </Button>
-            </CollapsibleTrigger>
+              <BaseDataPlaceholder
+                isLoading={isLoading}
+                isError={isError}
+                variant="avatar-list"
+              >
+                <CommunitiesWidget
+                  communities={communities?.slice(0, 5)}
+                  hasFavourites
+                />
+              </BaseDataPlaceholder>
+            </div>
+          </CollapsibleSection>
 
-            <CollapsibleContent>
-              <div className="space-y-1">
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="w-full justify-start"
-                >
-                  <Link href="/communities/create">
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-transparent">
-                        <Plus />
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="ml-2 mr-2 text-xs text-ellipsis overflow-hidden">
-                      Add Community
-                    </span>
-                  </Link>
-                </Button>
-                {communities.slice(0, 5).map((community, index) => (
-                  <CommunityHoverCard community={community}>
-                    <Button
-                      key={index}
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={(e) =>
-                        handleNavigation(e, `/communities/${community.id}`)
-                      }
-                    >
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage
-                          src={community.icon_img}
-                          alt={community.name}
-                        />
-                        <AvatarFallback>
-                          {community.title.slice(0, 2)}
-                        </AvatarFallback>
-                      </Avatar>
-
-                      <span className="ml-2 mr-2 text-xs text-ellipsis overflow-hidden">
-                        {community.name}
-                      </span>
-
-                      <Favourites className="ml-auto" />
-                    </Button>
-                  </CommunityHoverCard>
-                ))}
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
+          <Separator />
+          <CollapsibleSection title="Resources">
+            <TopNavItems items={bottomNav} pathname={pathname} />
+          </CollapsibleSection>
         </div>
-
-        <Separator />
-        <CollapsibleSection title="Resources">
-          <TopNavItems items={bottomNav} pathname={pathname} />
-        </CollapsibleSection>
       </div>
-    </div>
+    </aside>
   );
 }
 
-function CollapsibleSection({ children, title }) {
+function CollapsibleSection({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -157,7 +135,12 @@ function CollapsibleSection({ children, title }) {
   );
 }
 
-function TopNavItems({ pathname, items = [] }: { pathname: string }) {
+interface TopNavItemsProps {
+  pathname: string;
+  items: { href: string; icon: React.ComponentType<any>; label: string }[];
+}
+
+function TopNavItems({ pathname, items = [] }: TopNavItemsProps) {
   return (
     <div className="px-3 py-2">
       <div className="space-y-1">

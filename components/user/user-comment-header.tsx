@@ -6,21 +6,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CalendarDays, MoreHorizontal } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-import { Post } from "@/data/posts";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import CommunityHoverCard from "../CommunityHoverCard";
+import { MoreHorizontal } from "lucide-react";
+
 import { af, when } from "@/lib/utils";
 import Link from "next/link";
 import ListItem from "../base/list-items";
+import CommunityHoverCard from "@/components/community/CommunityHoverCard";
 
 const UserCommentHeader: React.FC<{
   comment: Comment;
@@ -56,7 +49,7 @@ const UserCommentHeader: React.FC<{
             </div>
 
             <div className="text-muted-foreground">
-              xxx commented {when(post?.created_at)}
+              commented {when(post?.created_at)}
             </div>
           </div>
         </div>

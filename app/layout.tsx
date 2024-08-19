@@ -12,6 +12,8 @@ import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { MountProvider } from "@/providers/mount-provider";
 import { getTheme } from "@/actions/theme-config";
 import { Toaster } from "@/components/ui/toaster";
+import { Sidebar } from "@/components/sidebar";
+import { LayoutProvider } from "@/providers/layout-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -48,7 +50,12 @@ export default async function RootLayout({
                 speed={200}
                 shadow="0 0 10px #2299DD,0 0 5px #2299DD"
               />
-              <ReactQueryProvider>{children}</ReactQueryProvider>
+
+              <ReactQueryProvider>
+                <LayoutProvider excludeSidebarRoutes={["/chats"]}>
+                  {children}
+                </LayoutProvider>
+              </ReactQueryProvider>
               <Toaster />
             </ThemeProvider>
           </JotaiProvider>

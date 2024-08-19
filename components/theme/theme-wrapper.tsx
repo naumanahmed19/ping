@@ -1,20 +1,14 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { useConfig } from "@/hooks/use-config";
 
 interface ThemeWrapperProps extends React.ComponentProps<"div"> {
   themeConfig?: {
     radius?: string;
-    // Add other properties as needed
   };
 }
 
-export function ThemeWrapper({
-  themeConfig,
-  children,
-  className,
-}: ThemeWrapperProps) {
+export function ThemeWrapper({ themeConfig, children }: ThemeWrapperProps) {
   const [config] = useConfig();
 
   return (

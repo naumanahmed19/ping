@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/button";
-import { ThemeWrapper } from "@/components/theme/theme-wrapper";
 
 interface PostSidebarProps {
   postId: string;

@@ -17,7 +17,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import CommunityHoverCard from "./CommunityHoverCard";
+import CommunityHoverCard from "@/components/community/CommunityHoverCard";
 import { af, when } from "@/lib/utils";
 
 const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
@@ -29,8 +29,11 @@ const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
       <div className="flex items-center justify-start">
         <CommunityHoverCard community={post.community}>
           <Avatar className={!isDetailsPage ? "h-7 w-7" : "h-10 w-10"}>
-          <AvatarImage src={post.community?.icon_img} alt={post?.community?.name} />
-          <AvatarFallback>{af(post.community?.name)}</AvatarFallback>
+            <AvatarImage
+              src={post.community?.icon_img}
+              alt={post?.community?.name}
+            />
+            <AvatarFallback>{af(post.community?.name)}</AvatarFallback>
           </Avatar>
         </CommunityHoverCard>
 
@@ -42,7 +45,7 @@ const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
                   <div className="flex">
                     <div className="font-bold">{post?.community?.name}</div>
                     <div className="text-muted-foreground mx-3">
-                      { when(post?.created_at) }
+                      {when(post?.created_at)}
                     </div>
                   </div>
                   {isDetailsPage && (

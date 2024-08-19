@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 export default function Page(): JSX.Element {
   return (
-    <Container className="space-y-10 my-4">
+    <Container>
       <div className=" w-[650px]">
         <div className="my-10">
           <h1 className="text-2xl font-bold ">Create a community</h1>

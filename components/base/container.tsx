@@ -1,17 +1,6 @@
 "use client";
 import { Sidebar } from "@/components/sidebar";
 import { playlists } from "@/data/playlists";
-
-import { UserNav } from "@/components/user-nav";
-import { MainNav } from "@/components/nav/main-nav";
-import MainNavSearch from "@/components/nav/main-nav-search";
-import { MenuIcon, TrendingUp } from "lucide-react";
-import Link from "next/link";
-import { ModeToggle } from "@/components/theme/mode-toggle";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { ThemeWrapper } from "@/components/theme/theme-wrapper";
-import { ThemeCustomizer } from "@/components/theme/theme-customizer";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { useConfig } from "@/hooks/use-config";
 import { cn } from "@/lib/utils";
 import { Header } from "./header";
@@ -34,10 +23,6 @@ export function Container({
     <div>
       <Header />
       <main className="flex">
-        <aside className="overflow-y-auto bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden xl:block">
-          <Sidebar playlists={playlists} className="" />
-        </aside>
-
         <div
           className={cn(
             "p-4 mt-16",

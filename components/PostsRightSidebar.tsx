@@ -1,72 +1,60 @@
-'use client';
-import * as React from "react"
-import { useState } from "react"
+"use client";
+import * as React from "react";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { communities } from "@/data/communities"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import CommunityHoverCard from "./CommunityHoverCard"
-
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import CommunitiesWidget from "@/components/community/communities-widget";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import { useCommunities } from "@/api/communities";
 export function PostsRightSidebar() {
-    const [visibleCount, setVisibleCount] = useState(5)
+  const { data: communities, isLoading, isError } = useCommunities();
 
-    const handleShowMore = () => {
-        setVisibleCount(prevCount => prevCount + 5)
-    }
+  const [visibleCount, setVisibleCount] = useState(5);
 
-    return (
-       <div className="w-[300px] ">  
-        <Card >
-            <CardHeader>
-                <CardTitle className="text-sm font-semibold tracking-tight">Popular Communities</CardTitle>
-            </CardHeader>
+  const handleShowMore = () => {
+    setVisibleCount((prevCount) => prevCount + 5);
+  };
 
-            <CardContent  className="w-[300px]">
-                {communities.slice(0, visibleCount).map((community, index) => (
-                   <CommunityHoverCard community={community}>
-                 <Link href="/" key={index}
+  return (
+    <div className="w-[300px]">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm font-semibold tracking-tight">
+            Popular Communities
+          </CardTitle>
+        </CardHeader>
 
-                        className={cn(
-                            "flex select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-
-                        )}
-
-                    >
-                        <Avatar className="h-8 w-8 mr-2">
-                        <AvatarImage src={community.icon_img} alt={community.name} />
-                        <AvatarFallback>{community.title.slice(0,2)}</AvatarFallback>
-                        </Avatar>
-
-                        <div className="grid gap-1">
-                            <p className="text-xs font-medium leading-none">
-                            {community.name}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                                {community.subscribers} members
-                            </p>
-                        </div>
-                        {/* <div className="ml-auto text-xs">Join</div> */}
-                    </Link>
-                    </CommunityHoverCard>
-                ))}
-            </CardContent>
-            <CardFooter className="">
-                {visibleCount < communities.length && (
-                    <Button variant="link" className="text-xs text-muted-foreground" onClick={handleShowMore}>
-                        Show More
-                    </Button>
-                )}
-            </CardFooter>
-        </Card>
-     </div>
-    )
+        <CardContent>
+          <BaseDataPlaceholder
+            isLoading={isLoading}
+            isError={isError}
+            variant="avatar-list"
+          >
+            <CommunitiesWidget
+              communities={communities?.slice(0, visibleCount)}
+              hasSubscribers
+            />
+          </BaseDataPlaceholder>
+        </CardContent>
+        <CardFooter className="">
+          {visibleCount < communities?.length && (
+            <Button
+              variant="link"
+              className="text-xs text-muted-foreground"
+              onClick={handleShowMore}
+            >
+              Show More
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
+    </div>
+  );
 }
