@@ -25,7 +25,7 @@ export const Header = () => {
               <MenuIcon className="mt-2" />
             </SheetTrigger>
             <SheetContent className="p-0" side={"left"}>
-              <Sidebar playlists={playlists} />
+              <Sidebar />
             </SheetContent>
           </Sheet>
         </div>

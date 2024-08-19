@@ -1,11 +1,14 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import {  
-  
+import {
   Command,
-  
-  CommandInput, CommandList, CommandGroup, CommandItem, CommandEmpty } from "cmdk";
+  CommandInput,
+  CommandList,
+  CommandGroup,
+  CommandItem,
+  CommandEmpty,
+} from "cmdk";
 import { useState, useCallback } from "react";
 import { useDebounce } from "use-debounce";
 import { Command as CommandPrimitive } from "cmdk";
@@ -60,10 +63,8 @@ export function Search(props: CommonProps) {
   return (
     <div>
       <Command className="overflow-visible">
-      
-         
         <div className="flex w-full items-center justify-between rounded-lg border bg-background ring-offset-background text-sm focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
-        <SearchIcon className="ml-3 text-muted-foreground" />
+          <SearchIcon className="ml-3 text-muted-foreground" />
           <CommandPrimitive.Input
             value={searchInput}
             onValueChange={setSearchInput}
@@ -73,13 +74,16 @@ export function Search(props: CommonProps) {
             className="w-full p-3 rounded-lg outline-none"
           />
         </div>
-        {searchInput !== "" && !isOpen && !selectedPlaceId && showInlineError && (
-          <FormMessages
-            type="error"
-            className="pt-1 text-sm"
-            messages={["Select a valid address from the list"]}
-          />
-        )}
+        {searchInput !== "" &&
+          !isOpen &&
+          !selectedPlaceId &&
+          showInlineError && (
+            <FormMessages
+              type="error"
+              className="pt-1 text-sm"
+              messages={["Select a valid address from the list"]}
+            />
+          )}
 
         {isOpen && (
           <div className="relative animate-in fade-in-0 zoom-in-95 h-auto">
@@ -104,7 +108,9 @@ export function Search(props: CommonProps) {
                             value={prediction.placePrediction.text.text}
                             onSelect={() => {
                               setSearchInput("");
-                              setSelectedPlaceId(prediction.placePrediction.place);
+                              setSelectedPlaceId(
+                                prediction.placePrediction.place,
+                              );
                               setIsOpenDialog(true);
                             }}
                             className="flex select-text flex-col cursor-pointer gap-0.5 h-max p-2 px-3 rounded-md aria-selected:bg-accent aria-selected:text-accent-foreground hover:bg-accent hover:text-accent-foreground items-start"
