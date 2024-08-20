@@ -44,13 +44,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-
-export default function NavNotifications() {
+import { useSearch } from "@/hooks/use-search";
+import { usePathname, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [query, setQuery] = useSearch();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   useEffect(() => {
+    setIsOpen(false);
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (ref.current && !ref.current.contains(target)) {
@@ -64,6 +70,19 @@ export default function NavNotifications() {
     };
   }, []);
 
+  useEffect(() => {
+    if (pathname === "/search") {
+      const search = searchParams.get("s");
+      setSearchTerm(search || "");
+    }
+  }, [pathname]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      router.push(`/search?s=${searchTerm}`);
+      setIsOpen(false);
+    }
+  };
   return (
     <div className="flex items-center gap-2">
       <div className=" items-center md:flex">
@@ -79,15 +98,19 @@ export default function NavNotifications() {
         </div>
         {isOpen && (
           <div ref={ref} className="fixed top-2  md:w-[400px]  p-0  ">
-            <Command className="rounded-md shadow-lg border">
+            <Command
+              className="rounded-md shadow-lg border"
+              onKeyDown={handleKeyDown}
+            >
               <CommandInput
                 className="h-12 text-md"
                 autoFocus
                 value={searchTerm}
+                onKeyDown={handleKeyDown}
                 placeholder={searchTerm}
                 onValueChange={(e) => {
-                  console.log(e);
                   setSearchTerm(e);
+                  setQuery({ s: e });
                 }}
               />
               <CommandList>
@@ -131,8 +154,4 @@ export default function NavNotifications() {
       </div>
     </div>
   );
-}
-
-function ActionIcon() {
-  return <BellIcon width={20} height={20} className="text-muted-foreground" />;
 }

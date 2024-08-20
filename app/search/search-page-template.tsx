@@ -21,7 +21,7 @@ import {
   Settings,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import React, { Children, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import PostHeader from "@/components/PostHeader";
 import { ContainerContent } from "@/components/base/container-content";
 import { ContainerAside } from "@/components/base/container-aside";
@@ -36,13 +36,27 @@ import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PostsResults from "./posts/posts-results";
 import SearchNav from "@/components/search/search-nav";
+import { useSearchParams } from "next/navigation";
+import { useSearch } from "@/api/search";
+export interface IBaseWrapperProps {
+  children?: React.ReactNode;
+  className?: string;
+  isFullWidth?: boolean;
+}
+const SearchPageTemplate = ({ children }: IBaseWrapperProps) => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("s");
+  const { data, isLoading, isError } = useSearch(search);
 
-const SearchPage: React.FC = () => {
   return (
-    <>
-      <PostsResults />
-    </>
+    <Container>
+      <pre>{JSON.stringify(data)}</pre>
+      <div className="my-10">
+        <SearchNav />
+      </div>
+      <div className="flex items-start justify-between gap-10">{children}</div>
+    </Container>
   );
 };
 
-export default SearchPage;
+export default SearchPageTemplate;

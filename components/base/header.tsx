@@ -4,7 +4,7 @@ import { playlists } from "@/data/playlists";
 
 import { UserNav } from "@/components/user-nav";
 import { MainNav } from "@/components/nav/main-nav";
-import MainNavSearch from "@/components/nav/main-nav-search";
+import MainNavSearch from "@/components/nav/nav-searchbar";
 import { Aperture, MenuIcon, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { ModeToggle } from "@/components/theme/mode-toggle";

@@ -83,5 +83,5 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
     );
   }
 
-  return <>{children}</>;
+  return <div>{children}</div>;
 };

@@ -20,9 +20,19 @@ import {
 import CommunityHoverCard from "@/components/community/CommunityHoverCard";
 import { af, when } from "@/lib/utils";
 
-const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
+const PostHeader: React.FC<{
+  post: Post;
+  isDetailsPage?: boolean;
+  hasTtile?: boolean;
+  hasJoinButton?: boolean;
+  hasActions?: boolean;
+}> = ({
   post,
   isDetailsPage = false,
+  hasTtile = false,
+  hasJoinButton = false,
+
+  hasActions = false,
 }) => {
   return (
     <div key={post.id}>
@@ -48,7 +58,7 @@ const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
                       {when(post?.created_at)}
                     </div>
                   </div>
-                  {isDetailsPage && (
+                  {hasTtile && (
                     <div className="text-muted-foreground">
                       {post?.community?.title}
                     </div>
@@ -58,7 +68,7 @@ const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
             </CommunityHoverCard>
 
             <div className="flex items-center">
-              {!isDetailsPage && (
+              {hasJoinButton && (
                 <Button
                   variant="outline"
                   className="h-[24px] items-center gap-1.5 rounded-md border p-[8px] shadow-sm"
@@ -66,19 +76,21 @@ const PostHeader: React.FC<{ post: Post; isDetailsPage?: boolean }> = ({
                   Join
                 </Button>
               )}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button aria-haspopup="true" size="icon" variant="ghost">
-                    <MoreHorizontal className="h-4 w-4" />
-                    <span className="sr-only">Toggle menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Save</DropdownMenuItem>
-                  <DropdownMenuItem>Hide</DropdownMenuItem>
-                  <DropdownMenuItem>Report</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {hasActions && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button aria-haspopup="true" size="icon" variant="ghost">
+                      <MoreHorizontal className="h-4 w-4" />
+                      <span className="sr-only">Toggle menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>Save</DropdownMenuItem>
+                    <DropdownMenuItem>Hide</DropdownMenuItem>
+                    <DropdownMenuItem>Report</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
           </div>
         </div>
