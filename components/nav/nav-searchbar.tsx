@@ -44,12 +44,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { useSearch } from "@/hooks/use-search";
+
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [query, setQuery] = useSearch();
+
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -110,7 +110,6 @@ export default function NavSearchBar() {
                 placeholder={searchTerm}
                 onValueChange={(e) => {
                   setSearchTerm(e);
-                  setQuery({ s: e });
                 }}
               />
               <CommandList>
