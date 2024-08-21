@@ -9,8 +9,15 @@ export const useSearch = (q: any) => {
 };
 
 function fetchSearch(q) {
-  console.log(q);
-  return getPosts(q);
+  console.log(q, "q");
+  switch (q) {
+    case "posts":
+      return getPosts(q);
+    case "communities":
+      return getPosts(q);
+    default:
+      return getPosts(q);
+  }
 }
 
 export const getPosts = async (q) => {
@@ -19,10 +26,8 @@ export const getPosts = async (q) => {
   );
 
   const filteredPosts = postsResponse.filter((post) => {
-    return post.title.toLowerCase().includes(q.toLowerCase());
+    return post.title.toLowerCase().includes(q?.s.toLowerCase());
   });
-
-  console.log(filteredPosts);
 
   const communitiesResponse = await fetch(`/data/communities.json`).then(
     (res) => res.json(),

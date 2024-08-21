@@ -21,7 +21,6 @@ export function Container({
 
   return (
     <div>
-      <Header />
       <main className="flex">
         <div
           className={cn(

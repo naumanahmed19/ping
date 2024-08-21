@@ -9,12 +9,20 @@ import SearchPageTemplate from "@/app/search/search-page-template";
 import { Container } from "@/components/base/container";
 import { PostsRightSidebar } from "@/components/PostsRightSidebar";
 import { ContainerAside } from "@/components/base/container-aside";
-import { useSearch } from "@/hooks/use-search";
+
 import SearchNav from "@/components/search/search-nav";
 import { ContainerContent } from "@/components/base/container-content";
+import { useSearchParams } from "next/navigation";
+import { useSearch } from "@/api/search";
 
 const PostsResults = () => {
-  const { data: posts, isLoading, isError } = usePosts();
+  const searchParams = useSearchParams();
+  // const search = searchParams.get("s");
+  // const { data: posts, isLoading, isError } = useSearch(search);
+
+  const entries = searchParams.values();
+  console.log(entries, "entries");
+  const { data: posts, isLoading, isError } = useSearch(entries);
   return (
     <SearchPageTemplate>
       <ContainerContent>

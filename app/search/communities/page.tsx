@@ -9,12 +9,18 @@ import { useCommunities } from "@/api/communities";
 import { ContainerContent } from "@/components/base/container-content";
 import SearchPageTemplate from "@/app/search/search-page-template";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-interface PostsResultsProps {
+import { useSearchParams } from "next/navigation";
+import { useSearch } from "@/api/search";
+interface CommuntiesResultsProps {
   searchTerm: string;
 }
 
-const PostsResults: React.FC<PostsResultsProps> = ({ searchTerm }) => {
-  const { data: communities, isLoading, isError } = useCommunities();
+const CommuntiesResults: React.FC<CommuntiesResultsProps> = ({
+  searchTerm,
+}) => {
+  const searchParams = useSearchParams();
+  const entries = searchParams.entries();
+  const { data: communities, isLoading, isError } = useSearch(entries);
   return (
     <SearchPageTemplate>
       <ContainerContent>
@@ -60,4 +66,4 @@ const PostsResults: React.FC<PostsResultsProps> = ({ searchTerm }) => {
   );
 };
 
-export default PostsResults;
+export default CommuntiesResults;

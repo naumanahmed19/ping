@@ -1,6 +1,6 @@
 // Avatar.tsx
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -13,31 +13,50 @@ import { User } from "@/data/users";
 
 const SearchNav = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
 
   const menuItems = [
-    { label: "Posts", href: "/search", route: `/search` },
+    { label: "Posts", href: "posts", route: `/search` },
     {
       label: "Communities",
-      href: "/communities",
+      href: "communities",
       route: `/search/communities`,
     },
 
     {
       label: "Comments",
-      href: "/comments",
+      href: "comments",
       route: `/search/comments`,
     },
     {
       label: "Media",
-      href: "/media",
+      href: "media",
       route: `/search/media`,
     },
     {
       label: "People",
-      href: "/people",
+      href: "people",
       route: `/search/people`,
     },
   ];
+  // Get a new searchParams string by merging the current
+  // searchParams with a provided key/value pair
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const handelOnClick = (e, item) => {
+    e.preventDefault();
+    router.push(item.route + "?" + createQueryString("type", item.href));
+  };
 
   return (
     <NavigationMenu className="mb-6">
@@ -45,14 +64,13 @@ const SearchNav = () => {
         {menuItems.map((item) => {
           return (
             <NavigationMenuItem key={item.label}>
-              <Link href={`${item.route}`}>
-                <NavigationMenuLink
-                  active={pathname === item.route}
-                  className={navigationMenuTriggerStyle()}
-                >
-                  {item.label}
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink
+                onClick={(e) => handelOnClick(e, item)}
+                active={pathname === item.route}
+                className={navigationMenuTriggerStyle()}
+              >
+                {item.label}
+              </NavigationMenuLink>
             </NavigationMenuItem>
           );
         })}

@@ -1,4 +1,5 @@
 "use client";
+import { Header } from "@/components/base/header";
 import { Sidebar } from "@/components/sidebar";
 import { usePathname } from "next/navigation";
 
@@ -19,6 +20,7 @@ export const LayoutProvider: React.FC<LayoutProviderProps> = ({
 
   return (
     <>
+      <Header />
       {!isRouteHasSidebar(pathname) && <Sidebar />}
       {children}
     </>

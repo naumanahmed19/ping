@@ -71,7 +71,7 @@ export default function NavSearchBar() {
   }, []);
 
   useEffect(() => {
-    if (pathname === "/search") {
+    if (!pathname.includes("/search")) {
       const search = searchParams.get("s");
       setSearchTerm(search || "");
     }
