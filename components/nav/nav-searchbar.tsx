@@ -1,5 +1,5 @@
 import { useNotifications } from "@/api/notifications";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
 import { Button } from "@/components/ui/button";
@@ -44,9 +44,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import CommunitiesWidget from "@/components/community/communities-widget";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { useCommunities } from "@/api/communities";
+import { BaseDataPlaceholder } from "../base/base-data-placeholder";
+import PostHeader from "../PostHeader";
+import { useSearch, useSearchSuggestions } from "@/api/search";
+import UserWidget from "../user/user-widget";
+import PostsSuggestions from "../search/posts-suggestions";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -55,6 +62,13 @@ export default function NavSearchBar() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const entries = searchParams.entries();
+  const {
+    data: suggestions,
+    isLoading,
+    isError,
+  } = useSearchSuggestions(searchTerm);
+
   useEffect(() => {
     setIsOpen(false);
     const handleClickOutside = (event: MouseEvent) => {
@@ -70,19 +84,36 @@ export default function NavSearchBar() {
     };
   }, []);
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams],
+  );
+
   useEffect(() => {
     if (!pathname.includes("/search")) {
-      const search = searchParams.get("s");
-      setSearchTerm(search || "");
+      const s = searchParams.get("s");
+      setSearchTerm(s || "");
     }
   }, [pathname]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      router.push(`/search?s=${searchTerm}`);
+      console.log("set params");
+      createQueryString("s", e.target.value);
+      router.push(`/search?s=${e.target.value}`);
       setIsOpen(false);
     }
   };
+
+  function handleOnSelect(chip) {
+    setSearchTerm(chip.title);
+    setIsOpen(false);
+  }
+
   return (
     <div className="flex items-center gap-2">
       <div className=" items-center md:flex">
@@ -101,51 +132,60 @@ export default function NavSearchBar() {
             <Command
               className="rounded-md shadow-lg border"
               onKeyDown={handleKeyDown}
+              shouldFilter={false}
+              onValueChange={(e) => {
+                // console.log(e, "testzzzz");
+                // createQueryString("s", e);
+                // setSearchTerm(e);
+              }}
             >
               <CommandInput
                 className="h-12 text-md"
                 autoFocus
                 value={searchTerm}
-                onKeyDown={handleKeyDown}
                 placeholder={searchTerm}
                 onValueChange={(e) => {
+                  // createQueryString("s", e);
                   setSearchTerm(e);
                 }}
               />
               <CommandList>
-                <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Suggestions">
-                  <CommandItem>
-                    <Calendar className="mr-2 h-4 w-4" />
-                    <span>Calendar</span>
-                  </CommandItem>
-                  <CommandItem>
-                    <Smile className="mr-2 h-4 w-4" />
-                    <span>Search Emoji</span>
-                  </CommandItem>
-                  <CommandItem disabled>
-                    <Calculator className="mr-2 h-4 w-4" />
-                    <span>Calculator</span>
-                  </CommandItem>
-                </CommandGroup>
-                <CommandSeparator />
-                <CommandGroup heading="Settings">
-                  <CommandItem>
-                    <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
-                    <CommandShortcut>⌘P</CommandShortcut>
-                  </CommandItem>
-                  <CommandItem>
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    <span>Billing</span>
-                    <CommandShortcut>⌘B</CommandShortcut>
-                  </CommandItem>
-                  <CommandItem>
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                    <CommandShortcut>⌘S</CommandShortcut>
-                  </CommandItem>
-                </CommandGroup>
+                {suggestions?.length == 0 && (
+                  <CommandEmpty>No results found.</CommandEmpty>
+                )}
+                <BaseDataPlaceholder
+                  isLoading={isLoading}
+                  isError={isError}
+                  variant="avatar-list"
+                >
+                  {suggestions?.users?.length > 0 && (
+                    <CommandGroup heading="People">
+                      <UserWidget
+                        users={suggestions?.users}
+                        onSelect={handleOnSelect}
+                      />
+                    </CommandGroup>
+                  )}
+                  {suggestions?.communities?.length > 0 && (
+                    <CommandGroup heading="Communities">
+                      <CommunitiesWidget
+                        communities={suggestions?.communities?.slice(0, 4)}
+                        hasSubscribers={false}
+                      />
+                    </CommandGroup>
+                  )}
+                  {suggestions?.posts?.length > 0 && (
+                    <CommandGroup heading="Trending Posts">
+                      <PostsSuggestions
+                        posts={suggestions?.posts}
+                        onSelect={function (): void {
+                          throw new Error("Function not implemented.");
+                        }}
+                      />
+                    </CommandGroup>
+                  )}
+                  <CommandSeparator />
+                </BaseDataPlaceholder>
               </CommandList>
             </Command>
           </div>

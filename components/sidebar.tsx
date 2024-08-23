@@ -144,12 +144,12 @@ function TopNavItems({ pathname, items = [] }: TopNavItemsProps) {
   return (
     <div className="px-3 py-2">
       <div className="space-y-1">
-        {items?.map(({ href, icon: Icon, label }) => (
+        {items?.map(({ href, icon: Icon, label }, index) => (
           <Button
             variant={pathname === href ? "secondary" : "ghost"}
             className={cn("w-full justify-start")}
             asChild
-            key={href}
+            key={index}
           >
             <Link href={href}>
               <Icon

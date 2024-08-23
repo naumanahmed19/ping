@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import { Post } from "@/data/posts";
 import Link from "next/link";
@@ -16,35 +16,31 @@ interface PostsList {
   className?: string;
 }
 
-const PostsList: React.FC<PostsList> = ({  className }) => {
-      // Fetch the comments data
-  const { data: posts, isLoading, isError } = useQuery({
+const PostsList: React.FC<PostsList> = ({ className }) => {
+  // Fetch the comments data
+  const {
+    data: posts,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
   });
 
-
-  
   return (
-      <WithSkeleton isLoading={isLoading} items={5} isError={isError} >
-      
-      
+    <WithSkeleton isLoading={isLoading} items={5} isError={isError}>
       <PostsFilter />
       <div className={cn("posts-list", className)}>
-        {posts?.map((post) => (
-          <>
+        {posts?.map((post, index) => (
+          <div key={index}>
             <PostContainer route={`/post/${post.id}`}>
               <PostTemplate key={post.id} post={post} />
             </PostContainer>
             <Separator className="my-3" />
-          </>
+          </div>
         ))}
       </div>
-
-      </WithSkeleton>
-
-    
-   
+    </WithSkeleton>
   );
 };
 
