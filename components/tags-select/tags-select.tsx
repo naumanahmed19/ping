@@ -1,5 +1,5 @@
-import { Button } from "@/components/button";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { CircleX } from "lucide-react";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -9,7 +9,6 @@ interface TagsSelectProps {
   type?: string;
   categories: any[];
   maxTags: number;
-  // Add other props here if needed
   [key: string]: any;
 }
 

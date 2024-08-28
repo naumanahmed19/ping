@@ -3,7 +3,7 @@ import { Sidebar } from "@/components/sidebar";
 import { playlists } from "@/data/playlists";
 import { useConfig } from "@/hooks/use-config";
 import { cn } from "@/lib/utils";
-import { Header } from "./header";
+import { Header } from "../common/header";
 
 export interface IBaseWrapperProps {
   children?: React.ReactNode;

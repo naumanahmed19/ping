@@ -3,16 +3,25 @@
 import { Container } from "@/components/base/container";
 import { PostsRightSidebar } from "./PostsRightSidebar";
 import PostsList from "@/components/posts/posts-lists";
-import WithSkeleton from "./base/with-skeleton";
-import { fetchPosts } from "@/api";
-import { ContainerContent } from "./base/container-content";
-import { ContainerAside } from "./base/container-aside";
+import { ContainerContent } from "@/components/base/container-content";
+import { ContainerAside } from "@/components/base/container-aside";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import { usePosts } from "@/api/posts";
 
 const ItemsList: React.FC = () => {
+  const { data: posts, isLoading, isError } = usePosts();
+
   return (
     <Container className="flex items-start justify-between gap-4">
       <ContainerContent>
-      <PostsList />
+        <BaseDataPlaceholder
+          isLoading={isLoading}
+          count={5}
+          isError={isError}
+          variant="posts-list"
+        >
+          <PostsList posts={posts} />
+        </BaseDataPlaceholder>
       </ContainerContent>
 
       <ContainerAside>
