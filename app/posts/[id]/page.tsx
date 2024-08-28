@@ -2,17 +2,18 @@
 import * as React from "react";
 
 import { useParams } from "next/navigation";
-import PostTemplate from "@/components/PostTemplate";
+import PostTemplate from "@/components/posts/PostTemplate";
 import { postsData, commentsData } from "@/data";
 import Image from "next/image";
 import { Container } from "@/components/base/container";
 import PostSidebar from "./components/PostSidebar";
 
 import Comments from "@/components/comments/Comments";
-import PostHeader from "@/components/PostHeader";
-import PostActions from "@/components/PostActions";
+import PostHeader from "@/components/posts/PostHeader";
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import PostActions from "@/components/posts/PostActions";
 
 const PostPage: React.FC = () => {
   const id = useParams().id;

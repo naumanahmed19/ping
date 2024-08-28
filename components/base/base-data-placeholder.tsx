@@ -6,7 +6,7 @@ interface BaseDataPlaceholderProps {
   isLoading: boolean;
   isError: boolean;
   children?: React.ReactNode;
-  count: number;
+  count?: number;
   variant?: "spinner" | "spinner-text " | "avatar-list" | "posts-list";
 }
 

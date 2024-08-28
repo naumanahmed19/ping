@@ -1,14 +1,21 @@
-"use client";
-
 import { Metadata } from "next";
-import ItemsList from "@/components/items-list";
-import { usePosts } from "@/api/posts";
-export const metadata: Metadata = {
-  title: "Popular",
-  description: "Popular items from the community.",
-};
-export default function HomePage() {
-  const { data: posts, isLoading, isError } = usePosts();
+import HomeContent from "@/components/home/home-content";
 
-  return <ItemsList />;
+/**
+ * Metadata for the HomePage component.
+ * This includes the title and description for the page.
+ */
+export const metadata: Metadata = {
+  title: "Whats New",
+  description: "Stay updated with the latest news and updates.",
+};
+
+/**
+ * HomePage component.
+ * This component renders the HomeContent component.
+ *
+ * @returns {JSX.Element} The rendered HomeContent component.
+ */
+export default function HomePage() {
+  return <HomeContent />;
 }

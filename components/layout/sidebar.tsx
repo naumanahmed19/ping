@@ -4,20 +4,15 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Playlist } from "../data/playlists";
 import { MouseEvent, useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
-import Favourites from "./community/favourites";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "./ui/collapsible";
+} from "@/components/ui/collapsible";
 import {
-  BadgeHelpIcon,
   BellDotIcon,
   ChevronsUpDown,
   GalleryVerticalEnd,
@@ -25,13 +20,11 @@ import {
   Newspaper,
   Plus,
   Rocket,
-  Rss,
   Telescope,
   Users,
 } from "lucide-react";
-// import { communities } from "@/data/communities";
 import { usePathname, useRouter } from "next/navigation";
-import CommunitiesWidget from "./community/communities-widget";
+import CommunitiesWidget from "@/components/community/communities-widget";
 import { useCommunities } from "@/api/communities";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";

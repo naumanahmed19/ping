@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { useStepper } from "@/components/stepper";
+import { useStepper } from "@/components/ui/stepper";
 import {
   Form,
   FormControl,
@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { StepperFormActions } from "./stepper-form-actions";
-import InputFileUpload from "@/components/fileUpload/input-file-upload";
+import InputFileUpload from "@/components/ui/fileUpload/input-file-upload";
 import { useAtom } from "jotai";
 import { step2State } from "./atoms/formAtoms";
 

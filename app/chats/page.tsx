@@ -7,7 +7,7 @@ import { Container } from "@/components/base/container";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChatLayout } from "@/components/chat/chat-layout";
 import Link from "next/link";
-import { Header } from "@/components/common/header";
+import { Header } from "@/components/layout/header";
 
 export default function MailPage() {
   const layout = cookies().get("react-resizable-panels:layout:mail");

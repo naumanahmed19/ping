@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { useStepper } from "@/components/stepper";
+import { useStepper } from "@/components/ui/stepper";
 import {
   Form,
   FormDescription,
@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { StepperFormActions } from "./stepper-form-actions";
-import TagsSelect from "@/components/tags-select/tags-select";
+import TagsSelect from "@/components/ui/tags-select/tags-select";
 import { categoriesData } from "@/data";
 import { step3State } from "./atoms/formAtoms";
 import { useAtom } from "jotai";

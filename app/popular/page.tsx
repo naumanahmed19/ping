@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ItemsList from "@/components/items-list";
+import ItemsList from "@/components/home/items-list";
 
 import {
   Carousel,
@@ -39,8 +39,8 @@ export default function PopularPage() {
                         className="w-full h-48 object-cover"
                       />
 
-                              {/* Gradient Overlay */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black "></div>
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black "></div>
 
                       {/* Text on Image */}
                       <div className="absolute bottom-0 left-0 p-4 text-white">

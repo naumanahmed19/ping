@@ -14,7 +14,7 @@ import { useDebounce } from "use-debounce";
 import { Command as CommandPrimitive } from "cmdk";
 import { Delete, Loader2, Pencil, Search as SearchIcon } from "lucide-react";
 
-import { FormMessages } from "@/components/form-messages";
+import { FormMessages } from "@/components/common/form-messages";
 import useSWR from "swr";
 
 export const fetcher = (url: string) => fetch(url).then((r) => r.json());

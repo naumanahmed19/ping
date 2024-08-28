@@ -15,8 +15,8 @@ import { BellIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 import NotificationsListHeader from "@/app/notifications/components/notifications-list-header";
-import { ScrollArea } from "../ui/scroll-area";
-import { toast } from "../ui/use-toast";
+import { ScrollArea } from "../../ui/scroll-area";
+import { toast } from "../../ui/use-toast";
 import { LoaderCircle } from "lucide-react";
 
 export default function NavNotifications() {

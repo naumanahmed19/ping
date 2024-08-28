@@ -1,15 +1,13 @@
-import React from 'react';
-import { Button } from './ui/button';
-import Voting from './voting';
-import { Award, MessageSquare, Share2 } from 'lucide-react';
+import React from "react";
+import { Button } from "@/components/ui/button";
+
+import { Award, MessageSquare, Share2 } from "lucide-react";
+import Voting from "@/components/ui/voting/voting";
 
 const PostActions: React.FC = () => {
   return (
     <div className="flex items-center gap-3 my-3">
-      <Voting 
-      className="rounded-md border border-gray-300 shadow-sm"
-      
-      size='sm' variant='outline' />
+      <Voting className="rounded-md border border-gray-300 shadow-sm" />
       <Button
         variant="outline"
         className="h-[28px] items-center gap-1.5 rounded-md border p-[4px] shadow-sm"

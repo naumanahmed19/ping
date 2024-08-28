@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useToast } from "@/components/ui/use-toast";
-import { useStepper } from "@/components/stepper";
+import { useStepper } from "@/components/ui/stepper";
 import {
   Form,
   FormControl,

@@ -1,19 +1,14 @@
 "use client";
-import { Sidebar } from "@/components/sidebar";
-import { playlists } from "@/data/playlists";
 
-import { UserNav } from "@/components/user-nav";
-import { MainNav } from "@/components/nav/main-nav";
-import MainNavSearch from "@/components/nav/nav-searchbar";
-import { Aperture, MenuIcon, TrendingUp } from "lucide-react";
+import { UserNav } from "@/components/layout/nav/user-nav";
+import { MainNav } from "@/components/layout/nav/main-nav";
+import MainNavSearch from "@/components/layout/nav/nav-searchbar";
+import { Aperture, MenuIcon } from "lucide-react";
 import Link from "next/link";
-import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { ThemeWrapper } from "@/components/theme/theme-wrapper";
 import { ThemeCustomizer } from "@/components/theme/theme-customizer";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useConfig } from "@/hooks/use-config";
-import { cn } from "@/lib/utils";
+import { Sidebar } from "@/components/layout/sidebar";
 
 export const Header = () => {
   return (

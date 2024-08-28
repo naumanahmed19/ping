@@ -12,7 +12,6 @@ import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { MountProvider } from "@/providers/mount-provider";
 import { getTheme } from "@/actions/theme-config";
 import { Toaster } from "@/components/ui/toaster";
-import { Sidebar } from "@/components/sidebar";
 import { LayoutProvider } from "@/providers/layout-provider";
 const inter = Inter({ subsets: ["latin"] });
 

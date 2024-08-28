@@ -24,8 +24,8 @@ import { BellIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 import NotificationsListHeader from "@/app/notifications/components/notifications-list-header";
-import { ScrollArea } from "../ui/scroll-area";
-import { toast } from "../ui/use-toast";
+import { ScrollArea } from "../../ui/scroll-area";
+import { toast } from "../../ui/use-toast";
 import { useEffect, useRef } from "react";
 import {
   Calculator,
@@ -49,11 +49,11 @@ import CommunitiesWidget from "@/components/community/communities-widget";
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useCommunities } from "@/api/communities";
-import { BaseDataPlaceholder } from "../base/base-data-placeholder";
-import PostHeader from "../PostHeader";
+import { BaseDataPlaceholder } from "../../base/base-data-placeholder";
+import PostHeader from "../../posts/PostHeader";
 import { useSearch, useSearchSuggestions } from "@/api/search";
-import UserWidget from "../user/user-widget";
-import PostsSuggestions from "../search/posts-suggestions";
+import UserWidget from "../../user/user-widget";
+import PostsSuggestions from "../../search/posts-suggestions";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 

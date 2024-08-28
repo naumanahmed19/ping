@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import PostHeader from "@/components/PostHeader";
+import PostHeader from "@/components/posts/PostHeader";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";

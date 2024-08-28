@@ -23,7 +23,7 @@ import { Post } from "@/data/posts";
 import { af, cn, when } from "@/lib/utils";
 import Link from "next/link";
 
-import UserHoverCard from "@/components/user-hover-card";
+import UserHoverCard from "@/components/user/user-hover-card";
 import ListItem from "@/components/base/list-items";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 

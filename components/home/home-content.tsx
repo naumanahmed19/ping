@@ -1,14 +1,14 @@
 "use client";
 
 import { Container } from "@/components/base/container";
-import { PostsRightSidebar } from "./PostsRightSidebar";
+import { PostsRightSidebar } from "../posts/PostsRightSidebar";
 import PostsList from "@/components/posts/posts-lists";
 import { ContainerContent } from "@/components/base/container-content";
 import { ContainerAside } from "@/components/base/container-aside";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { usePosts } from "@/api/posts";
 
-const ItemsList: React.FC = () => {
+const HomeContent: React.FC = () => {
   const { data: posts, isLoading, isError } = usePosts();
 
   return (
@@ -31,4 +31,4 @@ const ItemsList: React.FC = () => {
   );
 };
 
-export default ItemsList;
+export default HomeContent;

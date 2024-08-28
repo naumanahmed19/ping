@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ItemsList from "@/components/items-list";
+import ItemsList from "@/components/home/items-list";
 import { usePosts } from "@/api/posts";
 // export const metadata: Metadata = {
 //   title: "Popular",

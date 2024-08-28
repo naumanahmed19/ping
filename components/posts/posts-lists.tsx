@@ -2,7 +2,7 @@
 import React from "react";
 import { Post } from "@/data/posts";
 import Link from "next/link";
-import PostTemplate from "@/components/PostTemplate";
+import PostTemplate from "@/components/posts/PostTemplate";
 import { cn } from "@/lib/utils";
 import PostsFilter from "./posts-filter";
 import { PostContainer } from "../base/post-container";

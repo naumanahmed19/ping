@@ -8,12 +8,12 @@ import {
 } from "@/components/ui/drawer";
 
 import { ChatBubbleIcon, OpenInNewWindowIcon } from "@radix-ui/react-icons";
-import { ChatLayout } from "../chat/chat-layout";
+import { ChatLayout } from "../../chat/chat-layout";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import NavNotifications from "./nav-notifications";
-import { ThemeCustomizer } from "../theme/theme-customizer";
+import { ThemeCustomizer } from "../../theme/theme-customizer";
 import { Sidebar, Telescope } from "lucide-react";
 export default function NavChats() {
   const pathname = usePathname();

@@ -3,7 +3,7 @@ import Image from "next/image";
 import PostHeader from "./PostHeader";
 import PostActions from "./PostActions";
 import { cn } from "@/lib/utils";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 import { Post } from "@/data/posts";
 
 interface PostTemplateProps {

@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import NavNotifications from "./nav-notifications";
 import NavChats from "./nav-chats";
-import ChatSidebarFilters from "../chat/chat-sidebar-filters";
+import ChatSidebarFilters from "../../chat/chat-sidebar-filters";
 
 export function MainNav({
   className,

@@ -10,92 +10,32 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import Editor from "@/components/ui/editor";
 import { Container } from "@/components/base/container";
-import TeamSwitcher from "@/components/team-switcher";
-import { Sidebar } from "./sidebar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Text,
-  ImagePlay,
-  Link,
-  Image,
-  DockIcon,
-  Type,
-  Paperclip,
-  Mic,
-  UnderlineIcon,
-  ChevronsUpDown,
-  Check,
-} from "lucide-react";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
+import TeamSwitcher from "@/components/posts/team-switcher";
+import { Type } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { InputFileUpload } from "@/components/fileUpload/input-file-upload";
+
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { MinimalTiptapEditor } from "@/components/minimal-tiptap";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
-import { CheckIcon, FontBoldIcon, FontItalicIcon } from "@radix-ui/react-icons";
-import { Skeleton } from "@/components/ui/skeleton";
+import { CheckIcon } from "@radix-ui/react-icons";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {  formSchema } from "./form-schema";
+import { formSchema } from "./form-schema";
+import { MinimalTiptapEditor } from "@/components/ui/minimal-tiptap";
 export default function Component() {
-
-   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -103,8 +43,6 @@ export default function Component() {
       description: "",
     },
   });
-  
-
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -163,13 +101,13 @@ export default function Component() {
                               }}
                               className={cn(
                                 "justify-start",
-                                isActive && "border-2 border-primary"
+                                isActive && "border-2 border-primary",
                               )}
                             >
                               <span
                                 className={cn(
                                   isActive ? "bg-primary" : "bg-background",
-                                  "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full border-2 "
+                                  "mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full border-2 ",
                                 )}
                               >
                                 {isActive && (

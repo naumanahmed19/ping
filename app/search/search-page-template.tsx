@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import React, { Children, useEffect, useState } from "react";
-import PostHeader from "@/components/PostHeader";
+import PostHeader from "@/components/posts/PostHeader";
 import { ContainerContent } from "@/components/base/container-content";
 import { ContainerAside } from "@/components/base/container-aside";
 import { PostsRightSidebar } from "@/components/PostsRightSidebar";

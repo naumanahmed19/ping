@@ -1,6 +1,7 @@
 "use client";
-import { Header } from "@/components/common/header";
-import { Sidebar } from "@/components/sidebar";
+
+import { Header } from "@/components/layout/header";
+import { Sidebar } from "@/components/layout/sidebar";
 import { usePathname } from "next/navigation";
 
 type LayoutProviderProps = {
