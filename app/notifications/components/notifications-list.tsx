@@ -1,6 +1,6 @@
-import { useNotifications } from "@/api/notifications";
 import React, { useState } from "react";
 import NotificationsListHeader from "./notifications-list-header";
+import { useNotifications } from "@/queries/notifications.query";
 
 const NotificationList = () => {
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,4 +1,3 @@
-import { useNotifications } from "@/api/notifications";
 import React, { useState } from "react";
 
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
@@ -18,6 +17,7 @@ import NotificationsListHeader from "@/app/notifications/components/notification
 import { ScrollArea } from "../../ui/scroll-area";
 import { toast } from "../../ui/use-toast";
 import { LoaderCircle } from "lucide-react";
+import { useNotifications } from "@/queries/notifications.query";
 
 export default function NavNotifications() {
   return (
