@@ -25,9 +25,9 @@ import {
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import CommunitiesWidget from "@/components/community/communities-widget";
-import { useCommunities } from "@/api/communities";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
+import { useGetCommunities } from "@/queries/communities.query";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -35,7 +35,7 @@ export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
-  const { data: communities, isLoading, isError } = useCommunities();
+  const { data: communities, isLoading, isError } = useGetCommunities();
 
   const handleNavigation = (
     e: MouseEvent<HTMLButtonElement, MouseEvent>,

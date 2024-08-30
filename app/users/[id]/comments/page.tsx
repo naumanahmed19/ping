@@ -4,7 +4,6 @@ import * as React from "react";
 import { useParams } from "next/navigation";
 import { userData } from "@/data";
 import UserHeader from "@/components/user/user-header";
-import { PostsRightSidebar } from "@/components/PostsRightSidebar";
 
 import CommentsList from "./comments-list";
 import { comments } from "@/data/comments";
@@ -14,6 +13,7 @@ import { Container } from "@/components/base/container";
 import { useQuery } from "@tanstack/react-query";
 import { getComments } from "@/api";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
 const UserPage: React.FC = () => {
   const id = useParams().id;
 

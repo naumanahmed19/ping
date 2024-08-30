@@ -3,11 +3,11 @@ import React from "react";
 import { Post } from "@/data/posts";
 import { cn } from "@/lib/utils";
 
-import PostActions from "@/components/PostActions";
 import PostsFilter from "@/components/posts/posts-filter";
 import { Separator } from "@/components/ui/separator";
 import UserCommentHeader from "@/components/user/user-comment-header";
 import { PostContainer } from "@/components/base/post-container";
+import PostActions from "@/components/posts/PostActions";
 
 interface UserComments {
   comments: Array<Post>;

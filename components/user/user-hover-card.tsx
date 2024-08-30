@@ -1,14 +1,6 @@
 "use client";
 
-import { Button } from "../ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { CalendarDays, MoreHorizontal } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { User } from "@/data/users";

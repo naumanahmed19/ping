@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { fetchPosts } from "@/api";
 import { useQuery } from "@tanstack/react-query";
-import { usePosts } from "@/api/posts";
+import { useGetPosts } from "@/api/posts";
 import { BaseDataPlaceholder } from "../base/base-data-placeholder";
 
 interface PostsList {

@@ -4,13 +4,13 @@ import PostHeader from "@/components/posts/PostHeader";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
-import { usePosts } from "@/api/posts";
-import { useCommunities } from "@/api/communities";
+
 import { ContainerContent } from "@/components/base/container-content";
 import SearchPageTemplate from "@/app/search/search-page-template";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSearchParams } from "next/navigation";
-import { useSearch } from "@/api/search";
+import { useSearch } from "@/queries/search.query";
+
 interface CommuntiesResultsProps {
   searchTerm: string;
 }

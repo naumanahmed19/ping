@@ -4,16 +4,17 @@ import PostHeader from "@/components/posts/PostHeader";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
-import { usePosts } from "@/api/posts";
+
 import SearchPageTemplate from "@/app/search/search-page-template";
 import { Container } from "@/components/base/container";
-import { PostsRightSidebar } from "@/components/PostsRightSidebar";
+
 import { ContainerAside } from "@/components/base/container-aside";
 
 import SearchNav from "@/components/search/search-nav";
 import { ContainerContent } from "@/components/base/container-content";
 import { useSearchParams } from "next/navigation";
-import { useSearch } from "@/api/search";
+import { useSearch } from "@/queries/search.query";
+import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
 
 const PostsResults = () => {
   const searchParams = useSearchParams();

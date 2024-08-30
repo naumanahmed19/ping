@@ -1,14 +1,28 @@
 // Avatar.tsx
-import React from 'react';
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Assuming these are imported from somewhere
-import { Community } from '@/data/communities';
+import { Community } from "@/data/communities";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {MoreHorizontal, CalendarDays, Plus, UsersRound, BellPlus, BellRing, BellOff, BellMinus } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import {
+  MoreHorizontal,
+  CalendarDays,
+  Plus,
+  UsersRound,
+  BellPlus,
+  BellRing,
+  BellOff,
+  BellMinus,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const CommunityNav = ({ community }: { community: Community }) => {
-
   const [isJoined, setIsJoined] = React.useState(false);
 
   const handleJoinClick = () => {
@@ -16,23 +30,23 @@ const CommunityNav = ({ community }: { community: Community }) => {
   };
 
   return (
-    <div className='flex items-center space-x-2'>
+    <div className="flex items-center space-x-2">
       <Button asChild variant="outline">
-        <Link href={`/posts/create/?community=${community.id}`}>
+        <Link href={`/posts/create/?community=${community?.id}`}>
           <Plus className="mr-2 h-4 w-4" /> Create a post
         </Link>
       </Button>
 
-      <Button  variant="outline" onClick={handleJoinClick}>
-          {isJoined ? (
-            <>
-              <UsersRound className="mr-2 h-4 w-4" /> Joined
-            </>
-          ) : (
-            <>
-              <UsersRound className="mr-2 h-4 w-4" /> Join
-            </>
-          )}
+      <Button variant="outline" onClick={handleJoinClick}>
+        {isJoined ? (
+          <>
+            <UsersRound className="mr-2 h-4 w-4" /> Joined
+          </>
+        ) : (
+          <>
+            <UsersRound className="mr-2 h-4 w-4" /> Join
+          </>
+        )}
       </Button>
 
       <DropdownMenu>
@@ -42,10 +56,17 @@ const CommunityNav = ({ community }: { community: Community }) => {
             <span className="sr-only">Toggle menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent >
-          <DropdownMenuItem> <BellRing className="h-4 w-4 mr-3" /> Frequent</DropdownMenuItem>
-          <DropdownMenuItem><BellMinus className="h-4 w-4 mr-3" /> Low</DropdownMenuItem>
-          <DropdownMenuItem><BellOff className="h-4 w-4 mr-3" /> Off</DropdownMenuItem>
+        <DropdownMenuContent>
+          <DropdownMenuItem>
+            {" "}
+            <BellRing className="h-4 w-4 mr-3" /> Frequent
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <BellMinus className="h-4 w-4 mr-3" /> Low
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <BellOff className="h-4 w-4 mr-3" /> Off
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
@@ -56,15 +77,14 @@ const CommunityNav = ({ community }: { community: Community }) => {
             <span className="sr-only">Toggle menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent >
+        <DropdownMenuContent>
           <DropdownMenuItem>Add to Custom feed</DropdownMenuItem>
           <DropdownMenuItem>Add to favourites</DropdownMenuItem>
           <DropdownMenuItem>Mute</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );};
+  );
+};
 
 export default CommunityNav;
-
-

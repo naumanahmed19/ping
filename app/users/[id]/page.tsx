@@ -5,11 +5,12 @@ import { useParams } from "next/navigation";
 import { userData } from "@/data";
 import { posts } from "@/data/posts";
 import UserHeader from "@/components/user/user-header";
-import { PostsRightSidebar } from "@/components/PostsRightSidebar";
+
 import PostsList from "@/components/posts/posts-lists";
 import { Container } from "@/components/base/container";
 import { ContainerAside } from "@/components/base/container-aside";
 import { ContainerContent } from "@/components/base/container-content";
+import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
 const UserPage: React.FC = () => {
   const id = useParams().id;
 

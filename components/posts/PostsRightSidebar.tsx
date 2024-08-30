@@ -12,9 +12,10 @@ import {
 } from "@/components/ui/card";
 import CommunitiesWidget from "@/components/community/communities-widget";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
-import { useCommunities } from "@/api/communities";
+import { useGetCommunities } from "@/queries/communities.query";
+
 export function PostsRightSidebar() {
-  const { data: communities, isLoading, isError } = useCommunities();
+  const { data: communities, isLoading, isError } = useGetCommunities();
 
   const [visibleCount, setVisibleCount] = useState(5);
 

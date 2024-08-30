@@ -5,13 +5,15 @@ import { useParams } from "next/navigation";
 import { userData } from "@/data";
 import { posts } from "@/data/posts";
 import UserHeader from "@/components/user/user-header";
-import { PostsRightSidebar } from "@/components/PostsRightSidebar";
+
 import PostsList from "@/components/posts/posts-lists";
 import { ContainerContent } from "@/components/base/container-content";
 import { ContainerAside } from "@/components/base/container-aside";
 import { Container } from "@/components/base/container";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
-import { usePosts } from "@/api/posts";
+import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
+import { useGetPosts } from "@/queries/posts.query";
+
 const UserPage: React.FC = () => {
   const id = useParams().id;
 
@@ -20,7 +22,7 @@ const UserPage: React.FC = () => {
 
   if (!user) return <p>Not found</p>;
 
-  const { data: posts, isLoading, isError } = usePosts();
+  const { data: posts, isLoading, isError } = useGetPosts();
 
   return (
     <Container>

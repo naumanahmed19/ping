@@ -31,7 +31,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchPosts } from "@/api";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { usePosts } from "@/api/posts";
+import { useGetPosts } from "@/api/posts";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PostsResults from "./posts/posts-results";

@@ -1,59 +1,27 @@
-import { useNotifications } from "@/api/notifications";
 import React, { useCallback, useState } from "react";
 
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
-import { Button } from "@/components/ui/button";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import "@/styles/mdx.css";
-import { BellIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
-import NotificationsListHeader from "@/app/notifications/components/notifications-list-header";
-import { ScrollArea } from "../../ui/scroll-area";
-import { toast } from "../../ui/use-toast";
 import { useEffect, useRef } from "react";
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  LoaderCircle,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import CommunitiesWidget from "@/components/community/communities-widget";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { useCommunities } from "@/api/communities";
 import { BaseDataPlaceholder } from "../../base/base-data-placeholder";
-import PostHeader from "../../posts/PostHeader";
-import { useSearch, useSearchSuggestions } from "@/api/search";
+
 import UserWidget from "../../user/user-widget";
 import PostsSuggestions from "../../search/posts-suggestions";
+import { useSearchSuggestions } from "@/queries/search.query";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 

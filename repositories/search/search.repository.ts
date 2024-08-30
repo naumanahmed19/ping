@@ -1,12 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-
 /**
  * TODO:
  * This function needs to be changed to get results from server
  * Search suggestion may included posts, communities etc
  * Then structure can be seen in suggestions.json file
  */
-async function fetchSearchSuggestions(q: string) {
+export async function fetchSearchSuggestions(q: string) {
   let suggestions;
   const data = new URLSearchParams();
 
@@ -31,7 +29,7 @@ async function fetchSearchSuggestions(q: string) {
   return suggestions;
 }
 
-function fetchSearchResults(q) {
+export function fetchSearchResults(q) {
   switch (q) {
     case "posts":
       return getPosts(q);
