@@ -1,4 +1,4 @@
-import { LoaderCircle, ServerCrash } from "lucide-react";
+import { LoaderCircle, SearchSlash, ServerCrash } from "lucide-react";
 import React, { ReactNode } from "react";
 import { Skeleton } from "../ui/skeleton";
 
@@ -7,10 +7,12 @@ interface BaseDataPlaceholderProps {
   isError: boolean;
   children?: React.ReactNode;
   count?: number;
+  dataLength?: number;
   variant?: "spinner" | "spinner-text " | "avatar-list" | "posts-list";
 }
 
 export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
+  dataLength = undefined,
   isLoading,
   isError,
   children,
@@ -119,6 +121,19 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
       </div>
     );
   }
+
+  if (dataLength === 0)
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center space-y-1">
+          <SearchSlash className="w-16 h-16 mx-auto my-5 text-muted/95" />
+          <h2 className="text-2xl font-bold">No results found</h2>
+          <p className="text-muted-foreground">
+            Try searching for something else
+          </p>
+        </div>
+      </div>
+    );
 
   return <div>{children}</div>;
 };

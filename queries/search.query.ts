@@ -1,18 +1,14 @@
-/**
- * Nav bar suggestions:
- *
- */
-
-import {
-  fetchSearchResults,
-  fetchSearchSuggestions,
-} from "@/repositories/search/search.repository";
+import { SearchParams } from "@/lib/schemas/search.schema";
+import { useGet } from "@/lib/use-fetch";
 import { useQuery } from "@tanstack/react-query";
 
-export const useSearchSuggestions = (q: any) => {
+const BASE_URL = "/api/search";
+const QUERY_KEY = "search";
+
+export const useSearchSuggestions = (searchTerm: string) => {
   return useQuery({
-    queryKey: ["useSearchSuggestions", q],
-    queryFn: () => fetchSearchSuggestions(q),
+    queryFn: () => useGet(`${BASE_URL}/suggestions`, { q: searchTerm }),
+    queryKey: [QUERY_KEY, searchTerm],
     // enabled: !!q,
   });
 };
@@ -22,10 +18,12 @@ export const useSearchSuggestions = (q: any) => {
  *  to show on search page
  *
  */
-export const useSearch = (q: any) => {
+
+export const useSearch = (params: SearchParams) => {
+  console.log("params", params);
   return useQuery({
-    queryKey: ["searchResults", q],
-    queryFn: () => fetchSearchResults(q),
-    enabled: !!q,
+    queryKey: [QUERY_KEY, params],
+    queryFn: () => useGet(BASE_URL, params),
+    enabled: !!params,
   });
 };

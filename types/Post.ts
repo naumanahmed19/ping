@@ -1,3 +1,5 @@
+import { Community } from "./Community";
+
 export type Post = {
   id: number;
   title: string;

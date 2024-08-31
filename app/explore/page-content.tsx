@@ -34,7 +34,7 @@ export default function ExplorePageContnet() {
         {communities.map((community, index) => (
           <Card className="w-full max-w-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl">
             <CardContent className="p-4 bg-background">
-              <Link href={`/communities/${community.id}`}>
+              <Link href={`/communities/${community.name}`}>
                 <div className="flex justify-between space-x-4">
                   <div className="flex items-center space-x-4">
                     <Avatar>

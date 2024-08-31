@@ -1,27 +1,19 @@
-import {
-  getCommunitiesParam,
-  getCommunityParam,
-} from "@/repositories/communities/communities.params";
-import {
-  createCommunity,
-  fetchCommunities,
-  fetchCommunity,
-} from "@/repositories/communities/communities.repository";
+import { useQuery } from "@tanstack/react-query";
+import { useGet } from "@/lib/use-fetch";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+const BASE_URL = "/api/communities";
+const QUERY_KEY = "communities";
 
-export const useGetCommunities = (params?: getCommunitiesParam) => {
+export const useGetCommunities = () => {
   return useQuery({
-    queryFn: () => fetchCommunities(params),
-    queryKey: ["communities"],
+    queryFn: () => useGet(BASE_URL),
+    queryKey: [QUERY_KEY],
   });
 };
 
 export const useGetCommunity = (name: string) => {
   return useQuery({
-    queryFn: () => fetchCommunity(name),
-    queryKey: ["communities", name],
+    queryFn: () => useGet(`${BASE_URL}/${name}`),
+    queryKey: [QUERY_KEY, name],
   });
 };
-
-export const useCreateCommunityMutation = () => useMutation(createCommunity);

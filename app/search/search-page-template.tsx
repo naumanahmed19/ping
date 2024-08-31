@@ -25,17 +25,10 @@ const SearchPageTemplate = ({ children }: IBaseWrapperProps) => {
 
   return (
     <Container>
-      <pre>{JSON.stringify(data)}</pre>
       <div className="my-10">
         <SearchNav />
       </div>
-      <div className="flex items-start justify-between gap-10">
-        {children}
-        {/* {Component ? <Component searchTerm={search} /> : null}
-        <div className="w-80">
-          <PostsRightSidebar />
-        </div> */}
-      </div>
+      <div className="flex items-start justify-between gap-10">{children}</div>
     </Container>
   );
 };

@@ -6,14 +6,10 @@ export interface Community {
   subscribers: number;
   online_members: number;
   rank: number;
-  created_at: Date;
+  created_at: string;
   icon_img: string;
   banner_img: string;
   public_description: string;
-  type: Type;
+  type: string;
   over_18: boolean;
-}
-
-export enum Type {
-  Public = "public",
 }

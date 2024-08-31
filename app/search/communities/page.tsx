@@ -10,6 +10,7 @@ import SearchPageTemplate from "@/app/search/search-page-template";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSearchParams } from "next/navigation";
 import { useSearch } from "@/queries/search.query";
+import { Community } from "@/types/Community";
 
 interface CommuntiesResultsProps {
   searchTerm: string;
@@ -19,8 +20,10 @@ const CommuntiesResults: React.FC<CommuntiesResultsProps> = ({
   searchTerm,
 }) => {
   const searchParams = useSearchParams();
-  const entries = searchParams.entries();
-  const { data: communities, isLoading, isError } = useSearch(entries);
+  const params = Object.fromEntries(searchParams.entries());
+
+  const { data: communities, isLoading, isError } = useSearch(params);
+
   return (
     <SearchPageTemplate>
       <ContainerContent>
@@ -29,7 +32,7 @@ const CommuntiesResults: React.FC<CommuntiesResultsProps> = ({
           isError={isError}
           variant="avatar-list"
         >
-          {communities?.map((community, index) => (
+          {communities?.map((community: Community, index: number) => (
             <div key={index}>
               <Link href={`/communities/${community.id}`}>
                 <div className="flex items-start justify-between space-x-4">

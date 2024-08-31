@@ -21,9 +21,13 @@ import { BaseDataPlaceholder } from "../../base/base-data-placeholder";
 
 import UserWidget from "../../user/user-widget";
 import PostsSuggestions from "../../search/posts-suggestions";
-import { useSearchSuggestions } from "@/queries/search.query";
+import { useSearch, useSearchSuggestions } from "@/queries/search.query";
+import { atom, useAtom } from "jotai";
+import { searchState } from "@/lib/atoms";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [searchQuery, setSearchQuery] = useAtom(searchState);
 
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -63,16 +67,22 @@ export default function NavSearchBar() {
 
   useEffect(() => {
     if (!pathname.includes("/search")) {
-      const s = searchParams.get("s");
-      setSearchTerm(s || "");
+      const q = searchParams.get("q");
+      setSearchTerm(q || "");
     }
   }, [pathname]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log("set params");
-      createQueryString("s", e.target.value);
-      router.push(`/search?s=${e.target.value}`);
+      const query = e.target.value;
+      createQueryString("q", e.target.value);
+
+      setSearchQuery({
+        ...searchQuery,
+        q: searchTerm,
+      });
+      router.push(`/search?q=${query}`);
+
       setIsOpen(false);
     }
   };

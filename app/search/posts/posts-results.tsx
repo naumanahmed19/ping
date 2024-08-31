@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import PostHeader from "@/components/posts/PostHeader";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
@@ -15,24 +15,29 @@ import { ContainerContent } from "@/components/base/container-content";
 import { useSearchParams } from "next/navigation";
 import { useSearch } from "@/queries/search.query";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
+import { Post } from "@/types/Post";
+import { searchState } from "@/lib/atoms";
+import { useAtom } from "jotai";
 
 const PostsResults = () => {
-  const searchParams = useSearchParams();
-  // const search = searchParams.get("s");
-  // const { data: posts, isLoading, isError } = useSearch(search);
+  // const searchParams = useSearchParams();
+  // const params = Object.fromEntries(searchParams.entries());
 
-  const entries = searchParams.values();
-  console.log(entries, "entries");
-  const { data: posts, isLoading, isError } = useSearch(entries);
+  const [searchQuery] = useAtom(searchState);
+
+  const { data: posts, isLoading, isError } = useSearch(searchQuery);
+
   return (
     <SearchPageTemplate>
+      {JSON.stringify(searchQuery)}
       <ContainerContent>
         <BaseDataPlaceholder
+          dataLength={posts?.length}
           isLoading={isLoading}
           isError={isError}
           variant="avatar-list"
         >
-          {posts?.map((post, index) => (
+          {posts?.map((post: Post, index: number) => (
             <div key={index}>
               <Link href={`/post/${post.id}`}>
                 <PostHeader
