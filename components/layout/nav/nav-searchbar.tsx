@@ -21,8 +21,8 @@ import { BaseDataPlaceholder } from "../../base/base-data-placeholder";
 
 import UserWidget from "../../user/user-widget";
 import PostsSuggestions from "../../search/posts-suggestions";
-import { useSearch, useSearchSuggestions } from "@/queries/search.query";
-import { atom, useAtom } from "jotai";
+import { useSearchSuggestions } from "@/queries/search.query";
+import { useAtom } from "jotai";
 import { searchState } from "@/lib/atoms";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,10 +65,21 @@ export default function NavSearchBar() {
     [searchParams],
   );
 
+  //On page load, if the pathname includes /search, get the query string and set the search term and search query
   useEffect(() => {
-    if (!pathname.includes("/search")) {
-      const q = searchParams.get("q");
-      setSearchTerm(q || "");
+    if (pathname.includes("/search")) {
+      const params = Object.fromEntries(searchParams.entries());
+
+      setSearchQuery({
+        q: params.q || "",
+        type: params.type || "posts",
+      });
+    } else {
+      setSearchTerm("");
+      setSearchQuery({
+        q: "",
+        type: "posts",
+      });
     }
   }, [pathname]);
 

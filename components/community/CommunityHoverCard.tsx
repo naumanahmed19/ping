@@ -16,6 +16,8 @@ const CommunityHoverCard: React.FC<{
   className?: string;
   children?: React.ReactNode;
 }> = ({ community, className, children }) => {
+  if (!community) return null;
+
   return (
     <HoverCard openDelay={700}>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>

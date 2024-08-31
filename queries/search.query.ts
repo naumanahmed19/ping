@@ -18,7 +18,6 @@ export const useSearchSuggestions = (searchTerm: string) => {
  *  to show on search page
  *
  */
-
 export const useSearch = (params: SearchParams) => {
   console.log("params", params);
   return useQuery({
