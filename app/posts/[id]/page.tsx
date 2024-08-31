@@ -29,7 +29,7 @@ const PostPage: React.FC = () => {
     <Container isFullWidth={false}>
       <div className="flex items-start gap-4">
         <div>
-          <PostHeader key={post.id} post={post} isDetailsPage />
+          <PostHeader key={post.id} post={post} isDetailsPage hasActions />
 
           <h1 className="text-xl font-bold my-2">{post.title}</h1>
 

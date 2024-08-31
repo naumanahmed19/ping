@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Circle, Award } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import CommunityHoverCard from "@/components//community/CommunityHoverCard";
+import CommunityHoverCard from "@/components//community/community-hover-card";
 export default function Component({ community }) {
   return (
     <Card className="w-full max-w-sm rounded-lg overflow-hidden dtransition-all duration-300 hover:shadow-2xl">

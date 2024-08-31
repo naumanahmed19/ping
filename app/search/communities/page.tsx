@@ -11,6 +11,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSearchParams } from "next/navigation";
 import { useSearch } from "@/queries/search.query";
 import { Community } from "@/types/Community";
+import { useAtom } from "jotai";
+import { searchState } from "@/lib/atoms";
 
 interface CommuntiesResultsProps {
   searchTerm: string;
@@ -19,15 +21,14 @@ interface CommuntiesResultsProps {
 const CommuntiesResults: React.FC<CommuntiesResultsProps> = ({
   searchTerm,
 }) => {
-  const searchParams = useSearchParams();
-  const params = Object.fromEntries(searchParams.entries());
-
-  const { data: communities, isLoading, isError } = useSearch(params);
+  const [searchQuery] = useAtom(searchState);
+  const { data: communities, isLoading, isError } = useSearch(searchQuery);
 
   return (
     <SearchPageTemplate>
       <ContainerContent>
         <BaseDataPlaceholder
+          dataLength={communities?.length}
           isLoading={isLoading}
           isError={isError}
           variant="avatar-list"

@@ -17,9 +17,10 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import CommunityHoverCard from "@/components/community/CommunityHoverCard";
+import CommunityHoverCard from "@/components/community/community-hover-card";
 import { af, when } from "@/lib/utils";
 
+import { useToast } from "@/components/ui/use-toast";
 const PostHeader: React.FC<{
   post: Post;
   isDetailsPage?: boolean;
@@ -34,23 +35,27 @@ const PostHeader: React.FC<{
 
   hasActions = false,
 }) => {
+  const { toast } = useToast();
+  const handleJoinClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    toast({ title: "Request sent to join " });
+  };
+
   return (
     <div key={post.id}>
       <div className="flex items-center justify-start">
-        <CommunityHoverCard community={post.community}>
-          <Avatar className={!isDetailsPage ? "h-7 w-7" : "h-10 w-10"}>
-            <AvatarImage
-              src={post.community?.icon_img}
-              alt={post?.community?.name}
-            />
-            <AvatarFallback>{af(post.community?.name)}</AvatarFallback>
-          </Avatar>
-        </CommunityHoverCard>
-
         <div className="flex-1 space-y-2">
           <div className="flex items-center justify-between">
             <CommunityHoverCard community={post?.community}>
               <div className="flex items-center text-xs ">
+                <Avatar className={!isDetailsPage ? "h-7 w-7" : "h-10 w-10"}>
+                  <AvatarImage
+                    src={post.community?.icon_img}
+                    alt={post?.community?.name}
+                  />
+                  <AvatarFallback>{af(post.community?.name)}</AvatarFallback>
+                </Avatar>
                 <div className="ml-2 ">
                   <div className="flex">
                     <div className="font-bold">{post?.community?.name}</div>
@@ -72,6 +77,7 @@ const PostHeader: React.FC<{
                 <Button
                   variant="outline"
                   className="h-[24px] items-center gap-1.5 rounded-md border p-[8px] shadow-sm"
+                  onClick={handleJoinClick}
                 >
                   Join
                 </Button>

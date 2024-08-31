@@ -14,7 +14,7 @@ interface PostTemplateProps {
 const PostTemplate: React.FC<PostTemplateProps> = ({ children, post }) => {
   return (
     <div>
-      <PostHeader key={post.id} post={post} />
+      <PostHeader key={post.id} post={post} hasActions hasJoinButton />
       <h2 className="text-md font-bold">{post.title}</h2>
 
       <Badge className="rounded-sm bg-primary/10 font-normal border-primary text-primary hover:bg-primary/10 hover:bg-primary/10">

@@ -20,16 +20,11 @@ import { searchState } from "@/lib/atoms";
 import { useAtom } from "jotai";
 
 const PostsResults = () => {
-  // const searchParams = useSearchParams();
-  // const params = Object.fromEntries(searchParams.entries());
-
   const [searchQuery] = useAtom(searchState);
-
   const { data: posts, isLoading, isError } = useSearch(searchQuery);
 
   return (
     <SearchPageTemplate>
-      {JSON.stringify(searchQuery)}
       <ContainerContent>
         <BaseDataPlaceholder
           dataLength={posts?.length}

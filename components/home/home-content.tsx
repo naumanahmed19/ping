@@ -1,12 +1,13 @@
 "use client";
 
 import { Container } from "@/components/base/container";
-import { PostsRightSidebar } from "../posts/PostsRightSidebar";
+
 import PostsList from "@/components/posts/posts-lists";
 import { ContainerContent } from "@/components/base/container-content";
 import { ContainerAside } from "@/components/base/container-aside";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { useGetPosts } from "@/queries/posts.query";
+import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
 
 const HomeContent: React.FC = () => {
   const { data: posts, isLoading, isError } = useGetPosts();

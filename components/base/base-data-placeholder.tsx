@@ -1,6 +1,7 @@
 import { LoaderCircle, SearchSlash, ServerCrash } from "lucide-react";
 import React, { ReactNode } from "react";
 import { Skeleton } from "../ui/skeleton";
+import NoResults from "./no-results";
 
 interface BaseDataPlaceholderProps {
   isLoading: boolean;
@@ -9,6 +10,7 @@ interface BaseDataPlaceholderProps {
   count?: number;
   dataLength?: number;
   variant?: "spinner" | "spinner-text " | "avatar-list" | "posts-list";
+  noResults?: ReactNode;
 }
 
 export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
@@ -17,6 +19,8 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
   isError,
   children,
   variant = "spinner-text",
+  noResults,
+
   count = 5,
 }) => {
   if (isLoading) {
@@ -64,7 +68,7 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
       return (
         <>
           {[...Array(count)].map((_, index) => (
-            <div>
+            <div key={index}>
               <div className="flex items-center justify-start">
                 <Skeleton className="rounded-full h-7 w-7" />
                 <div className="flex-1 space-y-2 ml-2">
@@ -122,18 +126,18 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
     );
   }
 
-  if (dataLength === 0)
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-center space-y-1">
-          <SearchSlash className="w-16 h-16 mx-auto my-5 text-muted/95" />
-          <h2 className="text-2xl font-bold">No results found</h2>
-          <p className="text-muted-foreground">
-            Try searching for something else
-          </p>
-        </div>
-      </div>
+  // Main render function
+  if (dataLength === 0) {
+    return noResults ? (
+      noResults
+    ) : (
+      <NoResults
+        icon={<SearchSlash className="w-10 h-10 mx-auto my-5 text-muted/95" />}
+        title="No results found"
+        subtitle="Try searching for something else"
+      />
     );
+  }
 
   return <div>{children}</div>;
 };

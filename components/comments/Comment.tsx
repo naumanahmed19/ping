@@ -77,10 +77,10 @@ const Comment = ({ key, index, author, time, content, replies, isOpen }) => {
           <div></div>
           <div className="min-w-0 mx-2 md:mx-5 py-2">
             <p className="text-xs ">{content}</p>
-            <ReplyForm 
-              showReplyForm={showReplyForm} 
+            <ReplyForm
+              showReplyForm={showReplyForm}
               onCancel={() => setShowReplyForm(false)}
-              />
+            />
           </div>
         </div>
 
@@ -112,10 +112,7 @@ const Comment = ({ key, index, author, time, content, replies, isOpen }) => {
         {showReplies && replies && replies.length > 0 && (
           <>
             {replies.map((reply, i) => (
-              <div
-                id="comment-children"
-                className="contents bg-background"
-              >
+              <div id="comment-children" className="contents bg-background">
                 <BranchThreadLine isLast={i === replies.length - 1} />
                 <Comment
                   key={i}

@@ -6,13 +6,12 @@ import { cn, themeClassName } from "@/lib/utils";
 import { ThemeWrapper } from "@/components/theme/theme-wrapper";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { JotaiProvider } from "@/providers/jotai-provider";
-import { ThemeSwitcher } from "@/components/theme/theme-switcher";
-import NextTopLoader from "nextjs-toploader";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
-import { MountProvider } from "@/providers/mount-provider";
 import { getTheme } from "@/actions/theme-config";
 import { Toaster } from "@/components/ui/toaster";
 import { LayoutProvider } from "@/providers/layout-provider";
+import TopLoadingBar from "@/components/base/top-loading-bar";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -30,6 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(inter.className, themeClassName(theme.theme))}>
+        <TopLoadingBar theme={theme.theme} />
         <ThemeWrapper themeConfig={theme}>
           <JotaiProvider>
             <ThemeProvider
@@ -38,18 +38,6 @@ export default async function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              <NextTopLoader
-                color="#2299DD"
-                initialPosition={0.08}
-                crawlSpeed={200}
-                height={3}
-                crawl={true}
-                showSpinner={false}
-                easing="ease"
-                speed={200}
-                shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-              />
-
               <ReactQueryProvider>
                 <LayoutProvider excludeSidebarRoutes={["/chats"]}>
                   {children}

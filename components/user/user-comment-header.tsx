@@ -13,7 +13,7 @@ import { MoreHorizontal } from "lucide-react";
 import { af, when } from "@/lib/utils";
 import Link from "next/link";
 import ListItem from "../base/list-items";
-import CommunityHoverCard from "@/components/community/CommunityHoverCard";
+import CommunityHoverCard from "@/components/community/community-hover-card";
 
 const UserCommentHeader: React.FC<{
   comment: Comment;

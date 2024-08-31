@@ -24,6 +24,7 @@ import PostsSuggestions from "../../search/posts-suggestions";
 import { useSearchSuggestions } from "@/queries/search.query";
 import { useAtom } from "jotai";
 import { searchState } from "@/lib/atoms";
+import { isEmptyObject } from "@tiptap/react";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -36,7 +37,7 @@ export default function NavSearchBar() {
   const searchParams = useSearchParams();
   const entries = searchParams.entries();
   const {
-    data: suggestions,
+    data: suggestions = {},
     isLoading,
     isError,
   } = useSearchSuggestions(searchTerm);
@@ -138,14 +139,14 @@ export default function NavSearchBar() {
                   setSearchTerm(e);
                 }}
               />
-              <CommandList>
-                {suggestions?.length == 0 && (
-                  <CommandEmpty>No results found.</CommandEmpty>
-                )}
+
+              <CommandList className="min-h-64">
                 <BaseDataPlaceholder
+                  dataLength={Object?.keys(suggestions).length}
                   isLoading={isLoading}
                   isError={isError}
                   variant="avatar-list"
+                  emptyVariant="sm"
                 >
                   {suggestions?.users?.length > 0 && (
                     <CommandGroup heading="People">
@@ -158,7 +159,7 @@ export default function NavSearchBar() {
                   {suggestions?.communities?.length > 0 && (
                     <CommandGroup heading="Communities">
                       <CommunitiesWidget
-                        communities={suggestions?.communities?.slice(0, 4)}
+                        communities={suggestions?.communities}
                         hasSubscribers={false}
                       />
                     </CommandGroup>
