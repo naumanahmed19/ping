@@ -65,6 +65,19 @@ const config = {
         // mono: ["var(--font-mono)", ...fontFamily.mono],
       },
       keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+
+        slideInFromBottom: {
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -82,6 +95,9 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        fadeIn: "fadeIn 0.5s ease-in-out",
+        slideInFromBottom: "slideInFromBottom 0.2s ease-in-out",
+        fadeOut: "fadeOut 0.1s ease-in-out",
       },
     },
   },

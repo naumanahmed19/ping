@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import NotificationsListHeader from "./notifications-list-header";
 import { useNotifications } from "@/queries/notifications.query";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 
 const NotificationList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, error, isLoading } = useNotifications(currentPage);
+  const { data, isError, isLoading } = useNotifications(currentPage);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading notifications</div>;
-
-  const notifications = data.notifications;
-  const totalPages = data.totalPages;
+  const totalPages = data?.totalPages;
 
   const handleNextPage = (e) => {
     e.preventDefault();
@@ -28,14 +25,23 @@ const NotificationList = () => {
 
   return (
     <div>
-      <div className="space-y-1 ">
-        {notifications?.map((notification) => (
-          <NotificationsListHeader
-            className="rounded-md p-3"
-            notification={notification}
-          />
-        ))}
-      </div>
+      <BaseDataPlaceholder
+        isLoading={isLoading}
+        isError={isError}
+        dataLength={data?.notifications.length}
+        count={5}
+        variant="avatar-list"
+      >
+        <div className="space-y-1 ">
+          {data?.notifications?.map((notification) => (
+            <NotificationsListHeader
+              key={notification.id}
+              className="rounded-md p-3"
+              notification={notification}
+            />
+          ))}
+        </div>
+      </BaseDataPlaceholder>
     </div>
   );
 };

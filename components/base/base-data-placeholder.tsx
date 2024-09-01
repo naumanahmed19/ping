@@ -5,7 +5,7 @@ import NoResults from "./no-results";
 
 interface BaseDataPlaceholderProps {
   isLoading: boolean;
-  isError: boolean;
+  isError?: boolean;
   children?: React.ReactNode;
   count?: number;
   dataLength?: number;
@@ -66,7 +66,7 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
 
     if (variant === "posts-list") {
       return (
-        <>
+        <div className="animate-fadeOut">
           {[...Array(count)].map((_, index) => (
             <div key={index}>
               <div className="flex items-center justify-start">
@@ -97,7 +97,7 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
               </div>
             </div>
           ))}
-        </>
+        </div>
       );
     }
 
@@ -139,5 +139,5 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
     );
   }
 
-  return <div>{children}</div>;
+  return <div className="animate-fadeIn">{children}</div>;
 };

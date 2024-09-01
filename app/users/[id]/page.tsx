@@ -1,30 +1,40 @@
 "use client";
 import * as React from "react";
-
 import { useParams } from "next/navigation";
-import { userData } from "@/data";
-import { posts } from "@/data/posts";
 import UserHeader from "@/components/user/user-header";
-
-import PostsList from "@/components/posts/posts-lists";
 import { Container } from "@/components/base/container";
 import { ContainerAside } from "@/components/base/container-aside";
 import { ContainerContent } from "@/components/base/container-content";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
+import { useGetUser } from "@/queries/users.query";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import UserPosts from "@/components/user/user-posts";
+
 const UserPage: React.FC = () => {
-  const id = useParams().id;
+  const { id } = useParams();
+  const userId = Number(id);
 
-  // Fetch the first post from the data
-  const user = userData.find((user) => user.id === Number(id));
+  const userQuery = useGetUser(userId);
 
-  if (!user) return <p>Not found</p>;
+  const {
+    data: user,
+    isLoading: isLoadingUser,
+    isError: isErrorUser,
+  } = userQuery;
 
   return (
     <Container>
-      <UserHeader key={user?.id} user={user} />
+      <BaseDataPlaceholder
+        isLoading={isLoadingUser}
+        isError={isErrorUser}
+        variant="avatar-list"
+        count={1}
+      >
+        <UserHeader key={user?.id} user={user} />
+      </BaseDataPlaceholder>
       <div className="flex items-start justify-between gap-4">
         <ContainerContent>
-          <PostsList posts={posts} />
+          <UserPosts userId={userId} />
         </ContainerContent>
         <ContainerAside>
           <PostsRightSidebar />
