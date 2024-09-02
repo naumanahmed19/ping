@@ -2,7 +2,7 @@
   {
     "id": 0,
     "name": "john_doe",
-    "created_utc": 1627387200,
+    "created_at": 1627387200,
     "link_karma": 1200,
     "comment_karma": 3400,
     "is_gold": true,
@@ -33,7 +33,7 @@
   {
     "id": 1,
     "name": "jane_smith",
-    "created_utc": 1609459200,
+    "created_at": 1609459200,
     "link_karma": 4520,
     "comment_karma": 7890,
     "is_gold": false,
@@ -64,7 +64,7 @@
   {
     "id": 2,
     "name": "tech_guru",
-    "created_utc": 1593571200,
+    "created_at": 1593571200,
     "link_karma": 9800,
     "comment_karma": 11200,
     "is_gold": true,
@@ -95,7 +95,7 @@
   {
     "id": 3,
     "name": "nature_lover",
-    "created_utc": 1615852800,
+    "created_at": 1615852800,
     "link_karma": 600,
     "comment_karma": 2200,
     "is_gold": false,
@@ -126,7 +126,7 @@
   {
     "id": 4,
     "name": "foodie_fanatic",
-    "created_utc": 1625097600,
+    "created_at": 1625097600,
     "link_karma": 3700,
     "comment_karma": 5200,
     "is_gold": true,
@@ -157,7 +157,7 @@
   {
     "id": 4,
     "name": "foodie_fanatic",
-    "created_utc": 1625097600,
+    "created_at": 1625097600,
     "link_karma": 3700,
     "comment_karma": 5200,
     "is_gold": true,
@@ -188,7 +188,7 @@
   {
     "id": 5,
     "name": "bookworm_betty",
-    "created_utc": 1640995200,
+    "created_at": 1640995200,
     "link_karma": 2800,
     "comment_karma": 4300,
     "is_gold": false,
@@ -219,7 +219,7 @@
   {
     "id": 6,
     "name": "bookworm_betty",
-    "created_utc": 1640995200,
+    "created_at": 1640995200,
     "link_karma": 2800,
     "comment_karma": 4300,
     "is_gold": false,

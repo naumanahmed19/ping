@@ -65,7 +65,7 @@
     {
       "id": 0,
       "name": "john_doe",
-      "created_utc": 1627387200,
+      "created_at": 1627387200,
       "link_karma": 1200,
       "comment_karma": 3400,
       "is_gold": true,
@@ -96,7 +96,7 @@
     {
       "id": 1,
       "name": "jane_smith",
-      "created_utc": 1609459200,
+      "created_at": 1609459200,
       "link_karma": 4520,
       "comment_karma": 7890,
       "is_gold": false,
