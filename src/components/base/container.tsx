@@ -2,7 +2,6 @@
 
 import { useConfig } from "@/hooks/use-config";
 import { cn } from "@/lib/utils";
-import { Header } from "../layout/header";
 
 export interface IBaseWrapperProps {
   children?: React.ReactNode;

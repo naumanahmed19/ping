@@ -1,13 +1,7 @@
 import { cookies } from "next/headers";
-import Image from "next/image";
 
-import { Mail } from "@/app/chats/components/mail";
-import { accounts, mails } from "@/app/chats/data";
-import { Container } from "@/components/base/container";
-import { Card, CardContent } from "@/components/ui/card";
 import { ChatLayout } from "@/components/chat/chat-layout";
-import Link from "next/link";
-import { Header } from "@/components/layout/header";
+import { Header } from "@/components/common/header";
 
 export default function MailPage() {
   const layout = cookies().get("react-resizable-panels:layout:mail");
