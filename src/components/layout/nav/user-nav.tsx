@@ -10,30 +10,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { USER_MENU } from "@/constants/nav";
 import { useRouter } from "next/navigation";
-
-const navItems = [
-  {
-    title: "Profile",
-    href: "/settings",
-  },
-  {
-    title: "Account",
-    href: "/settings/account",
-  },
-  {
-    title: "Appearance",
-    href: "/settings/appearance",
-  },
-  {
-    title: "Notifications",
-    href: "/settings/notifications",
-  },
-  {
-    title: "Display",
-    href: "/settings/display",
-  },
-];
 
 export function UserNav() {
   const router = useRouter();
@@ -59,7 +37,7 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {navItems.map((item) => (
+          {USER_MENU.map((item) => (
             <DropdownMenuItem
               key={item.title}
               onClick={() => router.push(item.href)}

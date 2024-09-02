@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
@@ -7,14 +6,12 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import { ChatBubbleIcon, OpenInNewWindowIcon } from "@radix-ui/react-icons";
-import { ChatLayout } from "../../chat/chat-layout";
 import { cn } from "@/lib/utils";
+import { ChatBubbleIcon, OpenInNewWindowIcon } from "@radix-ui/react-icons";
+import { Telescope } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import NavNotifications from "./nav-notifications";
-import { ThemeCustomizer } from "../../theme/theme-customizer";
-import { Sidebar, Telescope } from "lucide-react";
+import { ChatLayout } from "../../chat/chat-layout";
 export default function NavChats() {
   const pathname = usePathname();
 

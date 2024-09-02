@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandList,
@@ -12,19 +11,17 @@ import {
 import "@/styles/mdx.css";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
-import { useEffect, useRef } from "react";
 import CommunitiesWidget from "@/components/community/communities-widget";
+import { useEffect, useRef } from "react";
 
-import { usePathname, useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { BaseDataPlaceholder } from "../../base/base-data-placeholder";
 
-import UserWidget from "../../user/user-widget";
-import PostsSuggestions from "../../search/posts-suggestions";
+import { searchState } from "@/lib/atoms";
 import { useSearchSuggestions } from "@/queries/search.query";
 import { useAtom } from "jotai";
-import { searchState } from "@/lib/atoms";
-import { isEmptyObject } from "@tiptap/react";
+import PostsSuggestions from "../../search/posts-suggestions";
+import UserWidget from "../../user/user-widget";
 export default function NavSearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
 

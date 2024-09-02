@@ -23,7 +23,6 @@ export function ContainerContent({
         className,
       )}
     >
-      {isGridView}-tex
       {children}
     </div>
   );

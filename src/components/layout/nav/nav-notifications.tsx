@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-
-// import { copyToClipboardWithMeta } from "@/components/copy-button"
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import {
@@ -8,16 +5,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useState } from "react";
 
 import "@/styles/mdx.css";
 import { BellIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 import NotificationsListHeader from "@/app/notifications/components/notifications-list-header";
+import { useNotifications } from "@/queries/notifications.query";
+import { LoaderCircle } from "lucide-react";
 import { ScrollArea } from "../../ui/scroll-area";
 import { toast } from "../../ui/use-toast";
-import { LoaderCircle } from "lucide-react";
-import { useNotifications } from "@/queries/notifications.query";
 
 export default function NavNotifications() {
   return (

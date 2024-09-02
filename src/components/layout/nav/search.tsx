@@ -1,18 +1,15 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
 import {
   Command,
-  CommandInput,
-  CommandList,
-  CommandGroup,
-  CommandItem,
   CommandEmpty,
+  CommandGroup,
+  CommandList,
+  Command as CommandPrimitive,
 } from "cmdk";
-import { useState, useCallback } from "react";
+import { Loader2, Search as SearchIcon } from "lucide-react";
+import { useCallback, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { Command as CommandPrimitive } from "cmdk";
-import { Delete, Loader2, Pencil, Search as SearchIcon } from "lucide-react";
 
 import { FormMessages } from "@/components/common/form-messages";
 import useSWR from "swr";
