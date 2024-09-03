@@ -1,7 +1,8 @@
 "use client";
-import * as React from "react";
 import { useState } from "react";
 
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import CommunitiesWidget from "@/components/community/communities-widget";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,12 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import CommunitiesWidget from "@/components/community/communities-widget";
-import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
-import { useGetCommunities } from "@/queries/communities.query";
+import { useGetPopularCommunities } from "@/queries/communities.query";
 
 export function PostsRightSidebar() {
-  const { data: communities, isLoading, isError } = useGetCommunities();
+  const { data: communities, isLoading, isError } = useGetPopularCommunities();
 
   const [visibleCount, setVisibleCount] = useState(5);
 

@@ -1,6 +1,6 @@
+import { UseInfiniteQueryResult } from "@tanstack/react-query";
 import * as React from "react";
 import { useInView } from "react-intersection-observer";
-import { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { BaseDataPlaceholder } from "./base-data-placeholder";
 
 interface InfiniteScrollProps<T> {
@@ -30,7 +30,9 @@ const InfiniteScroll = <T,>({
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  const dataLength = (data?.pages?.[0] as { posts: unknown[] })?.posts.length;
+  const dataLength = (data?.pages?.[0] as { data: unknown[] })?.data?.length;
+
+  console.log(data);
 
   return (
     <div>

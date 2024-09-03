@@ -2,9 +2,9 @@ import { cn } from "@/lib/utils";
 
 import Link from "next/link";
 
-import CommunityHoverCard from "./community-hover-card";
-import { Community } from "@/data/communities";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Community } from "@/data/communities";
+import CommunityHoverCard from "./community-hover-card";
 import Favourites from "./favourites";
 
 interface CommunitiesWidgetProps {

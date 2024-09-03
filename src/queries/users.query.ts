@@ -24,3 +24,10 @@ export const useGetUserPosts = (userId: number) => {
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 };
+
+export const useGetUserCommunities = (userId: number) => {
+  return useQuery({
+    queryFn: () => useGet(`${BASE_URL}/${userId}/communities`),
+    queryKey: [QUERY_KEY],
+  });
+};

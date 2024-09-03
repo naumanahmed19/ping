@@ -1,20 +1,20 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useState } from "react";
 
-import { ChevronsUpDown, Plus } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import CommunitiesWidget from "@/components/community/communities-widget";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
-import { useGetCommunities } from "@/queries/communities.query";
+import CommunitiesWidget from "@/components/community/communities-widget";
 import { BOTTOM_MENU, TOP_MENU } from "@/constants/sidebar-nav";
-import { Menu } from "./menu";
+import { useGetUserCommunities } from "@/queries/users.query";
+import { Plus } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { CollapsibleSection } from "./collapsible-section";
+import { Menu } from "./menu";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -22,7 +22,7 @@ export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
-  const { data: communities, isLoading, isError } = useGetCommunities();
+  const { data: communities, isLoading, isError } = useGetUserCommunities(0);
 
   return (
     <aside className="overflow-y-auto bg-background fixed top-16 left-0 bottom-0 w-64 h-full border-r hidden xl:block">
