@@ -1,7 +1,7 @@
 "use client";
 
-import PostsList from "@/components/posts/posts-lists";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import PostsList from "@/components/posts/posts-lists";
 import { useGetPosts } from "@/queries/posts.query";
 
 import InfiniteScroll from "@/components/base/infinite-scroll";
@@ -18,7 +18,7 @@ const LatestPosts: React.FC = () => {
       <InfiniteScroll
         query={query}
         key="posts"
-        renderItem={(page) => <PostsList posts={page.posts} />}
+        renderItem={(posts) => <PostsList posts={posts} />}
       />
     </BaseDataPlaceholder>
   );

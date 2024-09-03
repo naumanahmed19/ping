@@ -7,7 +7,6 @@ import {
 } from "@tanstack/react-query";
 
 const BASE_URL = "/api/communities";
-const QUERY_KEY = "communities";
 
 export const useGetPopularCommunities = (): UseQueryResult<any, unknown> => {
   return useQuery({

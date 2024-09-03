@@ -4,13 +4,17 @@ import { useInView } from "react-intersection-observer";
 import { BaseDataPlaceholder } from "./base-data-placeholder";
 
 interface InfiniteScrollProps<T> {
-  dataKey?: string;
+  placeholderVariant?:
+    | "spinner"
+    | "spinner-text "
+    | "avatar-list"
+    | "posts-list";
+
   query: UseInfiniteQueryResult<{ pages: T[] }, unknown>;
   renderItem: (item: T, index: number) => React.ReactNode;
 }
 
 const InfiniteScroll = <T,>({
-  dataKey,
   query: {
     fetchNextPage,
     hasNextPage,
@@ -19,6 +23,8 @@ const InfiniteScroll = <T,>({
     isFetchNextPageError,
   },
   renderItem,
+
+  placeholderVariant = "posts-list",
 }: InfiniteScrollProps<T>) => {
   const { ref, inView } = useInView({
     threshold: 1.0,
@@ -35,22 +41,23 @@ const InfiniteScroll = <T,>({
   console.log(data);
 
   return (
-    <div>
-      {data?.pages.map((item, index) => (
-        <React.Fragment key={index}>{renderItem(item, index)}</React.Fragment>
-      ))}
-      <div ref={ref} className="mt-4 p-2">
-        <BaseDataPlaceholder
-          isLoading={isFetchingNextPage}
-          variant="posts-list"
-          isError={isFetchNextPageError}
-        />
-
-        {dataLength == 0 && "No post found"}
-
-        {!hasNextPage && dataLength > 0 && "No more posts"}
-      </div>
-    </div>
+    <>
+      <>
+        {data?.pages.map((item, index) => (
+          <React.Fragment key={index}>
+            {renderItem(item.data, index)}
+          </React.Fragment>
+        ))}
+        <div ref={ref} className="mt-4 p-2">
+          <BaseDataPlaceholder
+            isLoading={isFetchingNextPage}
+            variant={placeholderVariant}
+            isError={isFetchNextPageError}
+          />
+        </div>
+      </>
+      {dataLength == 0 && "No post found"}
+    </>
   );
 };
 

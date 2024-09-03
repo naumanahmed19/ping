@@ -139,5 +139,5 @@ export const BaseDataPlaceholder: React.FC<BaseDataPlaceholderProps> = ({
     );
   }
 
-  return <div className="animate-fadeIn">{children}</div>;
+  return <>{children}</>;
 };
