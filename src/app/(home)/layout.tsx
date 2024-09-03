@@ -1,8 +1,8 @@
 "use client";
 
 import { Container } from "@/components/base/container";
-import { ContainerContent } from "@/components/base/container-content";
 import { ContainerAside } from "@/components/base/container-aside";
+import { ContainerContent } from "@/components/base/container-content";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
 
 const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {

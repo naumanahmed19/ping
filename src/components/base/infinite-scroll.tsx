@@ -45,7 +45,7 @@ const InfiniteScroll = <T,>({
       <>
         {data?.pages.map((item, index) => (
           <React.Fragment key={index}>
-            {renderItem(item.data, index)}
+            {renderItem((item as { data: T })?.data, index)}
           </React.Fragment>
         ))}
         <div ref={ref} className="mt-4 p-2">
