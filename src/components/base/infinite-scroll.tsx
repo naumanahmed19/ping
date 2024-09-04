@@ -38,8 +38,6 @@ const InfiniteScroll = <T,>({
 
   const dataLength = (data?.pages?.[0] as { data: unknown[] })?.data?.length;
 
-  console.log(data);
-
   return (
     <>
       <>

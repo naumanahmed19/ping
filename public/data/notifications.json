@@ -1,135 +1,127 @@
-{
-  "notifications": [
-    {
-      "id": 1,
-      "type": "comment_reply",
-      "message": "UserX replied to your comment",
-      "post_title": "What do you think about AI?",
-      "post_link": "/posts/1",
-      "comment_snippet": "I think AI will be...",
-      "created_at": "2024-08-18T10:30:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserX",
-        "avatar": "/images/user1.jpg"
-      }
-    },
-    {
-      "id": 2,
-      "type": "post_upvote",
-      "message": "Your post received an upvote!",
-      "post_title": "My thoughts on Quantum Computing",
-      "post_link": "/posts/2",
-      "created_at": "2024-08-17T18:20:00Z",
-      "is_read": true
-    },
-    {
-      "id": 3,
-      "type": "mention",
-      "message": "You were mentioned in a comment",
-      "post_title": "Discussion about Neural Networks",
-      "post_link": "/posts/4",
-      "comment_snippet": "@YourUsername I totally agree with your point!",
-      "created_at": "2024-08-16T12:45:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserY",
-        "avatar": "/images/user2.jpg"
-      }
-    },
-    {
-      "id": 4,
-      "type": "post_reply",
-      "message": "UserZ replied to your post",
-      "post_title": "Exploring the Universe",
-      "post_link": "/posts/5",
-      "comment_snippet": "I think the universe is...",
-      "created_at": "2024-08-15T09:30:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserZ",
-        "avatar": "/images/user3.jpg"
-      }
-    },
-    {
-      "id": 5,
-      "type": "post_upvote",
-      "message": "Your post received an upvote!",
-      "post_title": "The Future of Renewable Energy",
-      "post_link": "/posts/6",
-      "created_at": "2024-08-14T14:20:00Z",
-      "is_read": true
-    },
-    {
-      "id": 6,
-      "type": "comment_reply",
-      "message": "UserA replied to your comment",
-      "post_title": "The Impact of Social Media",
-      "post_link": "/posts/7",
-      "comment_snippet": "Social media has...",
-      "created_at": "2024-08-13T11:00:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserA",
-        "avatar": "/images/user4.jpg"
-      }
-    },
-    {
-      "id": 7,
-      "type": "mention",
-      "message": "You were mentioned in a comment",
-      "post_title": "Debate on Climate Change",
-      "post_link": "/posts/8",
-      "comment_snippet": "@YourUsername made a great point about...",
-      "created_at": "2024-08-12T16:45:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserB",
-        "avatar": "/images/user5.jpg"
-      }
-    },
-    {
-      "id": 8,
-      "type": "post_reply",
-      "message": "UserC replied to your post",
-      "post_title": "Advancements in AI",
-      "post_link": "/posts/9",
-      "comment_snippet": "AI is advancing rapidly...",
-      "created_at": "2024-08-11T08:30:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserC",
-        "avatar": "/images/user6.jpg"
-      }
-    },
-    {
-      "id": 9,
-      "type": "post_upvote",
-      "message": "Your post received an upvote!",
-      "post_title": "The Evolution of Technology",
-      "post_link": "/posts/10",
-      "created_at": "2024-08-10T13:20:00Z",
-      "is_read": true
-    },
-    {
-      "id": 10,
-      "type": "comment_reply",
-      "message": "UserD replied to your comment",
-      "post_title": "The Role of Education",
-      "post_link": "/posts/11",
-      "comment_snippet": "Education is crucial...",
-      "created_at": "2024-08-09T10:00:00Z",
-      "is_read": false,
-      "user": {
-        "display_name": "UserD",
-        "avatar": "/images/user7.jpg"
-      }
+[
+  {
+    "id": 1,
+    "type": "comment_reply",
+    "message": "Joe replied to your comment",
+    "post_title": "What do you think about AI?",
+    "post_link": "/posts/1",
+    "comment_snippet": "I think AI will be...",
+    "created_at": "2024-08-18T10:30:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "Joe",
+      "avatar": "/images/user1.jpg"
     }
-  ],
-  "unread_count": 2,
-  "pagination": {
-    "next_page": "/api/notifications?page=2",
-    "prev_page": null
   },
-  "total_pages": 3
-}
+  {
+    "id": 2,
+    "type": "post_upvote",
+    "message": "Your post received an upvote!",
+    "post_title": "My thoughts on Quantum Computing",
+    "post_link": "/posts/2",
+    "created_at": "2024-08-17T18:20:00Z",
+    "is_read": true
+  },
+  {
+    "id": 3,
+    "type": "mention",
+    "message": "You were mentioned in a comment",
+    "post_title": "Discussion about Neural Networks",
+    "post_link": "/posts/4",
+    "comment_snippet": "@YourUsername I totally agree with your point!",
+    "created_at": "2024-08-16T12:45:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "UserY",
+      "avatar": "/images/user2.jpg"
+    }
+  },
+  {
+    "id": 4,
+    "type": "post_reply",
+    "message": "UserZ replied to your post",
+    "post_title": "Exploring the Universe",
+    "post_link": "/posts/5",
+    "comment_snippet": "I think the universe is...",
+    "created_at": "2024-08-15T09:30:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "UserZ",
+      "avatar": "/images/user3.jpg"
+    }
+  },
+  {
+    "id": 5,
+    "type": "post_upvote",
+    "message": "Your post received an upvote!",
+    "post_title": "The Future of Renewable Energy",
+    "post_link": "/posts/6",
+    "created_at": "2024-08-14T14:20:00Z",
+    "is_read": true
+  },
+  {
+    "id": 6,
+    "type": "comment_reply",
+    "message": "UserA replied to your comment",
+    "post_title": "The Impact of Social Media",
+    "post_link": "/posts/7",
+    "comment_snippet": "Social media has...",
+    "created_at": "2024-08-13T11:00:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "UserA",
+      "avatar": "/images/user4.jpg"
+    }
+  },
+  {
+    "id": 7,
+    "type": "mention",
+    "message": "You were mentioned in a comment",
+    "post_title": "Debate on Climate Change",
+    "post_link": "/posts/8",
+    "comment_snippet": "@YourUsername made a great point about...",
+    "created_at": "2024-08-12T16:45:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "UserB",
+      "avatar": "/images/user5.jpg"
+    }
+  },
+  {
+    "id": 8,
+    "type": "post_reply",
+    "message": "UserC replied to your post",
+    "post_title": "Advancements in AI",
+    "post_link": "/posts/9",
+    "comment_snippet": "AI is advancing rapidly...",
+    "created_at": "2024-08-11T08:30:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "UserC",
+      "avatar": "/images/user6.jpg"
+    }
+  },
+  {
+    "id": 9,
+    "type": "post_upvote",
+    "message": "Your post received an upvote!",
+    "post_title": "The Evolution of Technology",
+    "post_link": "/posts/10",
+    "created_at": "2024-08-10T13:20:00Z",
+    "is_read": true
+  },
+  {
+    "id": 10,
+    "type": "comment_reply",
+    "message": "UserD replied to your comment",
+    "post_title": "The Role of Education",
+    "post_link": "/posts/11",
+    "comment_snippet": "Education is crucial...",
+    "created_at": "2024-08-09T10:00:00Z",
+    "is_read": false,
+    "user": {
+      "display_name": "UserD",
+      "avatar": "/images/user7.jpg"
+    }
+  }
+]

@@ -1,12 +1,11 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -17,17 +16,13 @@ import {
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-import { Post } from "@/data/posts";
 
-import { af, cn, when } from "@/lib/utils";
+import { cn, when } from "@/lib/utils";
 import Link from "next/link";
 
-import UserHoverCard from "@/components/user/user-hover-card";
 import ListItem from "@/components/base/list-items";
-import { ChatBubbleIcon } from "@radix-ui/react-icons";
 
-const NotificationsListHeader: React.FC<{
+export const NotificationsListItem: React.FC<{
   notification: any;
   variant?: "sm" | "md";
   className?: string;
@@ -132,5 +127,3 @@ const NotificationsListHeader: React.FC<{
     </div>
   );
 };
-
-export default NotificationsListHeader;

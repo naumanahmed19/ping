@@ -1,6 +1,4 @@
-// Avatar.tsx
-import React from "react";
-import { usePathname } from "next/navigation";
+"use client";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,6 +7,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NotificationNav = () => {
   const pathname = usePathname();

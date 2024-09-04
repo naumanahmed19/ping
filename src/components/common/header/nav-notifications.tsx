@@ -5,17 +5,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
 
 import "@/styles/mdx.css";
 import { BellIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
-import NotificationsListHeader from "@/app/notifications/components/notifications-list-header";
-import { useNotifications } from "@/queries/notifications.query";
+import { NotificationsListItem } from "@/app/notifications/_components/notifications-list-item";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { toast } from "@/components/ui/use-toast";
+import { useLatestNotifications } from "@/queries/notifications.query";
 import { LoaderCircle } from "lucide-react";
-import { ScrollArea } from "../../ui/scroll-area";
-import { toast } from "../../ui/use-toast";
 
 export default function NavNotifications() {
   return (
@@ -51,10 +50,7 @@ function ActionIcon() {
 }
 
 function Content() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data, error, isLoading } = useNotifications(currentPage);
-
-  const notifications = data?.notifications;
+  const { data: notifications, error, isLoading } = useLatestNotifications();
 
   if (isLoading)
     return (
@@ -84,8 +80,8 @@ function Content() {
         </Button>
       </div>
       <ScrollArea className="h-[300px] px-3 ">
-        {notifications?.map((notification) => (
-          <NotificationsListHeader
+        {notifications?.map((notification: Notification) => (
+          <NotificationsListItem
             className="rounded-md p-2 mt-1"
             variant="sm"
             notification={notification}

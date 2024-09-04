@@ -4,7 +4,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 const BASE_URL = "/api/posts";
 const QUERY_KEY = "posts";
 
-export const useGetPosts = (page?: number) => {
+export const useGetPosts = () => {
   return useInfiniteQuery({
     queryFn: ({ pageParam = 0 }) => useGet(`${BASE_URL}/?page=${pageParam}`),
     queryKey: [QUERY_KEY],

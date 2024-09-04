@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
 
+import NotificationsHeader from "@/app/notifications/_components/notifications-header";
 import { Container } from "@/components/base/container";
 import { ContainerContent } from "@/components/base/container-content";
-import NotificationsHeader from "@/app/notifications/components/notifications-header";
 const Page: React.FC = () => {
   return (
     <Container>
