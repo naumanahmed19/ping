@@ -39,3 +39,7 @@ export const useGetCommunityPosts = (
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 };
+
+export const useCreateCommunity = (name?: string): Promise<any> => {
+  return useServerGet(`${BASE_URL}/${name}`);
+};

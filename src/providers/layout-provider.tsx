@@ -11,7 +11,7 @@ type LayoutProviderProps = {
 
 export const LayoutProvider: React.FC<LayoutProviderProps> = ({
   children,
-  excludeSidebarRoutes = ["/chats"],
+  excludeSidebarRoutes = ["/chats", "/explore"],
 }) => {
   const pathname = usePathname();
 

@@ -1,10 +1,6 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { useToast } from "@/components/ui/use-toast";
-import { useStepper } from "@/components/ui/stepper";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -14,20 +10,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { StepperFormActions } from "./stepper-form-actions";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Fingerprint, Globe, GlobeLock, UserRoundMinus } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useStepper } from "@/components/ui/stepper";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
+import { Fingerprint, Globe, GlobeLock, UserRoundMinus } from "lucide-react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import {
   step1State,
   step2State,
   step3State,
   step4State,
 } from "./atoms/formAtoms";
-import { Checkbox } from "@/components/ui/checkbox";
-import { createCommunity } from "@/api/communities";
+import { StepperFormActions } from "./stepper-form-actions";
+
+import { useCreateCommunity } from "@/queries/communities.query";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -47,6 +48,8 @@ export function FourthStepForm() {
   const [step3] = useAtom(step3State);
   const [step4, setStep4] = useAtom(step4State);
   const { nextStep } = useStepper();
+
+  const createCommunity = useCreateCommunity();
   const mutation = useMutation({ mutationFn: createCommunity });
 
   /**
