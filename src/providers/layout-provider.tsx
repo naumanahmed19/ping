@@ -1,29 +1,55 @@
-"use client";
-
-import { Header } from "@/components/common/header";
+import { auth } from "@/auth";
+import { UserHeader } from "@/components/common/header";
+import { GuestHeader } from "@/components/common/header/GuestHeader";
+import { Header } from "@/components/common/header/headindex";
 import { Sidebar } from "@/components/common/sidebar";
-import { usePathname } from "next/navigation";
+import { GUEST_ROUTES, NO_SIDEBAR_ROUTES } from "@/constants/layout.constants";
+// import { getPathname } from "@/lib/utils";
+
+import { Session } from "next-auth";
+import { headers } from "next/headers";
+import { ReactQueryProvider } from "./react-query-provider";
 
 type LayoutProviderProps = {
   children: React.ReactNode;
-  excludeSidebarRoutes?: string[];
+  session?: Session | null;
 };
 
-export const LayoutProvider: React.FC<LayoutProviderProps> = ({
-  children,
-  excludeSidebarRoutes = ["/chats", "/explore"],
-}) => {
-  const pathname = usePathname();
+export async function getPathname() {
+  const heads = headers();
+  const pathname = headers().get("x-nextjs-pathname") || "";
 
-  const isRouteHasSidebar = (routeName: string) => {
-    return excludeSidebarRoutes?.includes(routeName);
+  return pathname;
+}
+export const LayoutProvider: React.FC<LayoutProviderProps> = async ({
+  children,
+}) => {
+  const session = await auth();
+  const pathname = await getPathname();
+
+  console.log(pathname, "ccccccccccccccccccc");
+
+  const isAuthenticated = session?.user !== null;
+  const isRouteHasSidebar = NO_SIDEBAR_ROUTES?.includes(pathname);
+  const isGuestRoute = GUEST_ROUTES.includes(pathname);
+
+  const SiteHeader = () => {
+    if (isGuestRoute) return <GuestHeader />;
+    if (isAuthenticated) return <UserHeader user={session?.user} />;
+    return <Header />;
+  };
+
+  const SiteSidebar = () => {
+    return !isRouteHasSidebar && <Sidebar />;
   };
 
   return (
     <>
-      <Header />
-      {!isRouteHasSidebar(pathname) && <Sidebar />}
-      {children}
+      {/* <SiteHeader /> */}
+      <ReactQueryProvider>
+        <SiteSidebar />
+        {children}
+      </ReactQueryProvider>
     </>
   );
 };

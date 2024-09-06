@@ -1,8 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { formatDistanceToNow } from "date-fns";
-import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import React, { useCallback, useState } from "react";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,3 +29,5 @@ export function af(name: string) {
 export function themeClassName(theme: string) {
   return `theme-${theme}` || "zinc";
 }
+
+/** Get current pathname */

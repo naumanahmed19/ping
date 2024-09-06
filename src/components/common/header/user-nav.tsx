@@ -1,3 +1,4 @@
+import { useAuth } from "@/actions/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,49 +8,34 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { USER_MENU } from "@/constants/nav";
-import { useRouter } from "next/navigation";
+import { SignOut } from "../authjs/signout-button";
+import { UserMenu } from "./user-menu";
 
-export function UserNav() {
-  const router = useRouter();
-
+export async function UserNav() {
+  const { user } = await useAuth();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-            <AvatarFallback>SC</AvatarFallback>
+            <AvatarImage src={user?.image ?? ""} alt="" />
+            <AvatarFallback>{user?.name?.slice(0, 1)}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">shadcn</p>
-            <p className="text-xs leading-none text-muted-foreground">
-              m@example.com
-            </p>
-          </div>
-        </DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
+
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {USER_MENU.map((item) => (
-            <DropdownMenuItem
-              key={item.title}
-              onClick={() => router.push(item.href)}
-            >
-              {item.title}
-            </DropdownMenuItem>
-          ))}
+          <UserMenu />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+        <DropdownMenuItem asChild>
+          <SignOut />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

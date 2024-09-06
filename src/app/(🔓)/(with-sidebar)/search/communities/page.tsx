@@ -1,18 +1,16 @@
 "use client";
-import React from "react";
-import PostHeader from "@/components/posts/PostHeader";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
+import React from "react";
 
+import SearchPageTemplate from "@/app/(🔓)/(with-sidebar)/search/search-page-template";
 import { ContainerContent } from "@/components/base/container-content";
-import SearchPageTemplate from "@/app/search/search-page-template";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useSearchParams } from "next/navigation";
+import { searchState } from "@/lib/atoms";
 import { useSearch } from "@/queries/search.query";
 import { Community } from "@/types/Community";
 import { useAtom } from "jotai";
-import { searchState } from "@/lib/atoms";
 
 interface CommuntiesResultsProps {
   searchTerm: string;

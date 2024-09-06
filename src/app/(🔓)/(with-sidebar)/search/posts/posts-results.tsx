@@ -1,22 +1,18 @@
 "use client";
-import React, { useEffect } from "react";
+import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import PostHeader from "@/components/posts/PostHeader";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 
-import SearchPageTemplate from "@/app/search/search-page-template";
-import { Container } from "@/components/base/container";
+import SearchPageTemplate from "@/app/(🔓)/(with-sidebar)/search/search-page-template";
 
 import { ContainerAside } from "@/components/base/container-aside";
 
-import SearchNav from "@/components/search/search-nav";
 import { ContainerContent } from "@/components/base/container-content";
-import { useSearchParams } from "next/navigation";
-import { useSearch } from "@/queries/search.query";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
-import { Post } from "@/types/Post";
 import { searchState } from "@/lib/atoms";
+import { useSearch } from "@/queries/search.query";
+import { Post } from "@/types/Post";
 import { useAtom } from "jotai";
 
 const PostsResults = () => {

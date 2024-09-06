@@ -1,12 +1,12 @@
 "use client";
 
-import * as React from "react";
 import { CheckIcon, MoonIcon, ResetIcon, SunIcon } from "@radix-ui/react-icons";
 import { Palette } from "lucide-react";
 import { useTheme } from "next-themes";
+import * as React from "react";
 
-import { cn } from "@/lib/utils";
 import { useConfig } from "@/hooks/use-config";
+import { cn } from "@/lib/utils";
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
@@ -19,8 +19,9 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { themes } from "@/styles/themes";
 
-import "@/styles/mdx.css";
 import { setCookie } from "@/actions/theme-config";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import "@/styles/mdx.css";
 
 export function ThemeCustomizer() {
   const [config, setConfig] = useConfig();
@@ -32,33 +33,35 @@ export function ThemeCustomizer() {
   }, []);
 
   return (
-    <div className="flex items-center gap-2">
-      <Drawer>
-        <DrawerTrigger asChild>
-          <Button className="md:hidden" variant="ghost" size="icon">
-            <Palette width={20} height={20} />
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent className="p-6 pt-0">
-          <Customizer />
-        </DrawerContent>
-      </Drawer>
-      <div className="hidden items-center md:flex">
-        <Popover modal={true}>
-          <PopoverTrigger asChild>
-            <Button variant="ghost" size="icon">
+    <TooltipProvider>
+      <div className="flex items-center gap-2">
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button className="md:hidden" variant="ghost" size="icon">
               <Palette width={20} height={20} />
             </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            align="start"
-            className="z-40 w-[340px] rounded-[12px] bg-white p-6 dark:bg-zinc-950"
-          >
+          </DrawerTrigger>
+          <DrawerContent className="p-6 pt-0">
             <Customizer />
-          </PopoverContent>
-        </Popover>
+          </DrawerContent>
+        </Drawer>
+        <div className="hidden items-center md:flex">
+          <Popover modal={true}>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Palette width={20} height={20} />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              align="start"
+              className="z-40 w-[340px] rounded-[12px] bg-white p-6 dark:bg-zinc-950"
+            >
+              <Customizer />
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
 

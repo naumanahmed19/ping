@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import {
@@ -10,7 +12,7 @@ import "@/styles/mdx.css";
 import { BellIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
-import { NotificationsListItem } from "@/app/notifications/_components/notifications-list-item";
+import { NotificationsListItem } from "@/app/(🔓)/(with-sidebar)/notifications/_components/notifications-list-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/use-toast";
 import { useLatestNotifications } from "@/queries/notifications.query";

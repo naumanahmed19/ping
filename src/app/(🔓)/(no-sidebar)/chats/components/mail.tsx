@@ -1,21 +1,12 @@
 "use client";
 
+import { Search } from "lucide-react";
 import * as React from "react";
-import {
-  AlertCircle,
-  Archive,
-  ArchiveX,
-  File,
-  Inbox,
-  MessagesSquare,
-  Search,
-  Send,
-  ShoppingCart,
-  Trash2,
-  Users2,
-} from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { MailDisplay } from "@/app/(🔓)/chats/components/mail-display";
+import { MailList } from "@/app/(🔓)/chats/components/mail-list";
+import { type Mail } from "@/app/(🔓)/chats/data";
+import { useMail } from "@/app/(🔓)/chats/use-mail";
 import { Input } from "@/components/ui/input";
 import {
   ResizableHandle,
@@ -25,12 +16,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AccountSwitcher } from "@/app/chats/components/account-switcher";
-import { MailDisplay } from "@/app/chats/components/mail-display";
-import { MailList } from "@/app/chats/components/mail-list";
-import { Nav } from "@/app/chats/components/nav";
-import { type Mail } from "@/app/chats/data";
-import { useMail } from "@/app/chats/use-mail";
 
 interface MailProps {
   accounts: {

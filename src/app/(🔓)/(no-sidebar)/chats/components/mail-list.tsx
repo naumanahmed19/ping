@@ -1,12 +1,11 @@
-import { ComponentProps } from "react";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { ComponentProps } from "react";
 
-import { cn } from "@/lib/utils";
+import { Mail } from "@/app/(🔓)/chats/data";
+import { useMail } from "@/app/(🔓)/chats/use-mail";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { Mail } from "@/app/chats/data";
-import { useMail } from "@/app/chats/use-mail";
+import { cn } from "@/lib/utils";
 
 interface MailListProps {
   items: Mail[];

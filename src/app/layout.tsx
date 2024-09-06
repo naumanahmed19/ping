@@ -1,16 +1,17 @@
+import { getTheme } from "@/actions/theme-config";
+import { auth } from "@/auth";
+import TopLoadingBar from "@/components/base/top-loading-bar";
+import { ThemeWrapper } from "@/components/theme/theme-wrapper";
+import { Toaster } from "@/components/ui/toaster";
+import { cn, themeClassName } from "@/lib/utils";
+import { JotaiProvider } from "@/providers/jotai-provider";
+import { ReactQueryProvider } from "@/providers/react-query-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import "/public/themes.css";
-import { cn, themeClassName } from "@/lib/utils";
-import { ThemeWrapper } from "@/components/theme/theme-wrapper";
-import { ThemeProvider } from "@/providers/theme-provider";
-import { JotaiProvider } from "@/providers/jotai-provider";
-import { ReactQueryProvider } from "@/providers/react-query-provider";
-import { getTheme } from "@/actions/theme-config";
-import { Toaster } from "@/components/ui/toaster";
-import { LayoutProvider } from "@/providers/layout-provider";
-import TopLoadingBar from "@/components/base/top-loading-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,28 +26,27 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = await getTheme();
-
+  const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(inter.className, themeClassName(theme.theme))}>
-        <TopLoadingBar theme={theme.theme} />
-        <ThemeWrapper themeConfig={theme}>
-          <JotaiProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <ReactQueryProvider>
-                <LayoutProvider excludeSidebarRoutes={["/chats"]}>
-                  {children}
-                </LayoutProvider>
-              </ReactQueryProvider>
-              <Toaster />
-            </ThemeProvider>
-          </JotaiProvider>
-        </ThemeWrapper>
+        <SessionProvider>
+          <TopLoadingBar theme={theme.theme} />
+          <ThemeWrapper themeConfig={theme}>
+            <JotaiProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <ReactQueryProvider>{children}</ReactQueryProvider>
+
+                <Toaster />
+              </ThemeProvider>
+            </JotaiProvider>
+          </ThemeWrapper>
+        </SessionProvider>
       </body>
     </html>
   );

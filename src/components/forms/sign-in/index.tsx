@@ -16,7 +16,6 @@ import { SignInSchema } from "./schema";
 type Props = {};
 
 const SignInForm = (props: Props) => {
-  // const { isPending, onAuthenticateUser, register, errors } = useAuthSignIn();
   function onSubmit(_data: z.infer<typeof SignInSchema>) {
     console.log("Submitted", _data);
   }
@@ -40,6 +39,14 @@ const SignInForm = (props: Props) => {
             <Button className="w-full" type="submit">
               Sign In
             </Button>
+            <div className="flex justify-between mt-4">
+              <a href="#" className="text-sm text-blue-600 hover:underline">
+                Forgot password?
+              </a>
+              <a href="#" className="text-sm text-blue-600 hover:underline">
+                New to ping? Sign Up
+              </a>
+            </div>
           </FormGenerator>
         </CardContent>
       </Card>

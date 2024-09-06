@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useState } from "react";
 
 // import { copyToClipboardWithMeta } from "@/components/copy-button"
@@ -22,7 +24,8 @@ import { useSearchSuggestions } from "@/queries/search.query";
 import { useAtom } from "jotai";
 import PostsSuggestions from "../../search/posts-suggestions";
 import UserWidget from "../../user/user-widget";
-export default function NavSearchBar() {
+
+export default function NavSearchBar({ className }: { className: string }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [searchQuery, setSearchQuery] = useAtom(searchState);
@@ -102,81 +105,83 @@ export default function NavSearchBar() {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <div className=" items-center md:flex">
-        <div
-          onClick={() => setIsOpen(true)}
-          className="flex items-center h-12 px-3 rounded-md bg-background border md:w-[400px] shadow-sm :hover:cursor-text"
-          cmdk-input-wrapper=""
-        >
-          <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-          <div className="flex  w-full border-nonebg-transparent text-sm text-muted-foreground :hover:cursor-text ">
-            {searchTerm || "Type to search..."}
+    <div className={className}>
+      <div className="flex items-center gap-2">
+        <div className=" items-center md:flex">
+          <div
+            onClick={() => setIsOpen(true)}
+            className="flex items-center h-12 px-3 rounded-md bg-background border md:w-[400px] shadow-sm :hover:cursor-text"
+            cmdk-input-wrapper=""
+          >
+            <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+            <div className="flex  w-full border-nonebg-transparent text-sm text-muted-foreground :hover:cursor-text ">
+              {searchTerm || "Type to search..."}
+            </div>
           </div>
-        </div>
-        {isOpen && (
-          <div ref={ref} className="fixed top-2  md:w-[400px]  p-0  ">
-            <Command
-              className="rounded-md shadow-lg border"
-              onKeyDown={handleKeyDown}
-              shouldFilter={false}
-              onValueChange={(e) => {
-                // console.log(e, "testzzzz");
-                // createQueryString("s", e);
-                // setSearchTerm(e);
-              }}
-            >
-              <CommandInput
-                className="h-12 text-md"
-                autoFocus
-                value={searchTerm}
-                placeholder={searchTerm}
+          {isOpen && (
+            <div ref={ref} className="fixed top-2  md:w-[400px]  p-0  ">
+              <Command
+                className="rounded-md shadow-lg border"
+                onKeyDown={handleKeyDown}
+                shouldFilter={false}
                 onValueChange={(e) => {
+                  // console.log(e, "testzzzz");
                   // createQueryString("s", e);
-                  setSearchTerm(e);
+                  // setSearchTerm(e);
                 }}
-              />
+              >
+                <CommandInput
+                  className="h-12 text-md"
+                  autoFocus
+                  value={searchTerm}
+                  placeholder={searchTerm}
+                  onValueChange={(e) => {
+                    // createQueryString("s", e);
+                    setSearchTerm(e);
+                  }}
+                />
 
-              <CommandList className="min-h-64">
-                <BaseDataPlaceholder
-                  dataLength={Object?.keys(suggestions).length}
-                  isLoading={isLoading}
-                  isError={isError}
-                  variant="avatar-list"
-                  emptyVariant="sm"
-                >
-                  {suggestions?.users?.length > 0 && (
-                    <CommandGroup heading="People">
-                      <UserWidget
-                        users={suggestions?.users}
-                        onSelect={handleOnSelect}
-                      />
-                    </CommandGroup>
-                  )}
-                  {suggestions?.communities?.length > 0 && (
-                    <CommandGroup heading="Communities">
-                      <CommunitiesWidget
-                        communities={suggestions?.communities}
-                        hasSubscribers={false}
-                      />
-                    </CommandGroup>
-                  )}
-                  {suggestions?.posts?.length > 0 && (
-                    <CommandGroup heading="Trending Posts">
-                      <PostsSuggestions
-                        posts={suggestions?.posts}
-                        onSelect={function (): void {
-                          throw new Error("Function not implemented.");
-                        }}
-                      />
-                    </CommandGroup>
-                  )}
-                  <CommandSeparator />
-                </BaseDataPlaceholder>
-              </CommandList>
-            </Command>
-          </div>
-        )}
+                <CommandList className="min-h-64">
+                  <BaseDataPlaceholder
+                    dataLength={Object?.keys(suggestions).length}
+                    isLoading={isLoading}
+                    isError={isError}
+                    variant="avatar-list"
+                    emptyVariant="sm"
+                  >
+                    {suggestions?.users?.length > 0 && (
+                      <CommandGroup heading="People">
+                        <UserWidget
+                          users={suggestions?.users}
+                          onSelect={handleOnSelect}
+                        />
+                      </CommandGroup>
+                    )}
+                    {suggestions?.communities?.length > 0 && (
+                      <CommandGroup heading="Communities">
+                        <CommunitiesWidget
+                          communities={suggestions?.communities}
+                          hasSubscribers={false}
+                        />
+                      </CommandGroup>
+                    )}
+                    {suggestions?.posts?.length > 0 && (
+                      <CommandGroup heading="Trending Posts">
+                        <PostsSuggestions
+                          posts={suggestions?.posts}
+                          onSelect={function (): void {
+                            throw new Error("Function not implemented.");
+                          }}
+                        />
+                      </CommandGroup>
+                    )}
+                    <CommandSeparator />
+                  </BaseDataPlaceholder>
+                </CommandList>
+              </Command>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

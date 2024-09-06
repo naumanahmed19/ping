@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
@@ -21,7 +20,6 @@ export function MainNav({
       </Button>
       <NavChats />
       <NavNotifications />
-      <ModeToggle />
     </nav>
   );
 }
