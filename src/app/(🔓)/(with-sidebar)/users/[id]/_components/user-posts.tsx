@@ -22,8 +22,7 @@ const UserPosts: React.FC<UserPostsProps> = () => {
     >
       <InfiniteScroll
         query={query}
-        dataKey="posts"
-        renderItem={(page) => <PostsList posts={page.data} />}
+        renderItem={(posts) => <PostsList posts={posts} />}
       />
     </BaseDataPlaceholder>
   );

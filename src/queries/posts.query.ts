@@ -19,3 +19,13 @@ export const useGetPost = (id?: number) => {
     queryKey: [QUERY_KEY, id],
   });
 };
+
+export const useGetPostComments = (postId: number) => {
+  return useInfiniteQuery({
+    queryFn: ({ pageParam = 0 }) =>
+      useGet(`${BASE_URL}/${postId}/comments?page=${pageParam}`),
+    queryKey: ["comments"],
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+  });
+};

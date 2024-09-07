@@ -1,19 +1,18 @@
 "use client";
 import * as React from "react";
 
-import { useParams } from "next/navigation";
-import PostTemplate from "@/components/posts/PostTemplate";
-import { postsData, commentsData } from "@/data";
-import Image from "next/image";
 import { Container } from "@/components/base/container";
+import { postsData } from "@/data";
+import Image from "next/image";
+import { useParams } from "next/navigation";
 import PostSidebar from "./components/PostSidebar";
 
-import Comments from "@/components/comments/Comments";
 import PostHeader from "@/components/posts/PostHeader";
 
+import PostActions from "@/components/posts/PostActions";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import PostActions from "@/components/posts/PostActions";
+import PostComments from "./components/post-comments";
 
 const PostPage: React.FC = () => {
   const id = useParams().id;
@@ -54,7 +53,7 @@ const PostPage: React.FC = () => {
 
           <PostActions />
 
-          <Comments comments={commentsData} />
+          <PostComments postId={post.id} />
         </div>
 
         <div className="hidden md:block ">

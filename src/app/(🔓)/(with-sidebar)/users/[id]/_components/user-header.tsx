@@ -1,8 +1,7 @@
-import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Assuming these are imported from somewhere
-import UserNav from "./user-nav";
-import { User } from "@/types/User";
 import { when } from "@/lib/utils";
+import { User } from "@/types/User";
+import UserNav from "./user-nav";
 
 const UserHeader = ({ user }: { user: User }) => {
   return (

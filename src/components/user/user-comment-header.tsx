@@ -1,7 +1,7 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 
+import CommunityHoverCard from "@/components/community/community-hover-card";
 import { af, when } from "@/lib/utils";
 import Link from "next/link";
 import ListItem from "../base/list-items";
-import CommunityHoverCard from "@/components/community/community-hover-card";
 
 const UserCommentHeader: React.FC<{
   comment: Comment;
@@ -24,7 +24,7 @@ const UserCommentHeader: React.FC<{
   // AvatarWithHoverCard Component (Internal)
   const Leading = () => {
     return (
-      <CommunityHoverCard community={post.community}>
+      <CommunityHoverCard community={post?.community}>
         <Avatar className={!isDetailsPage ? "h-7 w-7" : "h-10 w-10"}>
           <AvatarImage
             src={post.community?.icon_img}

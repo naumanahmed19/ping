@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import posts from "@/../public/data/posts.json";
 import communities from "@/../public/data/communities.json";
+import posts from "@/../public/data/posts.json";
+import { NextRequest, NextResponse } from "next/server";
 
 // get all posts of a user by id
 // following method is using sample data from posts.json and communities.json
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest, context: any) {
   const hasMore = (pageNumber + 1) * limitNumber < userPosts.length;
 
   return NextResponse.json({
-    posts: response,
+    data: response,
     nextCursor: hasMore ? pageNumber + 1 : null,
   });
 }

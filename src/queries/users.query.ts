@@ -31,3 +31,13 @@ export const useGetUserCommunities = (userId: number) => {
     queryKey: [QUERY_KEY],
   });
 };
+
+export const useGetUserComments = (userId: number) => {
+  return useInfiniteQuery({
+    queryFn: ({ pageParam = 0 }) =>
+      useGet(`${BASE_URL}/${userId}/comments?page=${pageParam}`),
+    queryKey: ["comments"],
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+  });
+};

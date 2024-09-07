@@ -1,4 +1,4 @@
-import { ChevronDown, Expand, List } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -8,10 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-interface PostsFilterProps {}
 import { useConfig } from "@/hooks/use-config";
+import { Expand, List } from "lucide-react";
+interface PostsFilterProps {}
 
 const PostsFilter: React.FC<PostsFilterProps> = ({}) => {
   const [config, setConfig] = useConfig();
@@ -64,11 +64,12 @@ const PostsFilter: React.FC<PostsFilterProps> = ({}) => {
           onClick={() =>
             setConfig({
               ...config,
-              container-layout: config.container-layout == "card" ? "compact" : "card",
+              containerLayout:
+                config["containerLayout"] === "card" ? "compact" : "card",
             })
           }
         >
-          {config.container-layout == "card" ? (
+          {config["containerLayout"] === "card" ? (
             <List size="16" />
           ) : (
             <Expand size="16" />

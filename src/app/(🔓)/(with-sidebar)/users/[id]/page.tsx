@@ -1,12 +1,12 @@
-import * as React from "react";
-import UserHeader from "@/components/user/user-header";
 import { Container } from "@/components/base/container";
 import { ContainerAside } from "@/components/base/container-aside";
 import { ContainerContent } from "@/components/base/container-content";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
-import UserPosts from "@/components/user/user-posts";
+
 import { useGetUser } from "@/queries/users.query";
 import { User } from "@/types/User";
+import UserHeader from "./_components/user-header";
+import UserPosts from "./_components/user-posts";
 
 type Props = {
   params: { id: string };
