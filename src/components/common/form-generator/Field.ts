@@ -8,4 +8,5 @@ export interface Field {
   name: string;
   className?: string;
   flex?: boolean;
+  disabled?: boolean;
 }

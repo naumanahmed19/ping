@@ -1,3 +1,4 @@
+import { GuestButtons } from "@/components/common/header/guest-buttons";
 import { Aperture } from "lucide-react";
 import Link from "next/link";
 
@@ -15,7 +16,9 @@ export const Header = () => {
           </Link>
         </div>
 
-        <div className="flex items-center space-x-4"></div>
+        <div className="flex items-center space-x-4">
+          <GuestButtons />
+        </div>
       </div>
     </header>
   );

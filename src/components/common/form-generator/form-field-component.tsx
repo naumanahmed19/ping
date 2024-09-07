@@ -14,12 +14,14 @@ export function FormFieldComponent({
   placeholder,
   type,
   inputType,
+  disabled,
 }: {
   field: any;
-  label: string;
+  label?: string;
   placeholder: string;
   type: string;
   inputType?: string;
+  disabled?: boolean;
 }) {
   const renderInput = () => {
     switch (inputType) {
@@ -29,6 +31,7 @@ export function FormFieldComponent({
             placeholder={placeholder}
             {...field}
             type={type}
+            disabled={disabled}
             value={field.value || ""}
           />
         );
@@ -37,6 +40,7 @@ export function FormFieldComponent({
           <Textarea
             placeholder={placeholder}
             {...field}
+            disabled={disabled}
             value={field.value || ""}
           />
         );
@@ -47,6 +51,7 @@ export function FormFieldComponent({
             placeholder={placeholder}
             {...field}
             type={type}
+            disabled={disabled}
             value={field.value || ""}
           />
         );
@@ -55,7 +60,7 @@ export function FormFieldComponent({
 
   return (
     <FormItem>
-      <FormLabel>{label}</FormLabel>
+      {label && <FormLabel>{label}</FormLabel>}
       <FormControl>{renderInput()}</FormControl>
       <FormMessage />
     </FormItem>

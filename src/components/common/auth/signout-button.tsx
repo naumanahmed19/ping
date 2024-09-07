@@ -1,6 +1,5 @@
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
-
 export function SignOut() {
   return (
     <form
@@ -8,6 +7,7 @@ export function SignOut() {
       action={async () => {
         "use server";
         await signOut();
+        // await nextAuthSignOut({ redirect: false });
       }}
     >
       <Button

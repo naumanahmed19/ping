@@ -2,6 +2,7 @@ import { Form, FormField } from "@/components/ui/form";
 
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Field } from "./Field";
@@ -11,23 +12,35 @@ interface FormGeneratorProps {
   children?: React.ReactNode;
   fields: Field[];
   onSubmit: (data: any) => void;
+  onChange?: (data: any) => void;
   schema: z.ZodType<any>;
   defaultValues?: Record<string, any>;
   className?: string;
+  action?: any;
+  disabled?: boolean;
 }
 
 export function FormGenerator({
   children,
   fields,
   onSubmit,
+  onChange,
   schema,
   defaultValues,
   className,
+  action,
+  disabled,
 }: FormGeneratorProps) {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues, // Set default values from form state
   });
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(form.watch());
+    }
+  }, [form.watch(), onChange]);
 
   return (
     <>
@@ -55,6 +68,7 @@ export function FormGenerator({
                       <FormFieldComponent
                         field={field}
                         label={label}
+                        disabled={disabled}
                         placeholder={placeholder}
                         type={type}
                         inputType={inputType}

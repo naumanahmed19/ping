@@ -37,7 +37,8 @@ export const SIGN_IN_FORM: Field[] = [
   {
     id: "1",
     inputType: "input",
-    placeholder: "Email",
+    placeholder: "joe@ping.com",
+    label: "Email",
     name: "email",
     type: "email",
     className: "grid gap-2",
@@ -45,7 +46,8 @@ export const SIGN_IN_FORM: Field[] = [
   {
     id: "4",
     inputType: "input",
-    placeholder: "Password",
+    placeholder: "Enter your password",
+    label: "Password",
     name: "password",
     type: "password",
     className: "grid gap-2",
