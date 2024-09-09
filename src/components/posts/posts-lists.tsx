@@ -1,4 +1,3 @@
-"use client";
 import PostTemplate from "@/components/posts/PostTemplate";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
