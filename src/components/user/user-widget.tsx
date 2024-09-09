@@ -3,16 +3,17 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "../../data/users";
 import Favourites from "../community/favourites";
-import { User } from "@/data/users";
-import { Button } from "react-day-picker";
-
+interface Chip {
+  title: string;
+}
 interface UserWidgetProps {
   users: User[];
 
   hasFavourites?: boolean;
   hasSubscribers?: boolean;
-  onSelect: () => void; //TODO: fix type
+  onSelect: (chip: Chip) => void;
 }
 
 const UserWidget: React.FC<UserWidgetProps> = ({

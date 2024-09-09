@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 function attachReplies(comment: any): any {
   return comment.replies && comment.replies.length > 0
-    ? comment.replies.map((reply) => {
+    ? comment.replies.map((reply: any) => {
         const user = users.find((u: any) => u.id === reply.userId);
         reply.author = user;
 
@@ -18,7 +18,7 @@ function attachReplies(comment: any): any {
 }
 
 // Sample data
-export async function GET(req: NextRequest, context: any) {
+export async function GET(req: Request, context: any) {
   // Access all query parameters
   const { searchParams } = new URL(req.url);
   const { page = 0, limit = 2 } = Object.fromEntries(searchParams.entries());

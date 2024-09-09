@@ -40,7 +40,7 @@ export function FormGenerator({
     if (onChange) {
       onChange(form.watch());
     }
-  }, [form.watch(), onChange]);
+  }, [form, onChange]);
 
   return (
     <>

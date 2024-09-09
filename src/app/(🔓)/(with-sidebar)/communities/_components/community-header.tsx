@@ -1,9 +1,9 @@
-import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Assuming these are imported from somewhere
-import { Community } from "@/data/communities";
-import CommunityNav from "./community-nav";
 
-const CommunityHeader = ({ community }: { community: Community }) => (
+import { Community } from "@/types/Community";
+import { CommunityNav } from "./community-nav";
+
+export const CommunityHeader = ({ community }: { community: Community }) => (
   <>
     <div className="flex items-center">
       <div className="ml-3"></div>
@@ -29,5 +29,3 @@ const CommunityHeader = ({ community }: { community: Community }) => (
     </div>
   </>
 );
-
-export default CommunityHeader;

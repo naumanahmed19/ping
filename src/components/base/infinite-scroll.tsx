@@ -36,7 +36,7 @@ const InfiniteScroll = <T,>({
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  const dataLength = (data?.pages?.[0] as { data: unknown[] })?.data?.length;
+  const dataLength = (data?.pages?.[0] as { data: T[] })?.data?.length;
 
   return (
     <>

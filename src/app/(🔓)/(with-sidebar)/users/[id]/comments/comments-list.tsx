@@ -1,16 +1,13 @@
-"use client";
-import { Post } from "@/data/posts";
-import { cn } from "@/lib/utils";
-import React from "react";
-
 import { PostContainer } from "@/components/base/post-container";
 import PostActions from "@/components/posts/PostActions";
 import PostsFilter from "@/components/posts/posts-filter";
 import { Separator } from "@/components/ui/separator";
-import UserCommentHeader from "@/components/user/user-comment-header";
+
+import { cn } from "@/lib/utils";
+import { Comment } from "@/types/Comment";
 
 interface UserComments {
-  comments: Array<Post>;
+  comments: Comment[];
   className?: string;
 }
 
@@ -30,8 +27,8 @@ const UserComments: React.FC<UserComments> = ({ comments, className }) => {
       <div className={cn("posts-list", className)}>
         {comments.map((comment) => (
           <>
-            <PostContainer route={`/post/${comment.post.id}`}>
-              <UserCommentHeader comment={comment} />
+            <PostContainer route={`/post/${comment.postId}`}>
+              {/* <UserCommentHeader comment={comment} /> */}
               <p className="text-sm  my-3">{comment.content}</p>
               <PostActions />
             </PostContainer>

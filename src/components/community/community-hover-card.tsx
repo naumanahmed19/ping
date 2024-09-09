@@ -1,14 +1,13 @@
 "use client";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { CalendarDays, MoreHorizontal } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-import { Community } from "@/data/communities";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { af, when } from "@/lib/utils";
+import { when } from "@/lib/utils";
+import { Community } from "@/types/Community";
+import { CalendarDays } from "lucide-react";
 import Link from "next/link";
 
 const CommunityHoverCard: React.FC<{
@@ -20,7 +19,7 @@ const CommunityHoverCard: React.FC<{
 
   return (
     <HoverCard openDelay={700}>
-      <HoverCardTrigger asChild>{children}</HoverCardTrigger>
+      <HoverCardTrigger asChild>{<>{children}</>}</HoverCardTrigger>
       <HoverCardContent className="w-80">
         <Link href={`/communities/${community.name}`}>
           <div className="flex justify-between space-x-4">

@@ -5,9 +5,9 @@ import React from "react";
 import SearchNav from "@/components/search/search-nav";
 import { useSearchParams } from "next/navigation";
 
+import { useSearch } from "@/queries/search.query";
 import CommuntiesResults from "./communities/page";
 import PostsResults from "./posts/posts-results";
-import { useSearch } from "@/queries/search.query";
 export interface IBaseWrapperProps {
   children?: React.ReactNode;
   className?: string;
@@ -15,9 +15,9 @@ export interface IBaseWrapperProps {
 }
 const SearchPageTemplate = ({ children }: IBaseWrapperProps) => {
   const searchParams = useSearchParams();
-  const search = searchParams.get("s");
+  const search = searchParams.get("s") || "";
   const type = searchParams.get("type") || "posts";
-  const { data, isLoading, isError } = useSearch(search);
+  const { data, isLoading, isError } = useSearch({ q: search, type });
 
   const types = [PostsResults, CommuntiesResults];
 

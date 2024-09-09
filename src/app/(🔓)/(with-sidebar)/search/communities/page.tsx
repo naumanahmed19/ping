@@ -12,13 +12,7 @@ import { useSearch } from "@/queries/search.query";
 import { Community } from "@/types/Community";
 import { useAtom } from "jotai";
 
-interface CommuntiesResultsProps {
-  searchTerm: string;
-}
-
-const CommuntiesResults: React.FC<CommuntiesResultsProps> = ({
-  searchTerm,
-}) => {
+const CommuntiesResults: React.FC = () => {
   const [searchQuery] = useAtom(searchState);
   const { data: communities, isLoading, isError } = useSearch(searchQuery);
 

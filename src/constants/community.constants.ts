@@ -1,3 +1,5 @@
+import { Field } from "@/components/common/form-generator/Field";
+
 export interface FormProps {
   id: string;
   inputType: string;
@@ -6,19 +8,19 @@ export interface FormProps {
   type: string;
 }
 
-export const COMMUNITY_FORM: FormProps[] = [
+export const COMMUNITY_FORM: Field[] = [
   {
     id: "1",
     inputType: "input",
     placeholder: "Community Name",
     name: "name",
-    type: "input",
+    type: "text",
   },
   {
     id: "2",
     inputType: "textarea",
     placeholder: "Community description",
     name: "description",
-    type: "textarea",
+    type: "text",
   },
 ];

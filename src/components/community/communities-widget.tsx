@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Community } from "@/data/communities";
+
+import { Community } from "@/types/Community";
 import CommunityHoverCard from "./community-hover-card";
 import Favourites from "./favourites";
 

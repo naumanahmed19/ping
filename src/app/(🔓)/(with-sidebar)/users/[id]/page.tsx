@@ -4,7 +4,6 @@ import { ContainerContent } from "@/components/base/container-content";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
 
 import { useGetUser } from "@/queries/users.query";
-import { User } from "@/types/User";
 import UserHeader from "./_components/user-header";
 import UserPosts from "./_components/user-posts";
 
@@ -17,15 +16,15 @@ type Props = {
  * @param params - The parameters containing the user ID.
  * @returns Metadata object for the user page.
  */
-export async function generateMetadata({ params }: Props) {
-  const user: User = await useGetUser(params.id);
-  return {
-    title: user.name,
-    openGraph: {
-      images: [user.profile.avatar],
-    },
-  };
-}
+// export async function generateMetadata({ params }: Props) {
+//   const user: User = await useGetUser(params.id);
+//   return {
+//     title: user.name,
+//     openGraph: {
+//       images: [user.profile.avatar],
+//     },
+//   };
+// }
 
 /**
  * Renders the user page.

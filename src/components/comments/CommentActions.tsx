@@ -1,7 +1,6 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
+import React from "react";
 
-import { Award, MessageSquare, Share2, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,12 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Voting from "@/components/ui/voting/voting";
+import { Award, MessageSquare, MoreHorizontal, Share2 } from "lucide-react";
 
 interface CommentActionsProps {
-  handleShowReplyForm: () => void;
+  handleShowReplyForm: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const CommentActions: React.FC<CommentActionsProps> = ({
+export const CommentActions: React.FC<CommentActionsProps> = ({
   handleShowReplyForm,
 }) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,5 +71,3 @@ const CommentActions: React.FC<CommentActionsProps> = ({
     </div>
   );
 };
-
-export default CommentActions;

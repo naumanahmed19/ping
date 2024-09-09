@@ -1,19 +1,15 @@
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Favourites from "../community/favourites";
-import { User } from "@/data/users";
-import { Button } from "react-day-picker";
-import { Post } from "@/data/posts";
+import { Post } from "@/types/Post";
 import { Separator } from "@radix-ui/react-separator";
+import Image from "next/image";
+import Link from "next/link";
 
 interface PostsSuggestionsProps {
   posts: Post[];
 
   hasFavourites?: boolean;
   hasSubscribers?: boolean;
-  onSelect: () => void; //TODO: fix type
+  onSelect: (chip: any) => void; // Fix the type to accept an argument
 }
 
 const PostsSuggestions: React.FC<PostsSuggestionsProps> = ({

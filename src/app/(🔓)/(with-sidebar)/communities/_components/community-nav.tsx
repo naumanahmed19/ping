@@ -1,28 +1,25 @@
 "use client";
-import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Assuming these are imported from somewhere
-import { Community } from "@/data/communities";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import {
-  MoreHorizontal,
-  CalendarDays,
-  Plus,
-  UsersRound,
-  BellPlus,
-  BellRing,
-  BellOff,
-  BellMinus,
-} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Community } from "@/types/Community";
+import {
+  BellMinus,
+  BellOff,
+  BellPlus,
+  BellRing,
+  MoreHorizontal,
+  Plus,
+  UsersRound,
+} from "lucide-react";
+import Link from "next/link";
+import React from "react";
 
-const CommunityNav = ({ community }: { community: Community }) => {
+export const CommunityNav = ({ community }: { community: Community }) => {
   const [isJoined, setIsJoined] = React.useState(false);
 
   const handleJoinClick = () => {
@@ -86,5 +83,3 @@ const CommunityNav = ({ community }: { community: Community }) => {
     </div>
   );
 };
-
-export default CommunityNav;

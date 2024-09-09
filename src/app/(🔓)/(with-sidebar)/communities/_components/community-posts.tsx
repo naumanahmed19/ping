@@ -4,8 +4,9 @@ import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import InfiniteScroll from "@/components/base/infinite-scroll";
 import PostsList from "@/components/posts/posts-lists";
 import { useGetCommunityPosts } from "@/queries/communities.query";
+import { Post } from "@/types/Post";
 
-export default function CommunityPosts({ id }: { id: number }) {
+export function CommunityPosts({ id }: { id: number }) {
   const query = useGetCommunityPosts(id);
   return (
     <BaseDataPlaceholder
@@ -16,7 +17,7 @@ export default function CommunityPosts({ id }: { id: number }) {
     >
       <InfiniteScroll
         query={query}
-        renderItem={(posts) => <PostsList posts={posts} />}
+        renderItem={(posts: Post[]) => <PostsList posts={posts} />}
       />
     </BaseDataPlaceholder>
   );

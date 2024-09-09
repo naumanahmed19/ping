@@ -1,5 +1,4 @@
-import React from "react";
-import PostMetaCard from "./PostMetaCard";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -7,16 +6,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Post } from "@/types/Post";
+import React from "react";
+import PostMetaCard from "./PostMetaCard";
 
 interface PostSidebarProps {
-  postId: string;
+  post: Post;
 }
 
 const PostSidebar: React.FC<PostSidebarProps> = ({ post }) => {
   return (
     <div className="post-sidebar w-[300px]">
-      <PostMetaCard community={post?.community} />
+      {post?.community && <PostMetaCard community={post.community} />}
 
       <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
         <CardHeader className="pb-3">

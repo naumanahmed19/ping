@@ -1,3 +1,4 @@
+"use client";
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import InfiniteScroll from "@/components/base/infinite-scroll";
 import CommentList from "@/components/comments/CommentList";
@@ -41,7 +42,6 @@ export default function PostComments({ postId }: { postId: number }) {
       >
         <InfiniteScroll
           query={query}
-          key="posts"
           renderItem={(comments) => <CommentList comments={comments} />}
           placeholderVariant="avatar-list"
         />

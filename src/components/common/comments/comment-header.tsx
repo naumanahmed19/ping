@@ -1,9 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User } from "@/types/User";
 import { PlusCircledIcon } from "@radix-ui/react-icons"; // Assuming this is the correct import
 import Link from "next/link"; // Assuming Link is from next/link
 import UserHoverCard from "../../user/user-hover-card";
 
-const CommentHeader = ({ isExpanded, user, time }) =>
+type CommentHeaderProps = {
+  isExpanded: boolean;
+  user: User;
+  time: string;
+};
+const CommentHeader = ({ isExpanded, user, time }: CommentHeaderProps) =>
   isExpanded ? (
     <UserHoverCard user={user}>
       <div className="flex">

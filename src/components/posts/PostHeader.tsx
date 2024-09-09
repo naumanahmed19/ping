@@ -1,26 +1,17 @@
 "use client";
 
-import { Button } from "../ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CalendarDays, MoreHorizontal } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-import { Post } from "@/data/posts";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import CommunityHoverCard from "@/components/community/community-hover-card";
-import { af, when } from "@/lib/utils";
+import { MoreHorizontal } from "lucide-react";
+
+import { Button } from "../ui/button";
 
 import { useToast } from "@/components/ui/use-toast";
+import { Post } from "@/types/Post";
 const PostHeader: React.FC<{
   post: Post;
   isDetailsPage?: boolean;
@@ -36,7 +27,7 @@ const PostHeader: React.FC<{
   hasActions = false,
 }) => {
   const { toast } = useToast();
-  const handleJoinClick = (e) => {
+  const handleJoinClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
     toast({ title: "Request sent to join " });
@@ -47,30 +38,11 @@ const PostHeader: React.FC<{
       <div className="flex items-center justify-start">
         <div className="flex-1 space-y-2">
           <div className="flex items-center justify-between">
-            <CommunityHoverCard community={post?.community}>
-              <div className="flex items-center text-xs ">
-                <Avatar className={!isDetailsPage ? "h-7 w-7" : "h-10 w-10"}>
-                  <AvatarImage
-                    src={post.community?.icon_img}
-                    alt={post?.community?.name}
-                  />
-                  <AvatarFallback>{af(post.community?.name)}</AvatarFallback>
-                </Avatar>
-                <div className="ml-2 ">
-                  <div className="flex">
-                    <div className="font-bold">{post?.community?.name}</div>
-                    <div className="text-muted-foreground mx-3">
-                      {when(post?.created_at)}
-                    </div>
-                  </div>
-                  {hasTtile && (
-                    <div className="text-muted-foreground">
-                      {post?.community?.title}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </CommunityHoverCard>
+            {/* <PostHeaderHoverCard
+              post={post}
+              isDetailsPage={isDetailsPage}
+              hasTitle={hasTtile}
+            /> */}
 
             <div className="flex items-center">
               {hasJoinButton && (
@@ -106,3 +78,41 @@ const PostHeader: React.FC<{
 };
 
 export default PostHeader;
+
+// interface PostHeaderHoverCard {
+//   post: Post;
+//   isDetailsPage: boolean;
+//   hasTitle: boolean;
+// }
+// const PostHeaderHoverCard: React.FC<PostHeaderHoverCard> = ({
+//   post,
+//   isDetailsPage,
+//   hasTitle,
+// }) => {
+//   return (
+//     <CommunityHoverCard community={post?.community}>
+//       <div className="flex items-center text-xs">
+//         <Avatar className={!isDetailsPage ? "h-7 w-7" : "h-10 w-10"}>
+//           <AvatarImage
+//             src={post.community?.icon_img}
+//             alt={post?.community?.name}
+//           />
+//           <AvatarFallback>{af(post.community?.name)}</AvatarFallback>
+//         </Avatar>
+//         <div className="ml-2">
+//           <div className="flex">
+//             <div className="font-bold">{post?.community?.name}</div>
+//             <div className="text-muted-foreground mx-3">
+//               {when(post?.created_at)}
+//             </div>
+//           </div>
+//           {hasTitle && (
+//             <div className="text-muted-foreground">
+//               {post?.community?.title}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </CommunityHoverCard>
+//   );
+// };

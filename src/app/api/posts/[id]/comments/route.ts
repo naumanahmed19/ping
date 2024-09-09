@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Helper function to attach replies
 function attachReplies(comment: any): any {
   return comment.replies && comment.replies.length > 0
-    ? comment.replies.map((reply) => {
+    ? comment.replies.map((reply: any) => {
         const user = users.find((u: any) => u.id === reply.userId);
         reply.author = user;
 

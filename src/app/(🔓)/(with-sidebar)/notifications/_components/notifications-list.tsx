@@ -1,9 +1,8 @@
 "use client";
-
 import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import InfiniteScroll from "@/components/base/infinite-scroll";
-
 import { useNotifications } from "@/queries/notifications.query";
+import { Notification } from "@/types/Notification";
 import { NotificationsListItem } from "./notifications-list-item";
 
 const NotificationList = () => {
@@ -20,7 +19,7 @@ const NotificationList = () => {
         <div className="space-y-1 ">
           <InfiniteScroll
             query={query}
-            renderItem={(notifications) => (
+            renderItem={(notifications: Notification[]) => (
               <List notifications={notifications} />
             )}
           />
@@ -31,6 +30,7 @@ const NotificationList = () => {
 };
 
 export default NotificationList;
+
 function List({ notifications }: { notifications: Notification[] }) {
   return (
     <>

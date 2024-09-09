@@ -1,16 +1,15 @@
 "use client";
 
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { CalendarDays, MoreHorizontal } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-import { User } from "@/data/users";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import Link from "next/link";
 import { af, dt } from "@/lib/utils";
+import { User } from "@/types/User";
+import { CalendarDays } from "lucide-react";
+import Link from "next/link";
 
 const UserHoverCard: React.FC<{
   user: User;

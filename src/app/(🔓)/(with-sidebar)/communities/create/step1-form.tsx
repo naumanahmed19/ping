@@ -22,8 +22,6 @@ export function FirstStepForm() {
 
   // Handle form submission
   function onSubmit(_data: z.infer<typeof Step1Schema>) {
-    toast("Submitted");
-
     setFormState(_data); // Update form state with submitted data
     nextStep(); // Move to the next step in the stepper
   }

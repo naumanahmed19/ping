@@ -1,6 +1,4 @@
 // Avatar.tsx
-import React, { useCallback } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -8,14 +6,20 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import Link from "next/link";
-import { User } from "@/data/users";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 const SearchNav = () => {
   const pathname = usePathname();
   const router = useRouter();
 
   const searchParams = useSearchParams();
+
+  interface MenuItem {
+    label: string;
+    href: string;
+    route: string;
+  }
 
   const menuItems = [
     { label: "Posts", href: "posts", route: `/search` },
@@ -53,7 +57,10 @@ const SearchNav = () => {
     [searchParams],
   );
 
-  const handelOnClick = (e, item) => {
+  const handelOnClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    item: MenuItem,
+  ) => {
     e.preventDefault();
     router.push(item.route + "?" + createQueryString("type", item.href));
   };

@@ -1,8 +1,7 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { CircleX } from "lucide-react";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface TagsSelectProps {
   className?: string;
@@ -20,12 +19,12 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
   value,
   ...props
 }) => {
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const MAX_TAGS = maxTags || 25;
   // Toggles selected tags in/out of array
-  const toggleTag = (e, tag) => {
+  const toggleTag = (e: React.MouseEvent<HTMLButtonElement>, tag: string) => {
     e.preventDefault();
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
@@ -36,13 +35,12 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
       }
     }
   };
-
   // Set selectedTags from props.value on mount
   useEffect(() => {
     if (value) {
       setSelectedTags(value);
     }
-  }, []);
+  }, [value]);
 
   // Use useEffect to log state changes
   useEffect(() => {
@@ -52,7 +50,7 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
   }, [selectedTags]);
 
   // Loop through each category and render filtered tags
-  const renderTags = (categories) => {
+  const renderTags = (categories: Category[]) => {
     return (
       <div className="mb-4 space-y-5  pt-5">
         <div className="flex flex-wrap gap-2">
@@ -62,12 +60,14 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
                 className="rounded-full h-8"
                 key={category.id}
                 variant={
-                  selectedTags.includes(category.id) ? "default" : "outline"
+                  selectedTags.includes(String(category.id))
+                    ? "default"
+                    : "outline"
                 }
-                onClick={(e) => toggleTag(e, category.id)}
+                onClick={(e) => toggleTag(e, String(category.id))}
               >
                 {category.title}
-                {selectedTags.includes(category.id) && (
+                {selectedTags.includes(String(category.id)) && (
                   <CircleX className="w-4 h-4 ml-2" />
                 )}
               </Button>
@@ -99,7 +99,13 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
 
 export default TagsSelect;
 
-const SearchInput = ({ searchQuery, setSearchQuery }) => (
+const SearchInput = ({
+  searchQuery,
+  setSearchQuery,
+}: {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+}) => (
   <div className="mb-2">
     <Input
       placeholder="Search for topics"

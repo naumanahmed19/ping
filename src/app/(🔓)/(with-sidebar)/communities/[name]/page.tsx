@@ -1,11 +1,11 @@
-import { ContainerContent } from "@/components/base/container-content";
+import { getCommuity } from "@/actions/get-community";
 import { Container } from "@/components/base/container";
-import CommunityHeader from "@/components/community/community-header";
-import { useGetCommunity } from "@/queries/communities.query";
-import { Community } from "@/types/Community";
 import { ContainerAside } from "@/components/base/container-aside";
+import { ContainerContent } from "@/components/base/container-content";
 import { PostsRightSidebar } from "@/components/posts/PostsRightSidebar";
-import CommunityPosts from "@/components/community/community-posts";
+import { Community } from "@/types/Community";
+import { CommunityHeader } from "../_components/community-header";
+import { CommunityPosts } from "../_components/community-posts";
 
 type Props = {
   params: { name: string };
@@ -17,11 +17,12 @@ type Props = {
  * @returns Metadata object for the community page.
  */
 export async function generateMetadata({ params }: Props) {
-  const community: Community = await useGetCommunity(params.name);
+  const community = await getCommuity(params?.name);
   return {
-    title: community.name,
+    title: community?.name,
+
     openGraph: {
-      images: [community.icon_img],
+      images: [community?.icon_img],
     },
   };
 }
@@ -32,13 +33,14 @@ export async function generateMetadata({ params }: Props) {
  * @returns JSX.Element representing the community page.
  */
 export default async function CommunityPage({ params }: Props) {
-  const community: Community = await useGetCommunity(params.name);
+  const community: Community = await getCommuity(params.name);
+
   return (
     <Container>
       <CommunityHeader community={community} />
       <div className="flex items-start justify-between gap-4">
         <ContainerContent>
-          <CommunityPosts id={community.id} />
+          <CommunityPosts id={community?.id} />
         </ContainerContent>
         <ContainerAside>
           <PostsRightSidebar />

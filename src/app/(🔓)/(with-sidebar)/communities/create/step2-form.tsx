@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { useStepper } from "@/components/ui/stepper";
+import InputFileUpload from "@/components/ui/fileUpload/input-file-upload";
 import {
   Form,
   FormControl,
@@ -12,10 +12,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { StepperFormActions } from "./stepper-form-actions";
-import InputFileUpload from "@/components/ui/fileUpload/input-file-upload";
+import { useStepper } from "@/components/ui/stepper";
 import { useAtom } from "jotai";
 import { step2State } from "./atoms/formAtoms";
+import { StepperFormActions } from "./stepper-form-actions";
 
 const FormSchema = z.object({
   icon_img: z.string().min(1, "Icon is required"),
@@ -35,8 +35,8 @@ export function SecondStepForm() {
   // Handle file change
   function handleFileChange(result: string, fieldName: string) {
     setFormState({ ...formState, [fieldName]: result });
-    form.setValue(fieldName, result);
-    form.clearErrors(fieldName);
+    form.setValue(fieldName as "icon_img" | "banner_img", result);
+    form.clearErrors(fieldName as "icon_img" | "banner_img");
   }
 
   // Handle form submission
@@ -62,7 +62,7 @@ export function SecondStepForm() {
                   placeholder="Community Icon"
                   {...field}
                   accept="image/*"
-                  onChange={(e) => handleFileChange(e, "icon_img")}
+                  onChange={(e: string) => handleFileChange(e, "icon_img")}
                 />
               </FormControl>
 
@@ -80,7 +80,7 @@ export function SecondStepForm() {
                   placeholder="Banner Icon"
                   {...field}
                   accept="image/*"
-                  onChange={(e) => handleFileChange(e, "banner_img")}
+                  onChange={(e: string) => handleFileChange(e, "banner_img")}
                 />
               </FormControl>
 

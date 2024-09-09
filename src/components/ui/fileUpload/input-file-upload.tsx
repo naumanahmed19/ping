@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import { Image } from "lucide-react"; // Assuming you are using lucide-react icons
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Image } from "lucide-react"; // Assuming you are using lucide-react icons
+import React from "react";
 
 const InputFileUpload = ({ ...props }) => {
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -17,7 +17,9 @@ const InputFileUpload = ({ ...props }) => {
     }
   }
 
-  const triggerFileInput = (e) => {
+  const triggerFileInput = (
+    e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>,
+  ) => {
     e.preventDefault();
     e.stopPropagation();
     document.getElementById(props.name)?.click();

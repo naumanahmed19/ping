@@ -12,11 +12,11 @@ export const step2State = atom({
 });
 
 export const step3State = atom({
-  topics: [],
+  topics: [] as number[],
 });
 
 export const step4State = atom({
   privacy: "public",
   mature: false,
-  terms: undefined,
+  terms: false,
 });

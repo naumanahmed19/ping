@@ -5,21 +5,23 @@
  */
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
 import { Toggle } from "@/components/ui/toggle";
-import { Star, StarIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Star } from "lucide-react";
+import { useState } from "react";
 
-export default function Component({ className }) {
+interface ComponentProps {
+  className?: string;
+}
+export default function Component({ className }: ComponentProps) {
   const [isFavourite, setIsFavourite] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const handleFavouriteClick = (e) => {
+  const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
 

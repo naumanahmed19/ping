@@ -1,13 +1,8 @@
 "use client";
 
+import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import * as React from "react";
-import {
-  CaretSortIcon,
-  CheckIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons";
 
-import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,65 +15,23 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { communities } from "@/data/communities";
-
-const yourCommunities = communities.map((c) => ({
-  id: c.id,
-  label: c.title,
-  value: c.name,
-  image: c.icon_img,
-}));
-
-console.log(yourCommunities);
-
-const groups = [
-  {
-    label: "Your profile",
-    teams: [
-      {
-        label: "@doe-joe",
-        value: "profile",
-      },
-    ],
-  },
-  {
-    label: "Your communities",
-    teams: yourCommunities,
-  },
-];
-
-type Team = (typeof groups)[number]["teams"][number] & {
-  id: string;
-  image?: string;
-};
+import { cn } from "@/lib/utils";
+import { useGetUserCommunities } from "@/queries/users.query";
+import { Community } from "@/types/Community";
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
 >;
 
-interface TeamSwitcherProps extends PopoverTriggerProps {}
+interface TeamSwitcherProps extends PopoverTriggerProps {
+  value?: number;
+  onSelect?: (team: any) => void;
+  className?: string;
+}
 
 export default function TeamSwitcher({
   className,
@@ -90,8 +43,33 @@ export default function TeamSwitcher({
   // const [selectedTeam, setSelectedTeam] = React.useState<Team>(
 
   // )
+  const { data: communities, isLoading, isError } = useGetUserCommunities(0);
 
-  const selectedTeam = yourCommunities.find((c) => c.id === value);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const selectedTeam = communities.find((c: Community) => c.id === value);
+
+  const groups = [
+    {
+      label: "Your profile",
+      teams: [
+        {
+          label: "@doe-joe",
+          value: "profile",
+        },
+      ],
+    },
+    {
+      label: "Your communities",
+      teams: communities,
+    },
+  ];
+
+  type Team = (typeof groups)[number]["teams"][number] & {
+    id: string;
+    image?: string;
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -124,7 +102,7 @@ export default function TeamSwitcher({
             <CommandEmpty>No team found.</CommandEmpty>
             {groups.map((group) => (
               <CommandGroup key={group.label} heading={group.label}>
-                {group.teams.map((team) => (
+                {group.teams.map((team: Team) => (
                   <CommandItem
                     value={team.label}
                     key={team.value}
@@ -132,7 +110,9 @@ export default function TeamSwitcher({
                       // setSelectedTeam(team)
                       setOpen(false);
 
-                      onSelect(team);
+                      if (onSelect) {
+                        onSelect(team);
+                      }
                     }}
                     className="text-sm"
                   >

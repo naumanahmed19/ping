@@ -25,7 +25,6 @@ export interface Profile {
 export interface User {
   id: number;
   name: string;
-  created_at: number;
   link_karma: number;
   comment_karma: number;
   is_gold: boolean;

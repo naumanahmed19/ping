@@ -1,23 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import { MoreHorizontal, SquarePen } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipTrigger,
   TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Message } from "@/data/chats";
-import ChatSidebarFilters from "./chat-sidebar-filters";
+import { cn } from "@/lib/utils";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+import { Message } from "../../data/chats";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
@@ -27,7 +25,7 @@ interface SidebarProps {
     name: string;
     messages: Message[];
     avatar: string;
-    variant: "grey" | "ghost";
+    variant: "secondary" | "ghost";
   }[];
   onClick?: () => void;
   isMobile: boolean;
@@ -76,7 +74,7 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                     className={cn(
                       buttonVariants({ variant: link.variant, size: "icon" }),
                       "h-11 w-11 md:h-16 md:w-16",
-                      link.variant === "grey" &&
+                      link.variant === "secondary" &&
                         "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
                     )}
                   >
@@ -105,8 +103,8 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
               key={index}
               href="#"
               className={cn(
-                buttonVariants({ variant: link.variant, size: "xl" }),
-                link.variant === "grey" &&
+                buttonVariants({ variant: link.variant, size: "lg" }),
+                link.variant === "secondary" &&
                   "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white shrink",
                 "justify-start gap-4 py-2 px-1",
               )}
@@ -118,7 +116,8 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                 <span>{link.name}</span>
                 {link.messages.length > 0 && (
                   <span className="text-zinc-400 text-xs truncate ">
-                    {link.messages}
+                    {link?.messages &&
+                      link.messages[link.messages.length - 1].message}
                     {/* {
                       link.messages[link.messages.length - 1].name?.split(
                         " ",

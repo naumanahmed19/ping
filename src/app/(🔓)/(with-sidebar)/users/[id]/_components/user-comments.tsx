@@ -4,8 +4,8 @@ import { BaseDataPlaceholder } from "@/components/base/base-data-placeholder";
 import InfiniteScroll from "@/components/base/infinite-scroll";
 
 import { useGetUserComments } from "@/queries/users.query";
+import { Comment } from "@/types/Comment";
 import CommentList from "./user-comments-list";
-
 export default function UserComments({ userId }: { userId: number }) {
   const query = useGetUserComments(userId);
 
@@ -19,8 +19,9 @@ export default function UserComments({ userId }: { userId: number }) {
       >
         <InfiniteScroll
           query={query}
-          key="posts"
-          renderItem={(comments) => <CommentList comments={comments} />}
+          renderItem={(comments: Comment[]) => (
+            <CommentList comments={comments} />
+          )}
           placeholderVariant="avatar-list"
         />
       </BaseDataPlaceholder>

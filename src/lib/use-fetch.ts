@@ -6,7 +6,7 @@ type FetchOptions = {
   headers?: Record<string, string>;
 };
 
-export const useFetch = async (url: string, options: FetchOptions = {}) => {
+export const getFetch = async (url: string, options: FetchOptions = {}) => {
   const response = await fetch(url, {
     ...options,
     headers: {
@@ -26,17 +26,25 @@ export const useFetch = async (url: string, options: FetchOptions = {}) => {
   return response.json();
 };
 
-export const useGet = (url: string, params?: Record<string, any>) => {
+export const get = (url: string, params?: Record<string, any>) => {
   const queryString = params
     ? "?" + new URLSearchParams(params).toString()
     : "";
 
-  return useFetch(url + queryString);
+  return getFetch(url + queryString);
 };
 
-export const useServerGet = (url: string, params?: Record<string, any>) => {
+export const textx = (url: string, params?: Record<string, any>) => {
+  const queryString = params
+    ? "?" + new URLSearchParams(params).toString()
+    : "";
+
+  return getFetch(url + queryString);
+};
+
+export const serverGet = (url: string, params?: Record<string, any>) => {
   const fullUrl = process.env.BASE_URL + url;
-  return useGet(fullUrl, params)
+  return get(fullUrl, params)
     .then((data) => data)
     .catch((error) => {
       redirect("/404");
@@ -44,27 +52,27 @@ export const useServerGet = (url: string, params?: Record<string, any>) => {
 };
 
 export const usePost = (url: string, data: any) => {
-  return useFetch(url, {
+  return getFetch(url, {
     method: "POST",
     body: JSON.stringify(data),
   });
 };
 
 export const usePut = (url: string, data: any) => {
-  return useFetch(url, {
+  return getFetch(url, {
     method: "PUT",
     body: JSON.stringify(data),
   });
 };
 
 export const useDelete = (url: string) => {
-  return useFetch(url, {
+  return getFetch(url, {
     method: "DELETE",
   });
 };
 
 export const usePatch = (url: string, data: any) => {
-  return useFetch(url, {
+  return getFetch(url, {
     method: "PATCH",
     body: JSON.stringify(data),
   });

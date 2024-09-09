@@ -1,17 +1,16 @@
 // CommentList.js
-import React from 'react';
-import Comment from './Comment'; // Import the Comment component
+import { Comment as CommentType } from "@/types/Comment";
+import Comment from "./Comment";
+// Import the Comment component
 
+const CommentList = ({ comments }: { comments: CommentType[] }) => {
+  return (
+    <div className="space-y-8">
+      {comments.map((comment: CommentType, index) => (
+        <Comment key={comment.id} index={index} reply={comment} isOpen={true} />
+      ))}
+    </div>
+  );
+};
 
-
-const CommentList = ({ comments }) => {
-    return (
-        <div className="space-y-8">
-            {comments.map((comment, index) => (
-                <Comment key={index} index={index} {...comment} isOpen={true} />
-            ))}
-        </div>
-    );
-  };
-  
-  export default CommentList;
+export default CommentList;

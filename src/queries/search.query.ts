@@ -1,5 +1,5 @@
 import { SearchParams } from "@/lib/schemas/search.schema";
-import { useGet } from "@/lib/use-fetch";
+import { get } from "@/lib/use-fetch";
 import { useQuery } from "@tanstack/react-query";
 
 const BASE_URL = "/api/search";
@@ -7,7 +7,7 @@ const QUERY_KEY = "search";
 
 export const useSearchSuggestions = (searchTerm: string) => {
   return useQuery({
-    queryFn: () => useGet(`${BASE_URL}/suggestions`, { q: searchTerm }),
+    queryFn: () => get(`${BASE_URL}/suggestions`, { q: searchTerm }),
     queryKey: [QUERY_KEY, searchTerm],
     // enabled: !!q,
   });
@@ -19,10 +19,9 @@ export const useSearchSuggestions = (searchTerm: string) => {
  *
  */
 export const useSearch = (params: SearchParams) => {
-  console.log("params", params);
   return useQuery({
     queryKey: [QUERY_KEY, params],
-    queryFn: () => useGet(BASE_URL, params),
+    queryFn: () => get(BASE_URL, params),
     enabled: !!params,
   });
 };

@@ -1,38 +1,30 @@
 // Comment.js
 "use client";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import {
-  BellIcon,
-  ChatBubbleIcon,
-  MinusCircledIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { MinusCircledIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 
-import CommentActions from "./CommentActions";
-import ReplyForm from "./ReplyForm";
-import { MainThreadLine, BranchThreadLine } from "./ThreadLines";
+import { Comment as CommentType } from "@/types/Comment";
+import { CommentActions } from "./CommentActions";
 import CommentHeader from "./CommentHeader";
-const Comment = ({ key, index, author, time, content, replies, isOpen }) => {
+import ReplyForm from "./ReplyForm";
+import { BranchThreadLine, MainThreadLine } from "./ThreadLines";
+
+interface CommentProps {
+  index: number;
+  reply: CommentType;
+  isOpen: boolean;
+}
+
+const Comment = ({ index, reply, isOpen }: CommentProps) => {
+  const { author, content, time, replies } = reply;
+
   const [showReplies, setShowReplies] = useState(false);
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isExpanded, setIsExpanded] = useState(isOpen);
 
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
-  const handleShowReplyForm = (e) => {
+  const handleShowReplyForm = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
     setShowReplyForm(!showReplyForm);
@@ -111,16 +103,14 @@ const Comment = ({ key, index, author, time, content, replies, isOpen }) => {
 
         {showReplies && replies && replies.length > 0 && (
           <>
-            {replies.map((reply, i) => (
-              <div id="comment-children" className="contents bg-background">
+            {replies.map((reply: CommentType, i: number) => (
+              <div
+                key={reply.id}
+                id="comment-children"
+                className="contents bg-background"
+              >
                 <BranchThreadLine isLast={i === replies.length - 1} />
-                <Comment
-                  key={i}
-                  {...reply}
-                  index={i}
-                  isOpen={true}
-                  isNested={true}
-                />
+                <Comment reply={reply} index={i} isOpen={true} />
               </div>
             ))}
           </>

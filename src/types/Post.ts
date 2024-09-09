@@ -5,8 +5,8 @@ export type Post = {
   title: string;
   content: string;
   image: string | null;
-  aspectRatio?: "portrait" | "square";
-  community: Community;
+  aspectRatio?: string | null;
+  community?: Community;
   votes: number;
   comments: number;
   isAwarded: boolean;
@@ -14,4 +14,5 @@ export type Post = {
   created_at?: string;
   tags?: string[]; // Add tags property
   flair?: string; // Add flair property
+  communityId: number;
 };

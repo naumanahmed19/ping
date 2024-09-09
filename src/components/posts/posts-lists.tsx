@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
-import { Post } from "@/data/posts";
 import PostTemplate from "@/components/posts/PostTemplate";
-import { cn } from "@/lib/utils";
-import PostsFilter from "./posts-filter";
-import { PostContainer } from "../base/post-container";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import React from "react";
+
+import { Post } from "@/types/Post";
+import { PostContainer } from "../base/post-container";
 
 interface PostsList {
   className?: string;

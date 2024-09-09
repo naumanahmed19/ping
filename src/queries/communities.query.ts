@@ -1,4 +1,4 @@
-import { useGet, useServerGet } from "@/lib/use-fetch";
+import { get, serverGet } from "@/lib/use-fetch";
 import {
   useInfiniteQuery,
   UseInfiniteQueryResult,
@@ -10,14 +10,14 @@ const BASE_URL = "/api/communities";
 
 export const useGetPopularCommunities = (): UseQueryResult<any, unknown> => {
   return useQuery({
-    queryFn: () => useGet(`${BASE_URL}/popular`),
+    queryFn: () => get(`${BASE_URL}/popular`),
     queryKey: ["communities-popular"],
   });
 };
 
 export const useGetCommunities = (): UseInfiniteQueryResult<any, unknown> => {
   return useInfiniteQuery({
-    queryFn: ({ pageParam = 0 }) => useGet(`${BASE_URL}/?page=${pageParam}`),
+    queryFn: ({ pageParam = 0 }) => get(`${BASE_URL}/?page=${pageParam}`),
     queryKey: ["communities-all"],
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -25,7 +25,7 @@ export const useGetCommunities = (): UseInfiniteQueryResult<any, unknown> => {
 };
 
 export const useGetCommunity = (name?: string): Promise<any> => {
-  return useServerGet(`${BASE_URL}/${name}`);
+  return serverGet(`${BASE_URL}/${name}`);
 };
 
 export const useGetCommunityPosts = (
@@ -33,7 +33,7 @@ export const useGetCommunityPosts = (
 ): UseInfiniteQueryResult<any, unknown> => {
   return useInfiniteQuery({
     queryFn: ({ pageParam = 0 }) =>
-      useGet(`${BASE_URL}/${id}/posts?page=${pageParam}`),
+      get(`${BASE_URL}/${id}/posts?page=${pageParam}`),
     queryKey: ["community-posts", id],
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -41,5 +41,5 @@ export const useGetCommunityPosts = (
 };
 
 export const useCreateCommunity = (name?: string): Promise<any> => {
-  return useServerGet(`${BASE_URL}/${name}`);
+  return serverGet(`${BASE_URL}/${name}`);
 };

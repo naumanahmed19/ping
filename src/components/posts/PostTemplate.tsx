@@ -1,10 +1,11 @@
-import * as React from "react";
-import Image from "next/image";
-import PostHeader from "./PostHeader";
-import PostActions from "./PostActions";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import * as React from "react";
+
+import { Post } from "@/types/Post";
 import { Badge } from "../ui/badge";
-import { Post } from "@/data/posts";
+import PostActions from "./PostActions";
+import PostHeader from "./PostHeader";
 
 interface PostTemplateProps {
   post: Post;

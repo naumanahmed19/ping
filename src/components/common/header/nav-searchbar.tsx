@@ -25,7 +25,7 @@ import { useAtom } from "jotai";
 import PostsSuggestions from "../../search/posts-suggestions";
 import UserWidget from "../../user/user-widget";
 
-export default function NavSearchBar({ className }: { className: string }) {
+export default function NavSearchBar({ className }: { className?: string }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [searchQuery, setSearchQuery] = useAtom(searchState);
@@ -82,16 +82,16 @@ export default function NavSearchBar({ className }: { className: string }) {
         type: "posts",
       });
     }
-  }, [pathname]);
+  }, [searchParams, pathname]);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const query = e.target.value;
-      createQueryString("q", e.target.value);
+      const query = e.currentTarget.value;
+      createQueryString("q", query);
 
       setSearchQuery({
         ...searchQuery,
-        q: searchTerm,
+        q: query,
       });
       router.push(`/search?q=${query}`);
 
@@ -99,7 +99,7 @@ export default function NavSearchBar({ className }: { className: string }) {
     }
   };
 
-  function handleOnSelect(chip) {
+  function handleOnSelect(chip: { title: string }) {
     setSearchTerm(chip.title);
     setIsOpen(false);
   }
@@ -147,7 +147,6 @@ export default function NavSearchBar({ className }: { className: string }) {
                     isLoading={isLoading}
                     isError={isError}
                     variant="avatar-list"
-                    emptyVariant="sm"
                   >
                     {suggestions?.users?.length > 0 && (
                       <CommandGroup heading="People">

@@ -29,7 +29,6 @@ import {
 import { StepperFormActions } from "./stepper-form-actions";
 
 import { useCreateCommunity } from "@/queries/communities.query";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
@@ -50,7 +49,7 @@ export function FourthStepForm() {
   const { nextStep } = useStepper();
 
   const createCommunity = useCreateCommunity();
-  const mutation = useMutation({ mutationFn: createCommunity });
+  // const mutation = useMutation({ mutationFn: createCommunity });
 
   /**
    * Initializes the form with the specified default values and resolver.
@@ -69,22 +68,26 @@ export function FourthStepForm() {
    * @param _data - The data submitted from the form.
    */
   function onSubmit(_data: z.infer<typeof FormSchema>) {
-    setStep4(_data);
+    setStep4({
+      privacy: _data.privacy,
+      mature: _data.mature,
+      terms: _data.terms,
+    });
     const allData = { ...step1, ...step2, ...step3, ..._data };
 
-    mutation.mutate(allData, {
-      onSuccess: (e) => {
-        toast({ title: "Form submitted successfully!" });
-        router.push("/communities/1");
-      },
-      onError: (error) => {
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem with your request.",
-        });
-      },
-    });
+    // mutation.mutate(allData, {
+    //   onSuccess: (e) => {
+    //     toast({ title: "Form submitted successfully!" });
+    //     router.push("/communities/1");
+    //   },
+    //   onError: (error) => {
+    //     toast({
+    //       variant: "destructive",
+    //       title: "Uh oh! Something went wrong.",
+    //       description: "There was a problem with your request.",
+    //     });
+    //   },
+    // });
   }
 
   return (

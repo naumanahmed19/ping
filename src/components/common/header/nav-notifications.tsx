@@ -16,6 +16,7 @@ import { NotificationsListItem } from "@/app/(🔓)/(with-sidebar)/notifications
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/use-toast";
 import { useLatestNotifications } from "@/queries/notifications.query";
+import { Notification as NotificationType } from "@/types/Notification";
 import { LoaderCircle } from "lucide-react";
 
 export default function NavNotifications() {
@@ -82,8 +83,9 @@ function Content() {
         </Button>
       </div>
       <ScrollArea className="h-[300px] px-3 ">
-        {notifications?.map((notification: Notification) => (
+        {notifications?.map((notification: NotificationType) => (
           <NotificationsListItem
+            key={notification?.id}
             className="rounded-md p-2 mt-1"
             variant="sm"
             notification={notification}

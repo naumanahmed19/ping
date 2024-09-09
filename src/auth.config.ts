@@ -45,7 +45,7 @@ export const authConfig = {
       const isProtectedRoute = protectedRoutes.includes(pathname);
 
       if (isApiAuthRoute) {
-        return null;
+        return false;
       }
 
       if (isAuthRoute) {
@@ -65,7 +65,7 @@ export const authConfig = {
   providers: [
     Google,
     Credentials({
-      async authorize(credentials) {
+      async authorize(credentials): Promise<any> {
         const parsedCredentials = LoginSchema.safeParse(credentials);
 
         if (parsedCredentials.success) {

@@ -3,20 +3,19 @@
  * @see https://v0.dev/t/mf9HSg9boUM
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Circle, Award } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import CommunityHoverCard from "@/components//community/community-hover-card";
-export default function Component({ community }) {
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Community } from "@/types/Community";
+import { Award, Circle } from "lucide-react";
+export default function Component({ community }: { community: Community }) {
   return (
     <Card className="w-full max-w-sm rounded-lg overflow-hidden dtransition-all duration-300 hover:shadow-2xl">
       <CardContent className="p-6 bg-background">
         <CommunityHoverCard community={community}>
-          <>
-            <h3 className="text-xl font-bold mb-2">{community.text}</h3>
-            <h4 className="text-sm font-bold mb-2">{community.title}</h4>
-          </>
+          <h3 className="text-xl font-bold mb-2">{community.name}</h3>
+          <h4 className="text-sm font-bold mb-2">{community.title}</h4>
         </CommunityHoverCard>
         <div className="flex items-center gap-2 mb-4">
           <span className="text-sm text-muted-foreground">
@@ -36,7 +35,7 @@ export default function Component({ community }) {
           </div>
           <Separator orientation="vertical" />
           <div className="center gap-2">
-            <div className="text-lg">{community.online}</div>
+            <div className="text-lg">{community.online_members}</div>
             <span className="text-sm text-muted-foreground">
               <div className="flex items-center">
                 <Circle

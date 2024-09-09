@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -8,8 +6,9 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { User } from "@/types/User";
 import Link from "next/link";
-import { User } from "@/data/users";
+import { usePathname } from "next/navigation";
 
 const UserNav = ({ user }: { user: User }) => {
   const pathname = usePathname();

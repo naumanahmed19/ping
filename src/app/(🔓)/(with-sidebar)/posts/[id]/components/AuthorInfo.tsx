@@ -1,8 +1,15 @@
-import React from 'react';
-import Link from 'next/link'; // Assuming Link is from next/link
-import { PlusCircledIcon } from '@radix-ui/react-icons';
+import { PlusCircledIcon } from "@radix-ui/react-icons";
+import Link from "next/link"; // Assuming Link is from next/link
 
-const AuthorInfo = ({ author, time, isAuthor }) => (
+type AuthorInfoProps = {
+  author: {
+    name: string;
+  };
+  time: string;
+  isAuthor: boolean;
+};
+
+const AuthorInfo = ({ author, time, isAuthor }: AuthorInfoProps) =>
   isAuthor ? (
     <div className="flex relative items-center justify-start mx-2 md:mx-3">
       <h4 className="text-xs font-semibold">{author.name}</h4>
@@ -15,7 +22,6 @@ const AuthorInfo = ({ author, time, isAuthor }) => (
       </div>
       <Link href="/"> {author.name}</Link>
     </div>
-  )
-);
+  );
 
 export default AuthorInfo;

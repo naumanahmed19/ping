@@ -12,7 +12,9 @@
     "banner_img": "/images/cover1.jpg",
     "public_description": "A place to share and discuss the latest technology news and trends.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 5000,
+    "rules": "No spam or self-promotion. Be respectful to others."
   },
   {
     "id": 2,
@@ -27,7 +29,9 @@
     "banner_img": "/images/cover2.jpg",
     "public_description": "Everything and anything related to gaming.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 12000,
+    "rules": "No cheating or hacking. Respect other players."
   },
   {
     "id": 3,
@@ -42,7 +46,9 @@
     "banner_img": "/images/cover3.jpg",
     "public_description": "Discuss and explore scientific research and findings.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 8000,
+    "rules": "Cite your sources. Stay on topic."
   },
   {
     "id": 4,
@@ -51,13 +57,15 @@
     "description": "A community dedicated to discussing movies, movie news, and trailers.",
     "subscribers": 22000000,
     "online_members": 64000,
-    "rank": 12,
+    "rank": 10,
     "created_at": "2023-03-01T12:00:00Z",
     "icon_img": "/images/c4.jpg",
     "banner_img": "/images/cover4.jpg",
-    "public_description": "Join the discussion on your favorite movies and discover new ones.",
+    "public_description": "Discuss and share your favorite movies and trailers.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   },
   {
     "id": 5,
@@ -72,7 +80,9 @@
     "banner_img": "/images/cover5.jpg",
     "public_description": "For book lovers to discuss and share their favorite books.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   },
   {
     "id": 6,
@@ -87,7 +97,9 @@
     "banner_img": "/images/cover6.jpg",
     "public_description": "Explore and discuss everything related to RAML and API development.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   },
   {
     "id": 7,
@@ -102,7 +114,9 @@
     "banner_img": "/images/cover7.jpg",
     "public_description": "Join the fun in creating, sharing, and enjoying the latest memes!",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   },
   {
     "id": 8,
@@ -117,7 +131,9 @@
     "banner_img": "/images/cover8.jpg",
     "public_description": "Capture and share your best shots.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   },
   {
     "id": 9,
@@ -132,7 +148,9 @@
     "banner_img": "/images/cover9.jpg",
     "public_description": "Share your love of cooking and discover new recipes.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   },
   {
     "id": 10,
@@ -147,6 +165,8 @@
     "banner_img": "/images/cover10.jpg",
     "public_description": "Discuss fitness goals, workout tips, and more.",
     "type": "public",
-    "over_18": false
+    "over_18": false,
+    "members": 15000,
+    "rules": "No spoilers. Be respectful of others' opinions."
   }
 ]

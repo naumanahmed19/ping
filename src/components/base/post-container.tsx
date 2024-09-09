@@ -1,6 +1,5 @@
-"use client";
-
 import { useRouter } from "next/navigation";
+import React from "react";
 
 export interface PostContainerProps {
   children?: React.ReactNode;
@@ -8,28 +7,25 @@ export interface PostContainerProps {
   route?: string;
 }
 
-export function PostContainer({
+export const PostContainer: React.FC<PostContainerProps> = ({
   children,
   className,
   route = "",
-}: PostContainerProps) {
+}) => {
   const router = useRouter();
 
-  const handleClick = (e, route: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>, route: string) => {
     e.stopPropagation();
     e.preventDefault();
     router.push(route); // Navigate to the post page
   };
 
-  function Loading() {
-    return <h2>🌀 Loading...</h2>;
-  }
   return (
     <div
       onClick={(e) => handleClick(e, route)}
-      className="relative p-3 rounded-md cursor-pointer transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+      className={`relative p-3 rounded-md cursor-pointer transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${className}`}
     >
       {children}
     </div>
   );
-}
+};

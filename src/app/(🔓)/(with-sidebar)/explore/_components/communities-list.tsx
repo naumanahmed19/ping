@@ -22,7 +22,9 @@ export default function CommmunitesList() {
         <InfiniteScroll
           query={query}
           key="posts"
-          renderItem={(communities) => <List communities={communities} />}
+          renderItem={(communities: Community[]) => (
+            <List communities={communities} />
+          )}
           placeholderVariant="avatar-list"
         />
       </BaseDataPlaceholder>
@@ -30,11 +32,14 @@ export default function CommmunitesList() {
   );
 }
 
-function List({ communities }) {
+function List({ communities }: { communities: Community[] }) {
   return (
     <>
       {communities.map((community: Community) => (
-        <Card className="w-full max-w-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl">
+        <Card
+          key={community.id}
+          className="w-full max-w-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl"
+        >
           <CardContent className="p-4 bg-background">
             <Link href={`/communities/${community.name}`}>
               <div className="flex justify-between space-x-4">

@@ -1,8 +1,9 @@
+import { Comment as CommentType } from "@/types/Comment";
 import { useState } from "react";
 import CommentList from "./comment-list";
 import ReplyForm from "./reply-form";
 
-const Comments = ({ comments }) => {
+const Comments = ({ comments }: { comments: CommentType[] }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
 
   return (

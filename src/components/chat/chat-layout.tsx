@@ -1,19 +1,19 @@
 "use client";
 
-import { userData } from "@/data/chats";
-import React, { useEffect, useState } from "react";
+import communities from "@/../public/data/communities.json";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
-import { Sidebar } from "./chat-sidebar";
+import { useEffect, useState } from "react";
+import { userData } from "../../data/chats";
 import { Chat } from "./chat";
-import { communitiesData } from "@/data";
+import { Sidebar } from "./chat-sidebar";
 
 interface ChatLayoutProps {
-  defaultLayout: number[] | undefined;
+  defaultLayout?: number[];
   defaultCollapsed?: boolean;
   navCollapsedSize: number;
 }
@@ -23,8 +23,8 @@ export function ChatLayout({
   defaultCollapsed = false,
   navCollapsedSize,
 }: ChatLayoutProps) {
-  const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
-  const [selectedUser, setSelectedUser] = React.useState(userData[0]);
+  const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
+  const [selectedUser, setSelectedUser] = useState(userData[0]);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function ChatLayout({
       <ResizablePanel
         defaultSize={defaultLayout[0]}
         collapsedSize={navCollapsedSize}
-        collapsible={true}
+        collapsible
         minSize={isMobile ? 0 : 24}
         maxSize={isMobile ? 8 : 30}
         onCollapse={() => {
@@ -79,12 +79,14 @@ export function ChatLayout({
       >
         <Sidebar
           isCollapsed={isCollapsed || isMobile}
-          links={communitiesData.map((c) => ({
-            name: c.name,
-            messages: c.title ?? [],
-            avatar: c.icon_img,
-            variant: selectedUser.name === c.name ? "grey" : "ghost",
-          }))}
+          links={
+            communities.map((c) => ({
+              name: c.name,
+              messages: c.title ?? [],
+              avatar: c.icon_img,
+              variant: selectedUser.name === c.name ? "grey" : "ghost",
+            })) as []
+          }
           isMobile={isMobile}
         />
       </ResizablePanel>
