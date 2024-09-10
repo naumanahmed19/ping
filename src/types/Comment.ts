@@ -3,7 +3,6 @@ import { User } from "./User";
 export interface Comment {
   id: number;
   postId: number;
-  communityId: number;
   userId: number;
   time: string;
   content: string;

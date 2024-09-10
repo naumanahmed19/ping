@@ -1,5 +1,4 @@
 "use server";
-import { logout } from "@/actions/logout";
 import { useAuth } from "@/actions/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SignOut } from "../auth/signout-button";
+import { SignOutButton } from "../auth/signout-button";
 import { UserMenu } from "./user-menu";
 
 export async function UserNav() {
@@ -36,10 +35,9 @@ export async function UserNav() {
           <UserMenu />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logout}>Sign Out</DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <SignOut />
+          <SignOutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

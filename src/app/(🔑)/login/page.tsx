@@ -1,5 +1,6 @@
-import GoogleAuthButton from "@/components/common/auth/googe-auth-button";
-import SignInForm from "@/components/common/auth/sign-in";
+import SignInForm from "@/components/common/auth/signin-form";
+import { Social } from "@/components/common/auth/social";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,17 +23,22 @@ const SignInPage = () => {
         </CardHeader>
         <CardContent className="grid gap-4">
           <SignInForm />
-          <GoogleAuthButton />
+          {/* <GoogleAuthButton /> */}
+          <Social />
 
           <div className="flex justify-between mt-4">
-            <Button variant="ghost">Forgot password?</Button>
+            <Button asChild variant="ghost">
+              <Link href="/forgot-password" className="underline">
+                Forgot password?
+              </Link>
+            </Button>
           </div>
         </CardContent>
       </Card>
 
       <div className="mt-4 text-center text-sm">
-        Don&apos;t have an account?{" "}
-        <Link href="/sign-up" className="underline">
+        Don&apos;t have an account?
+        <Link href="/signup" className="underline">
           Sign Up
         </Link>
       </div>

@@ -4,28 +4,20 @@ export const SIGN_UP_FORM: Field[] = [
   {
     id: "1",
     inputType: "input",
-    placeholder: "First name",
-    name: "firstname",
+    placeholder: "Name",
+    name: "name",
     type: "text",
-    flex: true,
   },
+
   {
     id: "2",
-    inputType: "input",
-    placeholder: "Last name",
-    name: "lastname",
-    type: "text",
-    flex: true,
-  },
-  {
-    id: "3",
     inputType: "input",
     placeholder: "Email",
     name: "email",
     type: "email",
   },
   {
-    id: "4",
+    id: "3",
     inputType: "input",
     placeholder: "Password",
     name: "password",
@@ -51,5 +43,15 @@ export const SIGN_IN_FORM: Field[] = [
     name: "password",
     type: "password",
     className: "grid gap-2",
+  },
+];
+
+export const FORGOT_PASSWORD_FORM: Field[] = [
+  {
+    id: "1",
+    inputType: "input",
+    placeholder: "Email",
+    name: "email",
+    type: "email",
   },
 ];

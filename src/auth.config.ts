@@ -7,22 +7,21 @@ import {
   publicRoutes,
 } from "./routes";
 
+import { SignInSchema } from "@/lib/schemas/auth.schema";
 import bcryptjs from "bcryptjs";
+import { eq } from "drizzle-orm";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
-import { LoginSchema } from "./lib/schemas/auth.schema";
+import { db } from "./db/db";
+import { users } from "./db/schema";
 
 async function getUser(email: string) {
   try {
-    const user = {
-      id: 1,
-      name: "John Doe",
-      email: "demo@ping.com",
-      password: await bcryptjs.hash("password", 10),
-    };
+    const user = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    });
     return user;
-  } catch (error) {
-    console.error("Failed to fetch user:", error);
+  } catch (error: any) {
     throw new Error("Failed to fetch user.");
   }
 }
@@ -30,6 +29,15 @@ export const authConfig = {
   pages: {
     signIn: "/login",
   },
+  events: {
+    async linkAccount({ user }) {
+      await db
+        .update(users)
+        .set({ emailVerified: new Date() })
+        .where(eq(users.email, user?.email as string));
+    },
+  },
+
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
@@ -66,7 +74,7 @@ export const authConfig = {
     Google,
     Credentials({
       async authorize(credentials): Promise<any> {
-        const parsedCredentials = LoginSchema.safeParse(credentials);
+        const parsedCredentials = SignInSchema.safeParse(credentials);
 
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;

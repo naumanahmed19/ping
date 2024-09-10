@@ -1,12 +1,12 @@
 "use client";
 
-import { login } from "@/actions/login";
+import { signup } from "@/actions/auth/signup";
 import { FormGenerator } from "@/components/common/form-generator";
 import { Button } from "@/components/ui/button";
 import { SIGN_UP_FORM } from "@/constants/auth.constants";
+import { SignUpSchema } from "@/lib/schemas/auth.schema";
 import { useState, useTransition } from "react";
 import { z } from "zod";
-import { SignUpSchema } from "./schema";
 
 type Props = {};
 
@@ -20,6 +20,7 @@ type Props = {};
 
 const SignUpForm = (props: Props) => {
   const defaultValues = {
+    name: "",
     email: "",
     password: "",
   };
@@ -38,11 +39,11 @@ const SignUpForm = (props: Props) => {
   function onSubmit(values: z.infer<typeof SignUpSchema>) {
     reset();
     startTransition(() => {
-      login(values).then((data) => {
-        if (data) {
-          console.error("Failed to login:", data.error);
+      signup(values).then((data) => {
+        if (data.success) {
+          setSuccessMessage(data.success);
+        } else {
           setErrorMessage(data.error);
-          // setErrorMessage(data.success);
         }
       });
     });
@@ -61,7 +62,7 @@ const SignUpForm = (props: Props) => {
         <div className="text-red-600 text-sm">{errorMessage}</div>
       )}
       <Button disabled={isPending} className="w-full" type="submit">
-        Sign In
+        Create Account
       </Button>
     </FormGenerator>
   );

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import GoogleAuthButton from "@/components/common/auth/googe-auth-button";
-import SignUpForm from "@/components/common/auth/sign-up";
+import SignUpForm from "@/components/common/auth/sign-up-form";
 
 export default function SingUpPage() {
   return (

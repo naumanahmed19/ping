@@ -1,6 +1,6 @@
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
-export function SignOut() {
+export function SignOutButton() {
   return (
     <form
       className="px-0 py-0"

@@ -1,20 +1,18 @@
 "use server";
 
 import { signIn } from "@/auth";
-import { LoginSchema } from "@/lib/schemas/auth.schema";
+import { SignInSchema } from "@/lib/schemas/auth.schema";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
-  const validateFields = LoginSchema.safeParse(values);
+export const login = async (values: z.infer<typeof SignInSchema>) => {
+  const validateFields = SignInSchema.safeParse(values);
 
   if (!validateFields.success) {
     return { error: "Invalid credentials." };
   }
 
   const { email, password } = validateFields.data;
-
-  console.log("Submitted", email);
 
   try {
     await signIn("credentials", { email, password });

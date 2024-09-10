@@ -1,12 +1,12 @@
 "use client";
 
-import { login } from "@/actions/login";
+import { login } from "@/actions/auth/login";
 import { Button } from "@/components/ui/button";
 import { SIGN_IN_FORM } from "@/constants/auth.constants";
+import { SignInSchema } from "@/lib/schemas/auth.schema";
 import { useState, useTransition } from "react";
 import { z } from "zod";
-import { FormGenerator } from "../../form-generator";
-import { SignInSchema } from "./schema";
+import { FormGenerator } from "../form-generator";
 
 type Props = {};
 
@@ -32,9 +32,7 @@ const SignInForm = (props: Props) => {
     startTransition(() => {
       login(values).then((data) => {
         if (data) {
-          console.error("Failed to login:", data.error);
           setErrorMessage(data.error);
-          // setErrorMessage(data.success);
         }
       });
     });
