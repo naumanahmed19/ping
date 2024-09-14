@@ -1,4 +1,5 @@
-import { NextAuthConfig } from "next-auth";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { DefaultSession, NextAuthConfig } from "next-auth";
 import {
   apiAuthRoutes,
   authRoutes,
@@ -12,19 +13,18 @@ import bcryptjs from "bcryptjs";
 import { eq } from "drizzle-orm";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import { getUser } from "./actions/get-user";
 import { db } from "./db/db";
 import { users } from "./db/schema";
 
-async function getUser(email: string) {
-  try {
-    const user = await db.query.users.findFirst({
-      where: eq(users.email, email),
-    });
-    return user;
-  } catch (error: any) {
-    throw new Error("Failed to fetch user.");
-  }
+interface Session {
+  user: {
+    id: string;
+    role: string;
+    roles: string[]; // Add the 'roles' property
+  } & DefaultSession["user"];
 }
+
 export const authConfig = {
   pages: {
     signIn: "/login",
@@ -37,8 +37,31 @@ export const authConfig = {
         .where(eq(users.email, user?.email as string));
     },
   },
+  adapter: DrizzleAdapter(db),
+  session: { strategy: "jwt" },
 
   callbacks: {
+    async jwt({ token, user }) {
+      // Add user id and roles to the token
+      if (user && user.email) {
+        const dbUser = await getUser(user.email);
+        console.log("user->>>>>>>>>>>>>>>>>>>>>>>", dbUser);
+        if (dbUser) {
+          token.id = dbUser.id;
+          token.roles = dbUser.roles;
+        }
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Add user id and roles to the session
+      if (token.id) {
+        session.user.id = token.id;
+
+        session.user.roles = token.roles;
+      }
+      return session;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const { pathname } = nextUrl;

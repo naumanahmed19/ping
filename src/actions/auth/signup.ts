@@ -4,7 +4,6 @@ import { db } from "@/db/db";
 import { users } from "@/db/schema";
 import { SignUpSchema } from "@/lib/schemas/auth.schema";
 import bcryptjs from "bcryptjs";
-
 import { eq } from "drizzle-orm";
 
 export interface CreateUserInput {
@@ -35,11 +34,15 @@ export async function signup(data: CreateUserInput) {
     }
 
     // Insert user data into the database
-    await db
+    const newUser = await db
       .insert(users)
       .values(data)
       .onConflictDoNothing({ target: users.email })
-      .returning();
+      .returning({ userId: users.id });
+
+    // await db.insert(profiles).values({ userId: newUser[0].userId }).execute();
+
+    return { success: "User created successfully", userId: newUser[0].userId };
 
     return { success: "User created successfully" };
   } catch (error: any) {

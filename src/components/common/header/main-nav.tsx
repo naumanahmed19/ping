@@ -19,6 +19,7 @@ export function MainNav({
         </Link>
       </Button>
       <NavChats />
+
       <NavNotifications />
     </nav>
   );
