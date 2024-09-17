@@ -1,5 +1,6 @@
 "use client";
 
+import { createCommunity } from "@/actions/community/create-community";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
@@ -28,7 +29,6 @@ import {
 } from "./atoms/formAtoms";
 import { StepperFormActions } from "./stepper-form-actions";
 
-import { useCreateCommunity } from "@/queries/communities.query";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
@@ -48,7 +48,7 @@ export function FourthStepForm() {
   const [step4, setStep4] = useAtom(step4State);
   const { nextStep } = useStepper();
 
-  const createCommunity = useCreateCommunity();
+  // const createCommunity = useCreateCommunity();
   // const mutation = useMutation({ mutationFn: createCommunity });
 
   /**
@@ -74,6 +74,12 @@ export function FourthStepForm() {
       terms: _data.terms,
     });
     const allData = { ...step1, ...step2, ...step3, ..._data };
+
+    createCommunity(allData).then((data) => {
+      if (data) {
+        console.log(data);
+      }
+    });
 
     // mutation.mutate(allData, {
     //   onSuccess: (e) => {

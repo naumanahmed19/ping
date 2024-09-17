@@ -19,12 +19,12 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
   value,
   ...props
 }) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<number[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const MAX_TAGS = maxTags || 25;
   // Toggles selected tags in/out of array
-  const toggleTag = (e: React.MouseEvent<HTMLButtonElement>, tag: string) => {
+  const toggleTag = (e: React.MouseEvent<HTMLButtonElement>, tag: number) => {
     e.preventDefault();
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
@@ -35,12 +35,13 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
       }
     }
   };
+
   // Set selectedTags from props.value on mount
   useEffect(() => {
     if (value) {
       setSelectedTags(value);
     }
-  }, [value]);
+  }, []);
 
   // Use useEffect to log state changes
   useEffect(() => {
@@ -54,20 +55,18 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
     return (
       <div className="mb-4 space-y-5  pt-5">
         <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
+          {categories.map((category: Category) => (
             <>
               <Button
                 className="rounded-full h-8"
                 key={category.id}
                 variant={
-                  selectedTags.includes(String(category.id))
-                    ? "default"
-                    : "outline"
+                  selectedTags.includes(category.id) ? "default" : "outline"
                 }
-                onClick={(e) => toggleTag(e, String(category.id))}
+                onClick={(e) => toggleTag(e, category.id)}
               >
                 {category.title}
-                {selectedTags.includes(String(category.id)) && (
+                {selectedTags.includes(category.id) && (
                   <CircleX className="w-4 h-4 ml-2" />
                 )}
               </Button>

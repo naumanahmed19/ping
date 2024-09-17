@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:push": "npx drizzle-kit push",
+    "db:seed": "npm run ./src/db/seed.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.4.2",
@@ -62,6 +65,7 @@
     "@tiptap/pm": "^2.6.3",
     "@tiptap/react": "^2.6.3",
     "@tiptap/starter-kit": "^2.6.3",
+    "aws-sdk": "^2.1691.0",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
