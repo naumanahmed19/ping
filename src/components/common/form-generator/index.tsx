@@ -37,6 +37,7 @@ export function FormGenerator({
   });
 
   useEffect(() => {
+    console.log("Form changed", form.getValues());
     if (onChange) {
       onChange(form.watch());
     }

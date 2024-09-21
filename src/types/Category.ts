@@ -1,6 +1,6 @@
-interface Category {
+export interface Category {
   id: number;
   title: string;
-  created_at: Date;
+  createdAt: Date;
   parentId: number | null;
 }
