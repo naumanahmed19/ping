@@ -1,12 +1,20 @@
+"use client"; // Mark the component as a client component
 import { Form, FormField } from "@/components/ui/form";
 
+import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Field } from "./Field";
 import { FormFieldComponent } from "./form-field-component";
+
+export interface FormMessages {
+  success: string;
+  error: string;
+}
 
 interface FormGeneratorProps {
   children?: React.ReactNode;
@@ -18,6 +26,7 @@ interface FormGeneratorProps {
   className?: string;
   action?: any;
   disabled?: boolean;
+  messages?: FormMessages;
 }
 
 export function FormGenerator({
@@ -30,7 +39,10 @@ export function FormGenerator({
   className,
   action,
   disabled,
+  messages,
 }: FormGeneratorProps) {
+  const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues, // Set default values from form state
@@ -43,10 +55,33 @@ export function FormGenerator({
     }
   }, [form, onChange]);
 
+  const handleSave = async (data: any) => {
+    console.log("Data", data);
+    try {
+      const response: any = await onSubmit(data);
+      if (response.success) {
+        toast({ title: messages?.success || "Form submitted successfully!" });
+        router.refresh();
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: messages?.error || "Uh oh! Something went wrong.",
+        description:
+          error instanceof Error ? error.message : "An unknown error occurred",
+      });
+    }
+  };
+
+  function onFieldChange(fieldName: string, value: any) {
+    form.setValue(fieldName, value);
+    form.clearErrors(fieldName);
+  }
+
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(handleSave)} className="space-y-6">
           <div className={cn("flex flex-wrap gap-4", className)}>
             {fields.map(
               ({
@@ -57,6 +92,8 @@ export function FormGenerator({
                 inputType,
                 className,
                 flex,
+                options,
+                getOptions,
               }) => (
                 <div
                   key={name}
@@ -73,6 +110,9 @@ export function FormGenerator({
                         placeholder={placeholder}
                         type={type}
                         inputType={inputType}
+                        options={options}
+                        getOptions={getOptions}
+                        onChange={onFieldChange}
                       />
                     )}
                   />

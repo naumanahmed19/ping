@@ -1,6 +1,7 @@
 "use server";
 
-import { categorySchema } from "@/app/dashboard/categories/_components/fields";
+import { useAuth } from "@/actions/use-auth";
+import { categorySchema } from "@/app/dashboard/categories/_constants/fields";
 import { db } from "@/db/db";
 import { categories } from "@/db/schema";
 
@@ -10,14 +11,16 @@ export interface CreateUserInput {
 }
 
 export async function createCategory(data: CreateUserInput) {
+  const { user } = await useAuth();
+
+  if (!user) return;
+
   try {
     // Validate input data
     const validate = categorySchema.safeParse(data);
     if (!validate.success) {
       throw new Error("Invalid input data");
     }
-
-    console.log("Creating category", data);
 
     // Insert user data into the database
     const response = await db
@@ -34,7 +37,7 @@ export async function createCategory(data: CreateUserInput) {
       .returning({ categoryId: categories.id });
 
     // await db.insert(profiles).values({ userId: newUser[0].userId }).execute();
-
+    //  revalidatePath(`/dashboard/categories`);
     return {
       success: "Category created successfully",
       categoryId: response[0].categoryId,

@@ -1,6 +1,6 @@
 export interface Field {
   id: string;
-  type: "email" | "text" | "password";
+  type?: "email" | "text" | "password";
   inputType:
     | "select"
     | "input"
@@ -16,12 +16,19 @@ export interface Field {
     | "color"
     | "search"
     | "tel"
-    | "url";
-  options?: { value: string; label: string; id: string }[];
+    | "url"
+    | "multiselect";
+  options?: {
+    value: string | number;
+    label: string;
+    id?: string;
+    icon?: React.ComponentType<{ className?: string }>;
+  }[];
   label?: string;
   placeholder: string;
   name: string;
   className?: string;
   flex?: boolean;
   disabled?: boolean;
+  getOptions?: () => void;
 }

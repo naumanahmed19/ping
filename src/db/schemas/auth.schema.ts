@@ -9,18 +9,64 @@ import {
   serial,
   text,
   timestamp,
+  varchar,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import { communities, media, posts } from "../schema";
 
+// Roles table
 export const roles = pgTable("roles", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull().unique(),
+  name: varchar("name", { length: 50 }).notNull().unique(),
+  description: varchar("description", { length: 255 }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+// Permissions table
 export const permissions = pgTable("permissions", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull().unique(),
+  name: varchar("name", { length: 50 }).notNull().unique(),
+  description: varchar("description", { length: 255 }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+// Junction table for roles and permissions (many-to-many relationship)
+export const rolePermissions = pgTable("role_permissions", {
+  id: serial("id").primaryKey(),
+  roleId: integer("role_id")
+    .notNull()
+    .references(() => roles.id),
+  permissionId: integer("permission_id")
+    .notNull()
+    .references(() => permissions.id),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Define relations
+export const rolesRelations = relations(roles, ({ many }) => ({
+  rolePermissions: many(rolePermissions),
+}));
+
+export const permissionsRelations = relations(permissions, ({ many }) => ({
+  rolePermissions: many(rolePermissions),
+}));
+
+export const rolePermissionsRelations = relations(
+  rolePermissions,
+  ({ one }) => ({
+    role: one(roles, {
+      fields: [rolePermissions.roleId],
+      references: [roles.id],
+    }),
+    permission: one(permissions, {
+      fields: [rolePermissions.permissionId],
+      references: [permissions.id],
+    }),
+  }),
+);
+
 export const userRoles = pgTable("user_roles", {
   userId: text("userid")
     .notNull()
@@ -28,15 +74,6 @@ export const userRoles = pgTable("user_roles", {
   roleId: integer("role_id")
     .notNull()
     .references(() => roles.id),
-});
-
-export const rolePermissions = pgTable("role_permissions", {
-  roleId: integer("role_id")
-    .notNull()
-    .references(() => roles.id),
-  permissionId: integer("permission_id")
-    .notNull()
-    .references(() => permissions.id),
 });
 
 // Profile Schema
@@ -145,7 +182,7 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   }),
   communities: many(communities),
   posts: many(posts),
-  userRoles: many(userRoles),
+  roles: many(roles),
   media: many(media),
 }));
 

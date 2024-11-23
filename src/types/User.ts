@@ -25,10 +25,6 @@ export interface Profile {
 export interface User {
   id: number;
   name: string;
-  link_karma: number;
-  comment_karma: number;
-  is_gold: boolean;
-  is_mod: boolean;
   has_verified_email: boolean;
   profile: Profile;
   messages: Message[];

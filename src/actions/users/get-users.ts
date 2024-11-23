@@ -4,18 +4,22 @@ import { db } from "@/db/db";
 import { useAuth } from "../use-auth";
 
 // Sample data
-export async function getCategories() {
+export async function getUsers() {
   const { user, isAuthenticated } = await useAuth();
 
   if (!user) return;
 
-  const categories = await db.query.categories.findMany();
+  const users = await db.query.users.findMany({
+    with: {
+      communities: true,
+    },
+  });
 
   // attach media to community
 
-  if (!categories) {
-    return { error: "Failed to get categories" };
+  if (!users) {
+    return { error: "Failed to get users" };
   }
 
-  return categories;
+  return users;
 }
