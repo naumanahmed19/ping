@@ -3,7 +3,6 @@ import { auth } from "@/auth";
 import TopLoadingBar from "@/components/base/top-loading-bar";
 import { ThemeWrapper } from "@/components/theme/theme-wrapper";
 import { Toaster } from "@/components/ui/toaster";
-import { cn, themeClassName } from "@/lib/utils";
 import { JotaiProvider } from "@/providers/jotai-provider";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -29,7 +28,7 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, themeClassName(theme.theme))}>
+      <body className={inter.className}>
         <SessionProvider>
           <TopLoadingBar theme={theme.theme} />
           <ThemeWrapper themeConfig={theme}>
@@ -40,7 +39,9 @@ export default async function RootLayout({
                 enableSystem
                 disableTransitionOnChange
               >
-                <ReactQueryProvider>{children}</ReactQueryProvider>
+                <ReactQueryProvider>
+                  <div className={inter.className}>{children}</div>
+                </ReactQueryProvider>
 
                 <Toaster />
               </ThemeProvider>

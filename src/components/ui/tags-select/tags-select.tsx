@@ -5,8 +5,7 @@ import React, { useEffect, useState } from "react";
 
 interface TagsSelectProps {
   className?: string;
-  type?: string;
-  categories: any[];
+  options: any[];
   maxTags: number;
   [key: string]: any;
 }
@@ -14,8 +13,7 @@ interface TagsSelectProps {
 const TagsSelect: React.FC<TagsSelectProps> = ({
   maxTags,
   className,
-  type,
-  categories,
+  options,
   value,
   ...props
 }) => {
@@ -51,11 +49,11 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
   }, [selectedTags]);
 
   // Loop through each category and render filtered tags
-  const renderTags = (categories: Category[]) => {
+  const renderTags = (options: any[]) => {
     return (
       <div className="mb-4 space-y-5  pt-5">
         <div className="flex flex-wrap gap-2">
-          {categories.map((category: Category) => (
+          {options.map((category) => (
             <>
               <Button
                 className="rounded-full h-8"
@@ -77,7 +75,7 @@ const TagsSelect: React.FC<TagsSelectProps> = ({
     );
   };
 
-  const filteredTags = categories.filter((tag) =>
+  const filteredTags = options.filter((tag) =>
     tag.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 

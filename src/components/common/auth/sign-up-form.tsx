@@ -5,7 +5,9 @@ import { FormGenerator } from "@/components/common/form-generator";
 import { Button } from "@/components/ui/button";
 import { SIGN_UP_FORM } from "@/constants/auth.constants";
 import { SignUpSchema } from "@/lib/schemas/auth.schema";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+
 import { z } from "zod";
 
 type Props = {};
@@ -19,6 +21,7 @@ type Props = {};
 // );
 
 const SignUpForm = (props: Props) => {
+  const router = useRouter();
   const defaultValues = {
     name: "",
     email: "",
@@ -42,6 +45,7 @@ const SignUpForm = (props: Props) => {
       signup(values).then((data) => {
         if (data.success) {
           setSuccessMessage(data.success);
+          router.push("/login");
         } else {
           setErrorMessage(data.error);
         }

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { FormGenerator } from "@/components/common/form-generator";
 import {
   Form,
   FormDescription,
@@ -17,32 +18,34 @@ import TagsSelect from "@/components/ui/tags-select/tags-select";
 import { useAtom } from "jotai";
 import { categoriesData } from "../../../../../data";
 import { step3State } from "./atoms/formAtoms";
+import { STEP3_FIELDS } from "./form-fields";
+import { STEP3_VALIDATIONS } from "./form-validations";
 import { StepperFormActions } from "./stepper-form-actions";
-
-const MAX_TAGS = 3;
-
-const FormSchema = z.object({
-  topics: z
-    .array(z.number())
-    .min(MAX_TAGS, "You must select at least three tag."),
-});
 
 export function ThirdStepForm() {
   const [formState, setFormState] = useAtom(step3State);
   const { nextStep } = useStepper();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof STEP3_VALIDATIONS>>({
+    resolver: zodResolver(STEP3_VALIDATIONS),
     defaultValues: formState,
   });
 
-  function onSubmit(_data: z.infer<typeof FormSchema>) {
+  function onSubmit(_data: z.infer<typeof STEP3_VALIDATIONS>) {
     setFormState(_data);
     nextStep();
   }
 
   return (
     <>
+      <FormGenerator
+        defaultValues={formState}
+        schema={STEP3_VALIDATIONS}
+        fields={STEP3_FIELDS}
+        onSubmit={onSubmit}
+      >
+        <StepperFormActions />
+      </FormGenerator>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -58,9 +61,9 @@ export function ThirdStepForm() {
                 <FormMessage />
 
                 <TagsSelect
-                  maxTags={MAX_TAGS}
+                  maxTags={3}
                   {...field}
-                  categories={categoriesData}
+                  options={categoriesData}
                   onChange={(tags: number[]) => {
                     setFormState({ ...formState, topics: tags });
                     form.setValue("topics", tags);

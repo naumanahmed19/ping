@@ -1,6 +1,5 @@
 "use client";
 
-import { createCategory } from "@/actions/categories/create-category";
 import BaseManager from "@/components/base/base-manager";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -14,23 +13,6 @@ export async function CommunitiesList({
   communities: Community[];
 }) {
   const router = useRouter();
-
-  const handleSave = async (data: any) => {
-    console.log("Submitted data", data);
-    if (data.id) {
-      console.log("Updating category");
-    }
-    try {
-      const response = await createCategory(data);
-      console.log("Response", response);
-      if (response.success) {
-        console.log("Category created successfully");
-        router.refresh();
-      }
-    } catch (error) {
-      console.log;
-    }
-  };
 
   const columns = [
     {

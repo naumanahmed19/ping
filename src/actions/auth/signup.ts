@@ -43,8 +43,6 @@ export async function signup(data: CreateUserInput) {
     // await db.insert(profiles).values({ userId: newUser[0].userId }).execute();
 
     return { success: "User created successfully", userId: newUser[0].userId };
-
-    return { success: "User created successfully" };
   } catch (error: any) {
     console.log(error);
     throw new Error("Failed to create user", error);

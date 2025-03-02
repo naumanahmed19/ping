@@ -43,6 +43,7 @@ export function FormGenerator({
 }: FormGeneratorProps) {
   const { toast } = useToast();
   const router = useRouter();
+
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues, // Set default values from form state
@@ -74,6 +75,7 @@ export function FormGenerator({
   };
 
   function onFieldChange(fieldName: string, value: any) {
+    console.log("Field changed", fieldName, value);
     form.setValue(fieldName, value);
     form.clearErrors(fieldName);
   }
@@ -83,42 +85,26 @@ export function FormGenerator({
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSave)} className="space-y-6">
           <div className={cn("flex flex-wrap gap-4", className)}>
-            {fields.map(
-              ({
-                name,
-                label,
-                placeholder,
-                type,
-                inputType,
-                className,
-                flex,
-                options,
-                getOptions,
-              }) => (
-                <div
-                  key={name}
-                  className={cn(`${flex ? "flex-1" : "w-full"}`, className)}
-                >
-                  <FormField
-                    control={form.control}
-                    name={name as "name" | "description"}
-                    render={({ field }) => (
-                      <FormFieldComponent
-                        field={field}
-                        label={label}
-                        disabled={disabled}
-                        placeholder={placeholder}
-                        type={type}
-                        inputType={inputType}
-                        options={options}
-                        getOptions={getOptions}
-                        onChange={onFieldChange}
-                      />
-                    )}
-                  />
-                </div>
-              ),
-            )}
+            {fields.map((f: Field) => (
+              <div
+                key={f.name}
+                className={cn(`${f.flex ? "flex-1" : "w-full"}`, className)}
+              >
+                {f.beforeFormField}
+                <FormField
+                  control={form.control}
+                  name={f.name as "name" | "description"}
+                  render={({ field }) => (
+                    <FormFieldComponent
+                      field={field}
+                      filedAttributes={f}
+                      onChange={onFieldChange}
+                    />
+                  )}
+                />
+                {f.afterFormField}
+              </div>
+            ))}
           </div>
           {children}
         </form>
