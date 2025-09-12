@@ -1,19 +1,23 @@
 "use client";
 
 import BaseManager from "@/components/base/base-manager";
+import { FormGenerator } from "@/components/common/form-generator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/components/ui/use-toast";
 import { Community } from "@/types/Community";
 import { useRouter } from "next/navigation";
-// import { Category } from "@/types/Category";
+import { createCommunity } from "../_actions/create-community";
+import { deleteCommunity } from "../_actions/delete-community";
+import { columns as baseColumns } from "../_constants/columns";
+import { COMMUNITIES_FORM, communitySchema } from "../_constants/fields";
 
-export async function CommunitiesList({
-  communities,
-}: {
-  communities: Community[];
-}) {
+export function CommunitiesList({ communities }: { communities: Community[] }) {
   const router = useRouter();
+  const { toast } = useToast();
 
+  // Add avatar column to the base columns
   const columns = [
     {
       id: "avatar",
@@ -31,26 +35,66 @@ export async function CommunitiesList({
         );
       },
     },
-    { header: "ID", accessorKey: "id" },
-    { header: "Name", accessorKey: "name" },
-    { header: "Title", accessorKey: "title" },
+    ...baseColumns,
   ];
+
+  const handleSave = async (data: any) => {
+    try {
+      const response = await createCommunity(data);
+      if (response && response.success) {
+        toast({ title: "Community saved successfully!" });
+        router.refresh();
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description:
+          error instanceof Error ? error.message : "An unknown error occurred",
+      });
+    }
+  };
+
+  const handleDelete = async (community: Community) => {
+    try {
+      const response = await deleteCommunity(community.id);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const reload = () => {
+    router.refresh();
+  };
 
   return (
     <BaseManager
       data={communities}
       columns={columns}
+      reload={reload}
+      onDelete={handleDelete}
+      resourceName="community"
+      form={(selectedItem) => (
+        <FormGenerator
+          defaultValues={selectedItem}
+          schema={communitySchema}
+          fields={COMMUNITIES_FORM}
+          onSubmit={handleSave}
+          className="grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <Button variant="outline" type="submit">
+            Save
+          </Button>
+        </FormGenerator>
+      )}
       actions={(item) => (
         <>
-          <Button
-            variant="ghost"
+          <DropdownMenuItem
             onClick={() => router.push(`/communities/${item.name}`)}
           >
             View
-          </Button>
-          <Button variant="ghost" onClick={() => console.log("Edit action")}>
-            Edit
-          </Button>
+          </DropdownMenuItem>
         </>
       )}
     />

@@ -2,6 +2,7 @@ import { getTheme } from "@/actions/theme-config";
 import { auth } from "@/auth";
 import TopLoadingBar from "@/components/base/top-loading-bar";
 import { ThemeWrapper } from "@/components/theme/theme-wrapper";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { JotaiProvider } from "@/providers/jotai-provider";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
@@ -44,6 +45,7 @@ export default async function RootLayout({
                 </ReactQueryProvider>
 
                 <Toaster />
+                <SonnerToaster />
               </ThemeProvider>
             </JotaiProvider>
           </ThemeWrapper>
